@@ -1,9 +1,9 @@
-/* src/styles.css */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
 :root {
   font-family: 'Mulish', sans-serif;
-  --color-success:rgb(128 200 95);
+  --color-primary: rgb(32 140 251);
+  --color-success: rgb(128 200 95);
 }

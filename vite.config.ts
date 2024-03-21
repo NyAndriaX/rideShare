@@ -9,6 +9,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '#': path.resolve(__dirname, 'src/types'),
+      '$': path.resolve(__dirname, 'public'),
     },
   },
 });
