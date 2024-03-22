@@ -5,5 +5,8 @@
 :root {
   font-family: 'Mulish', sans-serif;
   --color-primary: rgb(32 140 251);
+  --color-dark-primary: rgb(18, 109, 201);
   --color-success: rgb(128 200 95);
+  --color-white: #ffffff;
+  --color-dark-white: #eaeaeaea;
 }
