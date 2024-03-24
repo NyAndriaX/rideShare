@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
+import SetCountry from './setCountry'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
 import Logo from '@/components/common/Logo/Logo'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+
+const NavList = styled.li`
+  list-style-type: none;
+  font-weight: bold;
+  color: rgb(32 140 251);
+  cursor: pointer;
+`
 
 const Navigation: React.FC = () => {
   const { scrollY } = useScroll()
@@ -38,14 +48,30 @@ const Navigation: React.FC = () => {
       className={`fixed z-10 bg-white w-full ${currentScrollY <= 0 ? 'bg-opacity-100' : 'bg-opacity-70'}`}
     >
       <div className='flex flex-row justify-between items-center p-4'>
-        <Logo />
-        <div>NavList</div>
-        <div className='flex flex-row gap-4'>
+        <div className='flex flex-row justify-between items-center gap-10'>
+          <Logo />
+          <div className='flex flex-row gap-4'>
+            <NavList>Covoiturage</NavList>
+            <NavList>Bus</NavList>
+            <NavList>Covoiturage du quotidien</NavList>
+          </div>
+        </div>
+        <div className='flex flex-row items-center justify-center gap-4'>
+          <SetCountry />
+          <Button
+            type='button'
+            text='search'
+            icon={
+              <MagnifyingGlassIcon className='h-6 w-5' aria-hidden='true' />
+            }
+            onClick={() => console.log('search')}
+            className='border border-white hover:border-darkWhite text-primary'
+          />
           <Button
             type='button'
             text='Connexion'
             onClick={() => navigate('/login')}
-            className='border border-white hover:border-darkWhite'
+            className='border border-white hover:border-darkWhite text-primary'
           />
           <Button
             type='button'
