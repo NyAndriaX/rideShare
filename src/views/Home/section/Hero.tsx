@@ -1,4 +1,10 @@
 import React from 'react'
+import Passenger from '@/components/Home/search-form/Passenger'
+import ReturnDate from '@/components/Home/search-form/ReturnDate'
+import DateOfDeparture from '@/components/Home/search-form/DateOfDeparture'
+import Button from '@/components/common/Button/Button'
+import CityOfArrival from '@/components/Home/search-form/CityOfArrival'
+import DepartureCity from '@/components/Home/search-form/DepartureCity'
 import { StarIcon } from '@heroicons/react/20/solid'
 
 const Hero: React.FC = () => {
@@ -25,19 +31,32 @@ const Hero: React.FC = () => {
           ></path>
         </svg>
       </div>
-      <div className='flex flex-row relative top-32 justify-center items-center z-10 gap-4'>
+      <div className='flex flex-row relative top-32 justify-center z-10 gap-4'>
         <div className='w-1/2 p-6'>
-          <div className='bg-white p-8 rounded-md shadow-lg'></div>
+          <div className='flex flex-col items-center justify-center gap-4 bg-white p-8 rounded-md shadow-lg'>
+            <DepartureCity />
+            <CityOfArrival />
+            <div className='flex flex-row gap-4 w-full'>
+              <DateOfDeparture />
+              <ReturnDate />
+            </div>
+            <Passenger />
+            <Button
+              type='button'
+              text='Search'
+              className='bg-yellow text-black font-semibold'
+            />
+          </div>
         </div>
-        <div className='w-1/2'>
+        <div className='flex flex-col gap-4 w-1/2 mt-4'>
           <p className='flex flex-col gap-2 text-2xl text-white text-center font-semibold'>
-            <span>E-Covoiturage.</span>
+            <span>RideShare</span>
             <span>Toutes les informations sur le Covoiturage libre</span>
           </p>
-          <div className='flex flex-row border border-black items-center justify-center py-4 gap-8'>
-            <div className='flex flex-row justify-center items-center gap-4 border border-black'>
+          <div className='flex flex-row items-center justify-center py-4 gap-24'>
+            <div className='flex flex-row justify-center items-center gap-4'>
               <div className='flex flex-col '>
-                <div className='flex flex-row border border-black'>
+                <div className='flex flex-row'>
                   <StarIcon
                     className='h-4 w-5 text-yellow'
                     aria-hidden='true'
@@ -47,44 +66,48 @@ const Hero: React.FC = () => {
                     aria-hidden='true'
                   />
                   <StarIcon
-                    className='h-4 w-5 text-yellow'
+                    className='h-4 w-5 text-darkWhite'
                     aria-hidden='true'
                   />
                   <StarIcon
-                    className='h-4 w-5 text-yellow'
+                    className='h-4 w-5 text-darkWhite'
                     aria-hidden='true'
                   />
                   <StarIcon
-                    className='h-4 w-5 text-yellow'
+                    className='h-4 w-5 text-darkWhite'
                     aria-hidden='true'
                   />
                 </div>
-                <p>Play Store</p>
+                <p className='text-sm text-white font-semibold'>Play Store</p>
               </div>
               <div>
-                <div className='flex flex-row border border-black'>
+                <div className='flex flex-row'>
                   <StarIcon
                     className='h-4 w-5 text-yellow'
                     aria-hidden='true'
                   />
                   <StarIcon
-                    className='h-4 w-5 text-yellow'
+                    className='h-4 w-5 text-darkWhite'
                     aria-hidden='true'
                   />
                   <StarIcon
-                    className='h-4 w-5 text-yellow'
+                    className='h-4 w-5 text-darkWhite'
                     aria-hidden='true'
                   />
                   <StarIcon
-                    className='h-4 w-5 text-yellow'
+                    className='h-4 w-5 text-darkWhite'
                     aria-hidden='true'
                   />
-                  <StarIcon className='h-4 w-5 text-white' aria-hidden='true' />
+                  <StarIcon
+                    className='h-4 w-5 text-darkWhite'
+                    aria-hidden='true'
+                  />
                 </div>
-                <p>App store</p>
+                <p className='text-sm text-white font-semibold'>App store</p>
               </div>
             </div>
-            <p>+0 téléchargement</p>
+            <div className='border border-l border-white h-10' />
+            <p className='text-sm text-white font-semibold'>+0 Visitor</p>
           </div>
         </div>
       </div>

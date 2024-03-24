@@ -15,7 +15,7 @@ const SetCountry: React.FC = () => {
   return (
     <Listbox value={currentCountry} onChange={setCurrentCountry}>
       <div className='relative mt-1'>
-        <Listbox.Button className='relative w-20 cursor-default  py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
+        <Listbox.Button className='relative w-20 cursor-pointer  py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
           <span className='truncate'>
             <Flag country={currentCountry} size={20} />
           </span>
