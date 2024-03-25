@@ -1,47 +1,46 @@
-import React, {forwardRef } from 'react';
+import React, { forwardRef } from 'react'
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
-	label?: string;
-	placeholder?: string;
-	className?: string;
-	ariaInvalid?: boolean;
-	type: string;
-	error?: string;
-	value?: string;
-	disabled?: boolean;
-	autocomplete?: string;
-	autofocus?: boolean;
-	inputClassName?: string;
+  label?: string
+  placeholder?: string
+  className?: string
+  ariaInvalid?: boolean
+  type: string
+  error?: string
+  value?: string
+  disabled?: boolean
+  autocomplete?: string
+  autofocus?: boolean
+  inputClassName?: string
 }
 
 const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
-	{
-		label,
-		placeholder,
-		className,
-		type,
-		ariaInvalid,
-		error,
-		value,
-		disabled,
-		autocomplete,
-		autofocus,
-		inputClassName,
-		...props
-	},
-	ref
+  {
+    label,
+    placeholder,
+    className,
+    type,
+    ariaInvalid,
+    error,
+    value,
+    disabled,
+    autocomplete,
+    autofocus,
+    inputClassName,
+    ...props
+  },
+  ref,
 ) => {
-
-	return (
-    <div className="flex flex-col relative">
-      <label className="text-black text-sm mb-1">{label}</label>
-      <div className="flex items-center">
+  return (
+    <div className='flex flex-col relative'>
+      <label className='text-black text-sm mb-1'>{label}</label>
+      <div className='flex items-center gep-4'>
         <input
           ref={ref}
           type={type}
           placeholder={placeholder}
           {...props}
-          className={`z-1 px-3 py-2 w-full ${error && 'border-red-500'} ${inputClassName}`}
+          className={`z-1 p-4 w-full bg-offWhite rounded-md ${error && 'border-red-500'} ${inputClassName} ${className}`}
           value={value}
           disabled={disabled}
           autoFocus={autofocus}
@@ -49,12 +48,12 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
         />
       </div>
       {error && (
-        <small role="alert" className="text-red-500">
+        <p role='alert' className='text-sm text-red-500 font-semibold'>
           {error}
-        </small>
+        </p>
       )}
     </div>
-	);
-};
+  )
+}
 
-export default forwardRef(Input);
+export default forwardRef(Input)

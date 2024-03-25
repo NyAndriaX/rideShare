@@ -8,6 +8,7 @@ const Passenger: React.FC = () => {
     <React.Fragment>
       <Button type='button' className='flex flex-row justify-between'>
         <span className='flex flex-row gap-2'>
+          1
           <UsersIcon className='h-5 w-5' />
           Passenger
         </span>

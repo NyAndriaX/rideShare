@@ -1,4 +1,10 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, {
+  useState,
+  useEffect,
+  Fragment,
+  Dispatch,
+  SetStateAction,
+} from 'react'
 import {
   MapIcon,
   ChevronUpDownIcon,
@@ -9,7 +15,23 @@ import { countriesData } from '@/data/countries-data'
 import { useCurrentCountryState } from '@/stores/use-contry-store'
 import { Dialog, Transition, Combobox } from '@headlessui/react'
 
-const DepartureCity: React.FC = () => {
+interface DepartureCityProps {
+  formSearch: {
+    departureCity: string
+    cityOfArrival: string
+  }
+  setFormSearch: Dispatch<
+    SetStateAction<{
+      departureCity: string
+      cityOfArrival: string
+    }>
+  >
+}
+
+const DepartureCity: React.FC<DepartureCityProps> = ({
+  formSearch,
+  setFormSearch,
+}) => {
   const [query, setQuery] = useState<string>('')
   const currentCountry = useCurrentCountryState()
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -43,7 +65,7 @@ const DepartureCity: React.FC = () => {
     <React.Fragment>
       <Button type='button' onClick={openModal}>
         <MapIcon className='h-5 w-5 text-primary' />
-        Departure city
+        {formSearch.departureCity ? formSearch.departureCity : 'Departure city'}
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>
@@ -76,8 +98,13 @@ const DepartureCity: React.FC = () => {
                   >
                     Where are you leaving from?
                   </Dialog.Title>
-                  <div className='mt-4'>
-                    <Combobox>
+                  <div className='mt-4 h-32'>
+                    <Combobox
+                      value={formSearch.departureCity}
+                      onChange={(event) =>
+                        setFormSearch({ ...formSearch, departureCity: event })
+                      }
+                    >
                       <div className='relative mt-1'>
                         <div className='relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm'>
                           <Combobox.Input
@@ -92,6 +119,7 @@ const DepartureCity: React.FC = () => {
                             />
                           </Combobox.Button>
                         </div>
+
                         <Transition
                           as={Fragment}
                           leave='transition ease-in duration-100'
@@ -149,6 +177,9 @@ const DepartureCity: React.FC = () => {
                             )}
                           </Combobox.Options>
                         </Transition>
+                        <p className='text-primary text-lg mt-2 ml-2 font-semibold'>
+                          recent
+                        </p>
                       </div>
                     </Combobox>
                   </div>

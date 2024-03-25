@@ -1,6 +1,6 @@
 import { GenreEnum } from "./enum";
 
-export type GenreStateType = | GenreEnum.MASCULINE | GenreEnum.FEMININE
+export type GenreStateType = | GenreEnum.MASCULINE | GenreEnum.FEMININE | GenreEnum.NOT_SPECIFIE
 
 export interface User{
   id:string;
@@ -8,6 +8,7 @@ export interface User{
   updated_at: Date;
   firstName: string;
   lastName: string;
+  profilUrl?:string;
   genre:GenreStateType;
   dateOfBirth:Date | null;
   numberCIN : number;
@@ -23,13 +24,11 @@ export interface RegisterInput{
   lastName: string;
   genre:GenreStateType;
   dateOfBirth:Date | null;
-  numberCIN : number;
-  hasDrivingLicence:boolean;
-  drivingLicenseNumber:number;
-  phone:string;
   email: string;
   password: string;
 }
+
+
 
 export interface RegisterOutput {
   id:string | null | undefined

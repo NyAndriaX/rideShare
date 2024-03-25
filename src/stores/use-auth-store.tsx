@@ -3,13 +3,14 @@ import { devtools } from 'zustand/middleware'
 import { User } from '@/types/interface'
 import { getItem } from '@/utils/storage'
 import { StorageEnum } from '@/types/enum'
+import { RegisterInput } from '@/types/interface'
 
 interface UseAuthStoreProps {
   token: string | null
   user: User | null
   actions: {
     login: () => void
-    register: () => void
+    register: (data: RegisterInput) => void
     logout: () => void
   }
 }
@@ -22,8 +23,8 @@ const useAuthStore = create<UseAuthStoreProps>()(
       login: () => {
         console.log('login')
       },
-      register: () => {
-        console.log('register')
+      register: (data: RegisterInput) => {
+        console.log(data)
       },
       logout: () => {
         console.log('logout')

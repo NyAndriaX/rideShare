@@ -18,7 +18,6 @@ export default function Button({
   className,
   icon,
 }: ButtonProps) {
-  console.log(typeof icon)
   return (
     <button
       type={type}

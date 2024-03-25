@@ -6,5 +6,6 @@ export enum StorageEnum {
 
 export enum GenreEnum {
   MASCULINE = 'Masculine',
-  FEMININE ='Feminine'
+  FEMININE ='Feminine',
+  NOT_SPECIFIE = "not-specifie"
 }

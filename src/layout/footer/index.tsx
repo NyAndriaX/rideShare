@@ -1,5 +1,7 @@
-import { motion } from 'framer-motion'
 import React from 'react'
+import { motion } from 'framer-motion'
+import Input from '@/components/common/Input/Input'
+import Button from '@/components/common/Button/Button'
 
 const container = {
   show: {
@@ -31,14 +33,26 @@ const Footer: React.FC = () => {
     margin: '320px',
   }
   return (
-    <div className='mt-5'>
+    <div className='mt-10'>
       <motion.footer
         variants={container}
         initial='hide'
         whileInView='show'
         viewport={viewportConfig}
       >
-        Footer
+        <div className='flex flex-col'>
+          <div className='flex flex-col bg-primary text-white p-4'>
+            <form className='flex flex-row gap-2 items-center justify-center'>
+              <Input type='text' className='rounded-md border border-black' />
+              <Button
+                type='button'
+                text='Send'
+                className='bg-yellow text-black font-semibold'
+              />
+            </form>
+          </div>
+          <div className='text-white bg-darkPrimary p-4'>Lien des contact</div>
+        </div>
       </motion.footer>
     </div>
   )

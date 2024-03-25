@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Passenger from '@/components/Home/search-form/Passenger'
 import ReturnDate from '@/components/Home/search-form/ReturnDate'
 import DateOfDeparture from '@/components/Home/search-form/DateOfDeparture'
@@ -8,6 +8,10 @@ import DepartureCity from '@/components/Home/search-form/DepartureCity'
 import { StarIcon } from '@heroicons/react/20/solid'
 
 const Hero: React.FC = () => {
+  const [formSearch, setFormSearch] = useState({
+    departureCity: '',
+    cityOfArrival: '',
+  })
   const isMobile = window.innerWidth < 768
 
   return (
@@ -34,8 +38,14 @@ const Hero: React.FC = () => {
       <div className='flex flex-row relative top-32 justify-center z-10 gap-4'>
         <div className='w-1/2 p-6'>
           <div className='flex flex-col items-center justify-center gap-4 bg-white p-8 rounded-md shadow-lg'>
-            <DepartureCity />
-            <CityOfArrival />
+            <DepartureCity
+              formSearch={formSearch}
+              setFormSearch={setFormSearch}
+            />
+            <CityOfArrival
+              formSearch={formSearch}
+              setFormSearch={setFormSearch}
+            />
             <div className='flex flex-row gap-4 w-full'>
               <DateOfDeparture />
               <ReturnDate />
