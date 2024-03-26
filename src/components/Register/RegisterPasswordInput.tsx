@@ -19,15 +19,20 @@ const RegisterPasswordInput: React.FC = () => {
     defaultValues: { password: '' },
   })
   const formData = useFormData()
-  const { setFormData } = useFormActions()
+  const { resetDataState } = useFormActions()
   const authStoreAction = useAuthActions()
 
   const submit = async (data: { password: string }) => {
     try {
-      await setFormData(data)
-      await authStoreAction.register(formData as RegisterInput)
+      const res = await authStoreAction.register({
+        ...formData,
+        ...data,
+      } as RegisterInput)
+      console.log(res)
     } catch (e: any) {
       toast.error(e.response?.data.message)
+    } finally {
+      resetDataState()
     }
   }
 
@@ -57,7 +62,7 @@ const RegisterPasswordInput: React.FC = () => {
           })}
           error={errors.password?.message}
           ariaInvalid={isDirty}
-          type='text'
+          type='password'
           placeholder='Password'
           autofocus
           autoComplete='on'

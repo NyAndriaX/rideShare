@@ -2,11 +2,13 @@ import React from 'react'
 import Input from '../common/Input/Input'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useFormData } from '@/stores/use-form-store'
 import { useFormActions } from '@/stores/use-form-store'
 import { EMAIL_REGEX } from '@/constants/app-constants'
 import Button from '../common/Button/Button'
 
 const RegisterEmailInput: React.FC = () => {
+  const formData = useFormData()
   const {
     register,
     handleSubmit,
@@ -14,12 +16,14 @@ const RegisterEmailInput: React.FC = () => {
   } = useForm<{ email: string; unsubscribe: boolean }>({
     mode: 'onSubmit',
     defaultValues: {
-      email: '',
-      unsubscribe: false,
+      email: formData?.email || '',
+      unsubscribe: formData?.unsubscribe || false,
     },
   })
   const navigate = useNavigate()
   const { setFormData } = useFormActions()
+
+  console.log(formData)
 
   const submit = async (data: { email: string; unsubscribe: boolean }) => {
     await setFormData(data)

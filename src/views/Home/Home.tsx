@@ -3,7 +3,7 @@ import Hero from './section/Hero'
 
 const Home: React.FC = () => {
   return (
-    <div className='flex relative border-black flex-col items-center justify-center gap-4 z-0'>
+    <div className='flex flex-col gap-4 z-0'>
       <Hero />
     </div>
   )

@@ -15,18 +15,15 @@ const Hero: React.FC = () => {
   const isMobile = window.innerWidth < 768
 
   return (
-    <main
-      className='relative w-full'
-      style={{ height: isMobile ? '460px' : '525px' }}
-    >
-      <div className='absolute left-0 z-0'>
+    <main className='w-full' style={{ height: isMobile ? '460px' : '525px' }}>
+      <div className='w-full absolute left-0 z-0'>
         <div
-          className='w-screen bg-primary'
-          style={{ height: isMobile ? '460px' : '300px' }}
+          className='w-full bg-primary'
+          style={{ height: isMobile ? '460px' : '300px', width: '100%' }}
         />
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='SearchBarContainer_wave__zs6k2 w-screen hidden md:flex '
+          className='SearchBarContainer_wave__zs6k2 hidden md:flex w-full'
           viewBox='0 0 1440 320'
         >
           <path

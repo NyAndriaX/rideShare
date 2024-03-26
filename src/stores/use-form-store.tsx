@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { StorageEnum } from '@/types/enum'
+import { setItem, getItem, removeItem } from '@/utils/storage'
 
 interface FormData {
   firstName?: string
@@ -20,14 +22,15 @@ interface UseFormStoreProps {
 }
 
 const useFormStore = create<UseFormStoreProps>()(
-  devtools((set) => ({
-    formData: undefined,
+  devtools((set, get) => ({
+    formData: getItem<FormData>(StorageEnum.formDataRegister) || undefined,
     actions: {
       setFormData: (data: Partial<FormData>) => {
         set((state) => ({ formData: { ...state.formData, ...data } }))
+        setItem(StorageEnum.formDataRegister, get().formData)
       },
       resetDataState: () => {
-        console.log('resetDataState')
+        removeItem(StorageEnum.formDataRegister)
       },
     },
   })),

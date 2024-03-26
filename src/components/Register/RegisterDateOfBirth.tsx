@@ -8,6 +8,7 @@ import { useFormData } from '@/stores/use-form-store'
 import { useFormActions } from '@/stores/use-form-store'
 
 const RegisterDateOfBirth: React.FC = () => {
+  const formData = useFormData()
   const {
     register,
     handleSubmit,
@@ -15,10 +16,9 @@ const RegisterDateOfBirth: React.FC = () => {
   } = useForm<{ dateOfBirth: Date }>({
     mode: 'onSubmit',
     defaultValues: {
-      dateOfBirth: undefined,
+      dateOfBirth: formData?.dateOfBirth || undefined,
     },
   })
-  const formData = useFormData()
   const navigate = useNavigate()
   const { setFormData } = useFormActions()
 

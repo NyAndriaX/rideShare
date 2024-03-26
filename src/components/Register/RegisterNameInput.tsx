@@ -8,6 +8,7 @@ import { useFormData } from '@/stores/use-form-store'
 import { useFormActions } from '@/stores/use-form-store'
 
 const RegisterNameInput: React.FC = () => {
+  const formData = useFormData()
   const {
     register,
     handleSubmit,
@@ -15,12 +16,11 @@ const RegisterNameInput: React.FC = () => {
   } = useForm<{ firstName: string; lastName: string }>({
     mode: 'onSubmit',
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      firstName: formData?.firstName || '',
+      lastName: formData?.lastName || '',
     },
   })
   const navigate = useNavigate()
-  const formData = useFormData()
   const { setFormData } = useFormActions()
 
   const submit = async (data: { firstName: string; lastName: string }) => {

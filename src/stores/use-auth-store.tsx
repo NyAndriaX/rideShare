@@ -4,13 +4,14 @@ import { User } from '@/types/interface'
 import { getItem } from '@/utils/storage'
 import { StorageEnum } from '@/types/enum'
 import { RegisterInput } from '@/types/interface'
+import { _post } from '@/api/api-client'
 
 interface UseAuthStoreProps {
   token: string | null
   user: User | null
   actions: {
     login: () => void
-    register: (data: RegisterInput) => void
+    register: (data: RegisterInput) => Promise<void>
     logout: () => void
   }
 }
@@ -23,8 +24,8 @@ const useAuthStore = create<UseAuthStoreProps>()(
       login: () => {
         console.log('login')
       },
-      register: (data: RegisterInput) => {
-        console.log(data)
+      register: async (data: RegisterInput): Promise<User | any> => {
+        return await _post<User>('/users/register', data)
       },
       logout: () => {
         console.log('logout')
