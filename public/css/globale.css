@@ -16,3 +16,8 @@
   --color-light-grey: #eaeaeaea;
   --color-slate-blue: #7d969b;
 }
+
+.react-calendar {
+  width: 100% !important;
+  border: none !important;
+}

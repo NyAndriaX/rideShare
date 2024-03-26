@@ -2,8 +2,16 @@ import React, { useState, Fragment } from 'react'
 import { CalendarDaysIcon } from '@heroicons/react/24/outline'
 import { Button } from './Button.styled'
 import { Transition, Dialog } from '@headlessui/react'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
+
+type ValuePiece = Date | null
+
+type Value = ValuePiece | [ValuePiece, ValuePiece]
 
 const DateOfDeparture: React.FC = () => {
+  const currentDate = new Date()
+  const [value, onChange] = useState<Value>(currentDate)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const closeModal = () => setIsOpen(false)
@@ -28,7 +36,7 @@ const DateOfDeparture: React.FC = () => {
           >
             <div className='fixed inset-0 bg-black/25' />
           </Transition.Child>
-          <div className='fixed inset-0 overflow-y-auto'>
+          <div className='fixed inset-0'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
               <Transition.Child
                 as={Fragment}
@@ -44,10 +52,15 @@ const DateOfDeparture: React.FC = () => {
                     as='h3'
                     className='text-lg leading-6 text-primary font-bold'
                   >
-                    Where are you leaving from?
+                    when do you want to come back ?
                   </Dialog.Title>
-                  <div className='mt-4 h-32'>
-                    <input type='date' />
+                  <div className='mt-4 '>
+                    <Calendar
+                      onChange={onChange}
+                      value={value}
+                      className='w-full'
+                      minDate={currentDate}
+                    />
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

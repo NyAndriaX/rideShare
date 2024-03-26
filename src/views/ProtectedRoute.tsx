@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Navigate } from 'react-router-dom'
-import { useUserInfo } from '@/layout/navigation/stores/use-auth-store'
+import { useUserInfo } from '@/stores/use-auth-store'
 
 interface RouteProps {
   children: ReactNode

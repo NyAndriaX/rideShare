@@ -43,14 +43,14 @@ const SetCountry: React.FC = () => {
                 }
                 value={country.code}
               >
-                {({ selected }) => (
-                  <div className='flex flex-row items-center justify-between'>
-                    <span>{country.name}</span>
-                    <span>
-                      <Flag country={country.code} size={20} />
-                    </span>
-                  </div>
-                )}
+                <div className='flex flex-row items-center justify-between'>
+                  <span>{country.name}</span>
+                  <span>
+                    <Flag country={country.code} size={20} />
+                  </span>
+                </div>
+                {/* {({ selected }) => (
+                )} */}
               </Listbox.Option>
             ))}
           </Listbox.Options>

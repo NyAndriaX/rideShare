@@ -41,17 +41,38 @@ const Footer: React.FC = () => {
         viewport={viewportConfig}
       >
         <div className='flex flex-col'>
-          <div className='flex flex-col bg-primary text-white p-4'>
-            <form className='flex flex-row gap-2 items-center justify-center'>
-              <Input type='text' className='rounded-md border border-black' />
-              <Button
-                type='button'
-                text='Send'
-                className='bg-yellow text-black font-semibold'
-              />
-            </form>
+          <div className='flex flex-col items-center text-center justify-center bg-primary text-white py-14 px-4'>
+            <div className='flex flex-col gap-4 w-1/2'>
+              <div>
+                <p className='text-2xl font-semibold'>
+                  Subscribe to our newsletter
+                </p>
+                <p className='text-lg'>Stay tuned for good deals.</p>
+              </div>
+              <form className='flex flex-row items-center justify-between gap-2'>
+                <div className='w-2/3'>
+                  <Input
+                    type='text'
+                    placeholder='Email'
+                    className='text-midnightBlue'
+                  />
+                </div>
+                <div className='w-1/3'>
+                  <Button
+                    type='button'
+                    text='Send'
+                    className='bg-yellow text-black font-semibold'
+                  />
+                </div>
+              </form>
+            </div>
           </div>
-          <div className='text-white bg-darkPrimary p-4'>Lien des contact</div>
+          <div className='flex flex-row justify-between items-center text-white bg-midnightBlue p-4'>
+            <div>Logo and link</div>
+            <div>About Site</div>
+            <div>About to travel</div>
+            <div>About Contact</div>
+          </div>
         </div>
       </motion.footer>
     </div>
