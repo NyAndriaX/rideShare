@@ -26,6 +26,7 @@ const LoginEmail: React.FC = () => {
   const submit = async (data: { email: string; password: string }) => {
     try {
       const res = await login(data)
+      console.log(res)
     } catch (e: any) {
       toast.error(e.response?.data.message)
     } finally {
