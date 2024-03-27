@@ -25,7 +25,7 @@ const RegisterNameInput: React.FC = () => {
 
   const submit = async (data: { firstName: string; lastName: string }) => {
     await setFormData(data)
-    navigate('/register/dateofbirth')
+    navigate('/register/date-of-birth')
   }
 
   return formData?.email ? (

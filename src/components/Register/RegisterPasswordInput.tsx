@@ -28,11 +28,10 @@ const RegisterPasswordInput: React.FC = () => {
         ...formData,
         ...data,
       } as RegisterInput)
-      console.log(res)
+      resetDataState()
     } catch (e: any) {
       toast.error(e.response?.data.message)
     } finally {
-      resetDataState()
     }
   }
 

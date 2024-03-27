@@ -3,14 +3,14 @@ import { devtools } from 'zustand/middleware'
 import { User } from '@/types/interface'
 import { getItem } from '@/utils/storage'
 import { StorageEnum } from '@/types/enum'
-import { RegisterInput } from '@/types/interface'
+import { RegisterInput, LoginInput } from '@/types/interface'
 import { _post } from '@/api/api-client'
 
 interface UseAuthStoreProps {
   token: string | null
   user: User | null
   actions: {
-    login: () => void
+    login: (data: LoginInput) => Promise<void>
     register: (data: RegisterInput) => Promise<void>
     logout: () => void
   }
@@ -21,8 +21,8 @@ const useAuthStore = create<UseAuthStoreProps>()(
     token: getItem<string | null>(StorageEnum.Token),
     user: getItem<User | null>(StorageEnum.User),
     actions: {
-      login: () => {
-        console.log('login')
+      login: async (data: LoginInput): Promise<User | any> => {
+        return await _post<User>('/users/login', data)
       },
       register: async (data: RegisterInput): Promise<User | any> => {
         return await _post<User>('/users/register', data)

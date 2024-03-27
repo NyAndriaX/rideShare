@@ -24,7 +24,7 @@ const RegisterDateOfBirth: React.FC = () => {
 
   const submit = async (data: { dateOfBirth: Date }) => {
     await setFormData(data)
-    navigate('/register/genre')
+    navigate('/register/gender')
   }
 
   return formData?.firstName || formData?.lastName ? (

@@ -1,7 +1,9 @@
 import React from 'react'
 import Input from '../common/Input/Input'
 import { useForm } from 'react-hook-form'
+import { useAuthActions } from '@/stores/use-auth-store'
 // import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { EMAIL_REGEX } from '@/constants/app-constants'
 import Button from '../common/Button/Button'
 
@@ -18,10 +20,16 @@ const LoginEmail: React.FC = () => {
       saveAccount: false,
     },
   })
+  const { login } = useAuthActions()
   // const navigate = useNavigate()
 
   const submit = async (data: { email: string; password: string }) => {
-    console.log(data)
+    try {
+      const res = await login(data)
+    } catch (e: any) {
+      toast.error(e.response?.data.message)
+    } finally {
+    }
   }
 
   return (
