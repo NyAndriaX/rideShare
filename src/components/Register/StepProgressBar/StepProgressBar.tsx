@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { StepProgressBarStyled } from './StepProgressBar.styled'
 
@@ -9,57 +9,71 @@ interface StepProgressBarProps {
 const StepProgressBar: React.FC<StepProgressBarProps> = ({ pathname }) => {
   const navigate = useNavigate()
 
-  const regexPatterns = {
-    email: /(name|date-of-birth|gender|password)\//,
-    name: /(date-of-birth|gender|password)\//,
-    dateofbirth: /(gender|password)\//,
-    gender: /password\//,
+  const keywords = {
+    options: ['email', 'name', 'date-of-birth', 'gender', 'password'],
+    email: ['name', 'date-of-birth', 'gender', 'password'],
+    name: ['date-of-birth', 'gender', 'password'],
+    dateofbirth: ['gender', 'password'],
+    gender: ['password'],
   }
-  // useEffect(() => {
 
-  // })
+  const isActive = useCallback(
+    (path: string) => {
+      return path === pathname ? 'is-active' : ''
+    },
+    [pathname],
+  )
+
+  const isComplete = useCallback(
+    (keyword: string[]) => {
+      return keyword.some((word) => pathname.includes(word))
+        ? 'is-complete'
+        : ''
+    },
+    [pathname],
+  )
 
   return (
     <StepProgressBarStyled>
       <ol className='steps'>
         <li
           onClick={() => navigate('/register')}
-          className={`step ${pathname === '/register' ? 'is-active' : 'is-complete'}`}
+          className={`step ${isActive('/register')} ${isComplete(keywords.options)}`}
           data-step='1'
         >
           Registration options
         </li>
         <li
           onClick={() => navigate('/register/email')}
-          className={`step ${pathname === '/register/email' && 'is-active'} ${!regexPatterns.email.test(pathname) && 'is-complete'}`}
+          className={`step ${isActive('/register/email')} ${isComplete(keywords.email)}`}
           data-step='2'
         >
           E-mail
         </li>
         <li
           onClick={() => navigate('/register/name')}
-          className={`step ${pathname === '/register/name' && 'is-active'} ${!regexPatterns.name.test(pathname) && 'is-complete'}`}
+          className={`step ${isActive('/register/name')} ${isComplete(keywords.name)}`}
           data-step='3'
         >
           First and last name
         </li>
         <li
           onClick={() => navigate('/register/date-of-birth')}
-          className={`step ${pathname === '/register/date-of-birth' && 'is-active'} ${!regexPatterns.dateofbirth.test(pathname) && 'is-complete'}`}
+          className={`step  ${isActive('/register/date-of-birth')} ${isComplete(keywords.dateofbirth)}`}
           data-step='4'
         >
           Date of birth
         </li>
         <li
           onClick={() => navigate('/register/gender')}
-          className={`step ${pathname === '/register/gender' && 'is-active'} ${!regexPatterns.gender.test(pathname) && 'is-complete'}`}
+          className={`step  ${isActive('/register/gender')}  ${isComplete(keywords.gender)}`}
           data-step='4'
         >
           Gender
         </li>
         <li
           onClick={() => navigate('/register/password')}
-          className={`step ${pathname === '/register/password' && 'is-active'}`}
+          className={`step  ${isActive('/register/password')}`}
           data-step='4'
         >
           Password
