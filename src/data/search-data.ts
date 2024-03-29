@@ -1,4 +1,4 @@
-import { FormSearch } from "@/types/interface";
+import { FormSearch,ErrorFormSearch } from "@/types/interface";
 
 export const initialFormSearch: FormSearch = {
   departureCity: '',
@@ -13,4 +13,9 @@ export const initialFormSearch: FormSearch = {
     totalstandardpassengers:0,
     totalpassengers:0
   },
+}
+
+export const initialErrorFormSearch:ErrorFormSearch = {
+  departureCity:false,
+  cityOfArrival:false
 }

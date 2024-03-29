@@ -1,15 +1,8 @@
-import React, { useState } from 'react'
-import Passenger from '@/components/Home/search-form/Passenger'
-import ReturnDate from '@/components/Home/search-form/ReturnDate'
-import DateOfDeparture from '@/components/Home/search-form/DateOfDeparture'
-import Button from '@/components/common/Button/Button'
-import CityOfArrival from '@/components/Home/search-form/CityOfArrival'
-import DepartureCity from '@/components/Home/search-form/DepartureCity'
+import React from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
-import { initialFormSearch } from '@/data/search-data'
+import SearchCard from '@/components/Home/SearchCard'
 
 const Hero: React.FC = () => {
-  const [formSearch, setFormSearch] = useState(initialFormSearch)
   const isMobile = window.innerWidth < 768
 
   return (
@@ -32,32 +25,7 @@ const Hero: React.FC = () => {
       </div>
       <div className='flex flex-row relative top-32 justify-center z-10 gap-4'>
         <div className='w-1/2 p-6'>
-          <div className='flex flex-col items-center justify-center gap-4 bg-white p-8 rounded-md shadow-lg'>
-            <DepartureCity
-              formSearch={formSearch}
-              setFormSearch={setFormSearch}
-            />
-            <CityOfArrival
-              formSearch={formSearch}
-              setFormSearch={setFormSearch}
-            />
-            <div className='flex flex-row gap-4 w-full'>
-              <DateOfDeparture
-                formSearch={formSearch}
-                setFormSearch={setFormSearch}
-              />
-              <ReturnDate
-                formSearch={formSearch}
-                setFormSearch={setFormSearch}
-              />
-            </div>
-            <Passenger formSearch={formSearch} setFormSearch={setFormSearch} />
-            <Button
-              type='button'
-              text='Search'
-              className='bg-yellow text-black font-semibold'
-            />
-          </div>
+          <SearchCard />
         </div>
         <div className='flex flex-col gap-4 w-1/2 mt-4'>
           <p className='flex flex-col gap-2 text-2xl text-white text-center font-semibold'>

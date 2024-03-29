@@ -40,7 +40,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
           type={type}
           placeholder={placeholder}
           {...props}
-          className={`z-1 p-4 w-full bg-offWhite rounded-md ${error && 'border-red-500'} ${inputClassName} ${className}`}
+          className={`z-1 px-4 p-3  w-full bg-offWhite rounded-md ${error && 'border-red-500'} ${inputClassName} ${className}`}
           value={value}
           disabled={disabled}
           autoFocus={autofocus}

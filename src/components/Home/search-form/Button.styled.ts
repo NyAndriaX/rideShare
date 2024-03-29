@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 export const Button = styled.button`
   display:flex;
   gap:18px;
-  border:1px solid #eaeaea;
   padding:15px 20px;
   border-radius:8px;
   background-color:#f1f3f6;

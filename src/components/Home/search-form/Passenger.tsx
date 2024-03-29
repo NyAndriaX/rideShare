@@ -274,11 +274,6 @@ const Passenger: React.FC<PassengerProps> = ({ formSearch, setFormSearch }) => {
                             </span>
                           </ButtonStyled>
                         </div>
-                        <Button
-                          type='submit'
-                          text='Submit'
-                          className='bg-yellow text-black font-semibold'
-                        />
                       </div>
                     </div>
                   </div>

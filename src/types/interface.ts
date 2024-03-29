@@ -52,3 +52,8 @@ export interface FormSearch {
     totalpassengers:number
   }
 }
+
+export interface ErrorFormSearch{
+  departureCity:boolean
+  cityOfArrival:boolean
+}

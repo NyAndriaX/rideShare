@@ -8,16 +8,20 @@ import { Button } from './Button.styled'
 import { countriesData } from '@/data/countries-data'
 import { useCurrentCountryState } from '@/stores/use-contry-store'
 import { Dialog, Transition, Combobox } from '@headlessui/react'
-import { FormSearch } from '@/types/interface'
+import { FormSearch, ErrorFormSearch } from '@/types/interface'
 
 interface DepartureCityProps {
   formSearch: FormSearch
+  errorFormSearch: ErrorFormSearch
   setFormSearch: React.Dispatch<React.SetStateAction<FormSearch>>
+  setErrorFormSearch: React.Dispatch<React.SetStateAction<ErrorFormSearch>>
 }
 
 const DepartureCity: React.FC<DepartureCityProps> = ({
   formSearch,
+  errorFormSearch,
   setFormSearch,
+  setErrorFormSearch,
 }) => {
   const [query, setQuery] = useState<string>('')
   const currentCountry = useCurrentCountryState()
@@ -48,12 +52,36 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
   const closeModal = () => setIsOpen(false)
   const openModal = () => setIsOpen(true)
 
+  const handleDepartureCityChange = (event: string) => {
+    if (!event.trim()) {
+      setErrorFormSearch((prevState) => ({
+        ...prevState,
+        departureCity: true,
+      }))
+    } else {
+      setFormSearch({ ...formSearch, departureCity: event })
+    }
+  }
+
   return (
     <React.Fragment>
-      <Button type='button' onClick={openModal}>
-        <MapIcon className='h-5 w-5 text-primary' />
-        {formSearch.departureCity ? formSearch.departureCity : 'Departure city'}
-      </Button>
+      <div className='flex flex-col w-full'>
+        <Button
+          type='button'
+          className={`border ${errorFormSearch.departureCity ? 'border-lightGrey' : 'border-red-500'}`}
+          onClick={openModal}
+        >
+          <MapIcon className='h-5 w-5 text-primary' />
+          {formSearch.departureCity
+            ? formSearch.departureCity
+            : 'Departure city'}
+        </Button>
+        {errorFormSearch && (
+          <p role='alert' className='text-sm text-red-500 font-semibold'>
+            Departure city cannot be empty
+          </p>
+        )}
+      </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>
           <Transition.Child
@@ -91,9 +119,7 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
                   <div className='mt-4'>
                     <Combobox
                       value={formSearch.departureCity}
-                      onChange={(event) =>
-                        setFormSearch({ ...formSearch, departureCity: event })
-                      }
+                      onChange={(event) => handleDepartureCityChange(event)}
                     >
                       <div className='relative mt-1'>
                         <div className='relative w-full cursor-default overflow-hidden bg-white text-left sm:text-sm'>
