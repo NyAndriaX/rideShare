@@ -25,6 +25,7 @@ const LoginEmail: React.FC = () => {
 
   const submit = async (data: { email: string; password: string }) => {
     try {
+      // console
       const res = await login(data)
       console.log(res)
     } catch (e: any) {
@@ -52,7 +53,6 @@ const LoginEmail: React.FC = () => {
           ariaInvalid={isDirty}
           type='text'
           placeholder='E-mail'
-          autofocus
           autoComplete='off'
         />
         <Input
@@ -69,9 +69,8 @@ const LoginEmail: React.FC = () => {
           })}
           error={errors.password?.message}
           ariaInvalid={isDirty}
-          type='text'
+          type='password'
           placeholder='Password'
-          autofocus
           autoComplete='on'
         />
         <div className='flex flex-row justify-between items-center'>

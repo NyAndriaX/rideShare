@@ -6,12 +6,10 @@ import Button from '@/components/common/Button/Button'
 import CityOfArrival from '@/components/Home/search-form/CityOfArrival'
 import DepartureCity from '@/components/Home/search-form/DepartureCity'
 import { StarIcon } from '@heroicons/react/20/solid'
+import { initialFormSearch } from '@/data/search-data'
 
 const Hero: React.FC = () => {
-  const [formSearch, setFormSearch] = useState({
-    departureCity: '',
-    cityOfArrival: '',
-  })
+  const [formSearch, setFormSearch] = useState(initialFormSearch)
   const isMobile = window.innerWidth < 768
 
   return (
@@ -44,10 +42,16 @@ const Hero: React.FC = () => {
               setFormSearch={setFormSearch}
             />
             <div className='flex flex-row gap-4 w-full'>
-              <DateOfDeparture />
-              <ReturnDate />
+              <DateOfDeparture
+                formSearch={formSearch}
+                setFormSearch={setFormSearch}
+              />
+              <ReturnDate
+                formSearch={formSearch}
+                setFormSearch={setFormSearch}
+              />
             </div>
-            <Passenger />
+            <Passenger formSearch={formSearch} setFormSearch={setFormSearch} />
             <Button
               type='button'
               text='Search'
@@ -58,7 +62,7 @@ const Hero: React.FC = () => {
         <div className='flex flex-col gap-4 w-1/2 mt-4'>
           <p className='flex flex-col gap-2 text-2xl text-white text-center font-semibold'>
             <span>RideShare</span>
-            <span>Toutes les informations sur le Covoiturage libre</span>
+            <span>All information on free carpooling</span>
           </p>
           <div className='flex flex-row items-center justify-center py-4 gap-24'>
             <div className='flex flex-row justify-center items-center gap-4'>

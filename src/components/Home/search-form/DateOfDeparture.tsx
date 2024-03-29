@@ -1,18 +1,35 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { CalendarDaysIcon } from '@heroicons/react/24/outline'
 import { Button } from './Button.styled'
 import { Transition, Dialog } from '@headlessui/react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
+import { FormSearch } from '@/types/interface'
+import { formatDate } from '@/utils/formatDate'
+
+interface DateOfDepartureProps {
+  formSearch: FormSearch
+  setFormSearch: React.Dispatch<React.SetStateAction<FormSearch>>
+}
 
 type ValuePiece = Date | null
 
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
-const DateOfDeparture: React.FC = () => {
+const DateOfDeparture: React.FC<DateOfDepartureProps> = ({
+  formSearch,
+  setFormSearch,
+}) => {
   const currentDate = new Date()
   const [value, onChange] = useState<Value>(currentDate)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  useEffect(() => {
+    setFormSearch({
+      ...formSearch,
+      dateofdearture: value as Date,
+    })
+  }, [value])
 
   const closeModal = () => setIsOpen(false)
   const openModal = () => setIsOpen(true)
@@ -21,7 +38,9 @@ const DateOfDeparture: React.FC = () => {
     <React.Fragment>
       <Button onClick={openModal}>
         <CalendarDaysIcon className='h-5 w-5 text-primary' />
-        Date of departure
+        {formatDate(formSearch.dateofdearture)
+          ? formatDate(formSearch.dateofdearture)
+          : 'Date of departure'}
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>
@@ -47,14 +66,17 @@ const DateOfDeparture: React.FC = () => {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel
+                  className='w-1/2 transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all'
+                  style={{ height: '60vh' }}
+                >
                   <Dialog.Title
                     as='h3'
-                    className='text-lg leading-6 text-primary font-bold'
+                    className='text-xl leading-6 text-primary font-bold'
                   >
                     when do you want to come back ?
                   </Dialog.Title>
-                  <div className='mt-4 '>
+                  <div className='mt-8'>
                     <Calendar
                       onChange={onChange}
                       value={value}

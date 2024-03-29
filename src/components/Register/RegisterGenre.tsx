@@ -10,7 +10,7 @@ const RegisterGenre: React.FC = () => {
   const formData = useFormData()
   const { setFormData } = useFormActions()
 
-  const handleGenreSelection = async (data: { genre: string }) => {
+  const handleGenreSelection = async (data: { gender: string }) => {
     await setFormData(data)
     navigate('/register/password')
   }
@@ -23,7 +23,7 @@ const RegisterGenre: React.FC = () => {
       <div className='flex flex-col gap-4'>
         <div
           className='flex flex-row justify-between rounded-md cursor-pointer items-center p-4 bg-white hover:bg-offWhite'
-          onClick={() => handleGenreSelection({ genre: 'Md' })}
+          onClick={() => handleGenreSelection({ gender: 'Md' })}
         >
           <p className='text-base text-deepSeaBlue font-semibold'>Madam</p>
           <ChevronRightIcon className='h-6 w-6' />
@@ -31,7 +31,7 @@ const RegisterGenre: React.FC = () => {
         <div className='border border-lightGrey mx-4' />
         <div
           className='flex flex-row justify-between rounded-md cursor-pointer items-center p-4 bg-white hover:bg-offWhite'
-          onClick={() => handleGenreSelection({ genre: 'Mr' })}
+          onClick={() => handleGenreSelection({ gender: 'Mr' })}
         >
           <p className='text-base text-deepSeaBlue font-semibold'>Sir</p>
           <ChevronRightIcon className='h-6 w-6' />
@@ -39,7 +39,7 @@ const RegisterGenre: React.FC = () => {
         <div className='border border-lightGrey mx-4' />
         <div
           className='flex flex-row justify-between rounded-md cursor-pointer items-center p-4 bg-white hover:bg-offWhite'
-          onClick={() => handleGenreSelection({ genre: 'not-specified' })}
+          onClick={() => handleGenreSelection({ gender: 'not-specified' })}
         >
           <p className='text-base text-deepSeaBlue font-semibold'>
             I prefer not to say it

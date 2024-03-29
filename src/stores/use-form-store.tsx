@@ -7,7 +7,7 @@ interface FormData {
   firstName?: string
   lastName?: string
   dateOfBirth?: Date
-  genre?: string
+  gender?: string
   email?: string
   password?: string
   unsubscribe?: boolean

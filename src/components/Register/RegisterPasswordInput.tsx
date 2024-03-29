@@ -24,19 +24,18 @@ const RegisterPasswordInput: React.FC = () => {
 
   const submit = async (data: { password: string }) => {
     try {
-      const res = await authStoreAction.register({
+      const { statusText } = await authStoreAction.register({
         ...formData,
         ...data,
       } as RegisterInput)
-      console.log(res)
+      statusText === 'OK' && toast.success('Register success')
       resetDataState()
     } catch (e: any) {
-      toast.error(e.response?.data.message)
-    } finally {
+      toast.error(e.response?.data?.err[0])
     }
   }
 
-  return formData?.genre ? (
+  return formData?.gender ? (
     <div className='flex flex-col gap-8 w-1/2'>
       <p className='text-2xl font-bold text-midnightBlue text-center'>
         choose your password

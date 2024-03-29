@@ -11,7 +11,7 @@ interface UseAuthStoreProps {
   user: User | null
   actions: {
     login: (data: LoginInput) => Promise<void>
-    register: (data: RegisterInput) => Promise<void>
+    register: (data: RegisterInput) => Promise<any>
     logout: () => void
   }
 }
@@ -21,11 +21,11 @@ const useAuthStore = create<UseAuthStoreProps>()(
     token: getItem<string | null>(StorageEnum.Token),
     user: getItem<User | null>(StorageEnum.User),
     actions: {
-      login: async (data: LoginInput): Promise<User | any> => {
-        return await _post<User>('/users/login', data)
+      login: async (data: LoginInput): Promise<{ token: string } | any> => {
+        return await _post<{ token: string } | any>('/users/login', data)
       },
-      register: async (data: RegisterInput): Promise<User | any> => {
-        return await _post<User>('/users/register', data)
+      register: async (data: RegisterInput): Promise<any> => {
+        return await _post<any>('/users/register', data)
       },
       logout: () => {
         console.log('logout')

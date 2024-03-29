@@ -54,9 +54,9 @@ const Navigation: React.FC = () => {
           <Logo />
           {!pathname.startsWith('/register') && (
             <div className='flex flex-row gap-4'>
-              <NavList>Covoiturage</NavList>
+              <NavList>Carpooling</NavList>
               <NavList>Bus</NavList>
-              <NavList>Covoiturage du quotidien</NavList>
+              <NavList>Daily carpooling</NavList>
             </div>
           )}
         </div>
@@ -66,10 +66,10 @@ const Navigation: React.FC = () => {
             <Button
               type='button'
               text='search'
+              onClick={() =>navigate('/app/search')}
               icon={
                 <MagnifyingGlassIcon className='h-6 w-5' aria-hidden='true' />
               }
-              onClick={() => console.log('search')}
               className='border border-white hover:border-darkWhite text-primary'
             />
             <Button

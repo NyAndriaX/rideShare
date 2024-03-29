@@ -45,7 +45,6 @@ const RegisterNameInput: React.FC = () => {
           ariaInvalid={isDirty}
           type='text'
           placeholder='First Name'
-          autofocus
           autoComplete='on'
         />
         <Input
@@ -56,7 +55,6 @@ const RegisterNameInput: React.FC = () => {
           ariaInvalid={isDirty}
           type='text'
           placeholder='Last Name'
-          autofocus
           autoComplete='on'
         />
         <Button

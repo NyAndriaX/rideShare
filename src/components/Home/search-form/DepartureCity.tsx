@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  Fragment,
-  Dispatch,
-  SetStateAction,
-} from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import {
   MapIcon,
   ChevronUpDownIcon,
@@ -14,18 +8,11 @@ import { Button } from './Button.styled'
 import { countriesData } from '@/data/countries-data'
 import { useCurrentCountryState } from '@/stores/use-contry-store'
 import { Dialog, Transition, Combobox } from '@headlessui/react'
+import { FormSearch } from '@/types/interface'
 
 interface DepartureCityProps {
-  formSearch: {
-    departureCity: string
-    cityOfArrival: string
-  }
-  setFormSearch: Dispatch<
-    SetStateAction<{
-      departureCity: string
-      cityOfArrival: string
-    }>
-  >
+  formSearch: FormSearch
+  setFormSearch: React.Dispatch<React.SetStateAction<FormSearch>>
 }
 
 const DepartureCity: React.FC<DepartureCityProps> = ({
@@ -91,14 +78,17 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel
+                  className=' w-1/2 transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all'
+                  style={{ height: '50vh' }}
+                >
                   <Dialog.Title
                     as='h3'
-                    className='text-lg leading-6 text-primary font-bold'
+                    className='text-xl leading-6 text-primary font-bold'
                   >
                     Where are you leaving from?
                   </Dialog.Title>
-                  <div className='mt-4 h-32'>
+                  <div className='mt-4'>
                     <Combobox
                       value={formSearch.departureCity}
                       onChange={(event) =>
@@ -106,9 +96,9 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
                       }
                     >
                       <div className='relative mt-1'>
-                        <div className='relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm'>
+                        <div className='relative w-full cursor-default overflow-hidden bg-white text-left sm:text-sm'>
                           <Combobox.Input
-                            className='w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0'
+                            className='w-full py-3 border border-slateBlue rounded-md pl-3 pr-10 text-sm text-midnightBlue'
                             displayValue={(country: string) => country}
                             onChange={(event) => setQuery(event.target.value)}
                           />

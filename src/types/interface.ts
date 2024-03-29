@@ -29,17 +29,26 @@ export interface RegisterInput{
 }
 
 
-
-export interface RegisterOutput {
-  id:string | null | undefined
-}
-
 export interface LoginInput{
   email:string;
   password:string;
 }
 
 export interface LoginOutput {
-  user:User;
   token:string;
+}
+
+export interface FormSearch {
+  departureCity: string
+  cityOfArrival: string
+  dateofdearture: Date
+  returndate?: Date
+  passenger: {
+    adult: number
+    child: number
+    baby: number
+    reducedmobilitypassengers: number
+    totalstandardpassengers:number
+    totalpassengers:number
+  }
 }

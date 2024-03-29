@@ -22,7 +22,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`flex flex-row gap-2 w-full py-2 px-4 rounded-md max-h-[44px] items-center justify-center transition-all ${
+      className={`flex flex-row gap-2 w-full p-4 rounded-md max-h-[44px] items-center justify-center transition-all ${
         className ?? ''
       }`}
       disabled={disabled}
