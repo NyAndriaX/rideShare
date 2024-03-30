@@ -15,6 +15,14 @@ const SearchCard: React.FC = () => {
 
   const handleSearch = async () => {
     setErrorFormSearch(initialErrorFormSearch)
+    if (!formSearch.departureCity.trim() && !formSearch.cityOfArrival.trim()) {
+      setErrorFormSearch((prevState) => ({
+        ...prevState,
+        departureCity: true,
+        cityOfArrival: true,
+      }))
+      return
+    }
     if (!formSearch.departureCity.trim()) {
       setErrorFormSearch((prevState) => ({
         ...prevState,
@@ -38,14 +46,19 @@ const SearchCard: React.FC = () => {
     navigate(`app/search?${params.toString()}`)
   }
   return (
-    <div className='flex flex-col items-center justify-center gap-4 bg-white p-8 rounded-md shadow-lg'>
+    <div className='flex flex-col w-full items-center justify-center gap-4 bg-white p-8 rounded-md shadow-lg'>
       <DepartureCity
         errorFormSearch={errorFormSearch}
         formSearch={formSearch}
         setErrorFormSearch={setErrorFormSearch}
         setFormSearch={setFormSearch}
       />
-      <CityOfArrival formSearch={formSearch} setFormSearch={setFormSearch} />
+      <CityOfArrival
+        errorFormSearch={errorFormSearch}
+        formSearch={formSearch}
+        setFormSearch={setFormSearch}
+        setErrorFormSearch={setErrorFormSearch}
+      />
       <div className='flex flex-row gap-4 w-full'>
         <DateOfDeparture
           formSearch={formSearch}

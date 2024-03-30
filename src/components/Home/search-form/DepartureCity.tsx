@@ -53,14 +53,11 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
   const openModal = () => setIsOpen(true)
 
   const handleDepartureCityChange = (event: string) => {
-    if (!event.trim()) {
-      setErrorFormSearch((prevState) => ({
-        ...prevState,
-        departureCity: true,
-      }))
-    } else {
-      setFormSearch({ ...formSearch, departureCity: event })
-    }
+    setErrorFormSearch((prevState) => ({
+      ...prevState,
+      departureCity: false,
+    }))
+    setFormSearch({ ...formSearch, departureCity: event })
   }
 
   return (
@@ -68,7 +65,7 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
       <div className='flex flex-col w-full'>
         <Button
           type='button'
-          className={`border ${errorFormSearch.departureCity ? 'border-lightGrey' : 'border-red-500'}`}
+          className={`border ${errorFormSearch.departureCity ? 'border-red-500' : 'border-lightGrey'}`}
           onClick={openModal}
         >
           <MapIcon className='h-5 w-5 text-primary' />
@@ -76,7 +73,7 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
             ? formSearch.departureCity
             : 'Departure city'}
         </Button>
-        {errorFormSearch && (
+        {errorFormSearch.departureCity && (
           <p role='alert' className='text-sm text-red-500 font-semibold'>
             Departure city cannot be empty
           </p>
