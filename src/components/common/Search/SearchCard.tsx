@@ -6,7 +6,7 @@ import ReturnDate from './search-form/ReturnDate'
 import Passenger from './search-form/Passenger'
 import DepartureCity from './search-form/DepartureCity'
 import { initialFormSearch, initialErrorFormSearch } from '@/data/search-data'
-import Button from '../common/Button/Button'
+import Button from '../Button/Button'
 
 const SearchCard: React.FC = () => {
   const navigate = useNavigate()

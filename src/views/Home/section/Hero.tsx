@@ -1,6 +1,6 @@
 import React from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
-import SearchCard from '@/components/Home/SearchCard'
+import SearchCard from '@/components/common/Search/SearchCard'
 
 const Hero: React.FC = () => {
   const isMobile = window.innerWidth < 768
