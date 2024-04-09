@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import SetCountry from './setCountry'
 import { useLocation } from 'react-router-dom'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import {
+  MagnifyingGlassIcon,
+  PlusCircleIcon,
+} from '@heroicons/react/24/outline'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
 import Logo from '@/components/common/Logo/Logo'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import Users from '@/components/Users'
 
 const NavList = styled.li`
   list-style-type: none;
@@ -16,6 +20,7 @@ const NavList = styled.li`
 `
 
 const Navigation: React.FC = () => {
+  const isConnected = false
   const navigate = useNavigate()
   const { scrollY } = useScroll()
   const { pathname } = useLocation()
@@ -66,24 +71,40 @@ const Navigation: React.FC = () => {
             <Button
               type='button'
               text='search'
-              onClick={() =>navigate('/app/search')}
+              onClick={() => navigate('/app/search')}
               icon={
-                <MagnifyingGlassIcon className='h-6 w-5' aria-hidden='true' />
+                <MagnifyingGlassIcon className='h-5 w-5' aria-hidden='true' />
               }
               className='border border-white hover:border-darkWhite text-primary'
             />
-            <Button
-              type='button'
-              text='Connexion'
-              onClick={() => navigate('/login')}
-              className='border border-white hover:border-darkWhite text-primary'
-            />
-            <Button
-              type='button'
-              text='Sign Up'
-              onClick={() => navigate('/register')}
-              className='bg-primary text-white font-semibold hover:bg-darkPrimary'
-            />
+            {isConnected ? (
+              <>
+                <Button
+                  type='button'
+                  text='Publish'
+                  icon={
+                    <PlusCircleIcon className='h-5 w-5' aria-hidden='true' />
+                  }
+                  className='border border-white hover:border-darkWhite text-primary'
+                />
+                <Users />
+              </>
+            ) : (
+              <>
+                <Button
+                  type='button'
+                  text='Connexion'
+                  onClick={() => navigate('/login')}
+                  className='border border-white hover:border-darkWhite text-primary'
+                />
+                <Button
+                  type='button'
+                  text='Sign Up'
+                  onClick={() => navigate('/register')}
+                  className='bg-primary text-white font-semibold hover:bg-darkPrimary'
+                />
+              </>
+            )}
           </div>
         )}
       </div>

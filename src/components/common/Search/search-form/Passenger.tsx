@@ -104,7 +104,7 @@ const Passenger: React.FC<PassengerProps> = ({ formSearch, setFormSearch }) => {
       ...formSearch,
       passenger: {
         ...formSearch.passenger,
-        adult: formSearch.passenger.adult + 1,
+        baby: formSearch.passenger.baby + 1,
         totalstandardpassengers: updatedTotalStandardPassengers(),
         totalpassengers: updatedTotalPassengers(),
       },
