@@ -1,71 +1,90 @@
-import React, { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import React, { Fragment, forwardRef } from 'react'
+import { NavigateFunction } from 'react-router-dom'
+import { Popover, Transition } from '@headlessui/react'
+import {
+  PencilSquareIcon,
+  ArrowLeftOnRectangleIcon,
+} from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { User } from '@/types/interface'
 
-interface UserType {
-  lastName?: string
-  firstName?: string
-  photoURL?: string
+interface UsersProps {
+  open: boolean
+  userData?: User
   mobile?: boolean
+  navigate: NavigateFunction
+  handleClickOpen: () => void
 }
 
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join('')
-}
-
-const Users: React.FC<UserType> = ({
-  // lastName,
-  firstName,
-  photoURL,
+const Users: React.FC<UsersProps> = ({
+  userData,
   // mobile,
+  handleClickOpen,
+  navigate,
 }) => {
   return (
-    <Menu as='div' className='relative inline-block text-left'>
-      <div>
-        <Menu.Button className='inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'>
-          <img
-            className='h-9 w-9 rounded-full'
-            src={
-              photoURL === 'default' || !photoURL
-                ? '/public/image/person.svg'
-                : photoURL
-            }
-            alt={firstName ?? 'Anonymous'}
-          />
-          <ChevronDownIcon
-            className='-mr-1 h-5 w-5 text-slateBlue'
-            aria-hidden='true'
-          />
-        </Menu.Button>
-      </div>
-      <Transition
-        as={Fragment}
-        enter='transition ease-out duration-100'
-        enterFrom='transform opacity-0 scale-95'
-        enterTo='transform opacity-100 scale-100'
-        leave='transition ease-in duration-75'
-        leaveFrom='tranform opacity-100 scale-100 '
-        leaveTo='transform opacity-0 scale-95'
-      >
-        <Menu.Items className='absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-          <div className='py-1'>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href='#'
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm',
-                  )}
-                >
-                  Edit
-                </a>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
+    <Popover className='relative hidden leading-3 md:block text-midnightBlue'>
+      {({ open }) => (
+        <div>
+          <Popover.Button
+            className={`flex flex-row px-4 py-2 min-w-20 gap-2 items-center border border-white hover:border-darkWhite rounded-md`}
+            onClick={handleClickOpen}
+          >
+            <img
+              className='h-8 w-7 rounded-full'
+              src={
+                (userData && userData.profilUrl) === 'default' ||
+                !(userData && userData.profilUrl)
+                  ? '/public/image/person.svg'
+                  : userData.profilUrl
+              }
+              alt={userData ? userData.firstName : 'Anonymous'}
+            />
+            <ChevronDownIcon
+              className='-mr-1 h-5 w-5 text-slateBlue'
+              aria-hidden='true'
+            />
+          </Popover.Button>
+          <Transition
+            as={Fragment}
+            show={open}
+            enter='transition ease-out duration-200'
+            enterFrom='opacity-0 translate-y-1'
+            enterTo='opacity-100 translate-y-0'
+            leave='transition ease-in duration-150'
+            leaveFrom='opacity-100 translate-y-0'
+            leaveTo='opacity-0 translate-y-1'
+          >
+            <Popover.Panel className='absolute left-35 z-50 mt-0 w-[250px] max-w-sm -translate-x-1/2 px-3 pt-3 sm:px-0 lg:max-w-3xl'>
+              <div className='overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5'>
+                <div className='relative grid  bg-white '>
+                  <div className='flex items-center bg-white p-2'>
+                    <Popover.Button
+                      onClick={() => navigate('/account')}
+                      className='flex w-full items-center p-2 rounded-lg hover:bg-gray-50'
+                    >
+                      <PencilSquareIcon className='h-4 w-4' />
+                      <p className='ml-3 text-base font-medium'>Edit Profile</p>
+                    </Popover.Button>
+                  </div>
+                  <div className='flex items-center bg-gray-50 p-4'>
+                    <Popover.Button
+                      className='flex items-center text-sm font-medium text-primary'
+                      // onClick={logout}
+                    >
+                      <ArrowLeftOnRectangleIcon className='h-4 w-4' />
+                      <p className='ml-3 text-base font-medium text-primary'>
+                        Sign out
+                      </p>
+                    </Popover.Button>
+                  </div>
+                </div>
+              </div>
+            </Popover.Panel>
+          </Transition>
+        </div>
+      )}
+    </Popover>
   )
 }
 

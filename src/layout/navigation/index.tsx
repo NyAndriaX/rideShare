@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import SetCountry from './setCountry'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   MagnifyingGlassIcon,
   PlusCircleIcon,
 } from '@heroicons/react/24/outline'
 import { styled } from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
 import Logo from '@/components/common/Logo/Logo'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
@@ -20,11 +19,12 @@ const NavList = styled.li`
 `
 
 const Navigation: React.FC = () => {
-  const isConnected = false
+  const isConnected = true
   const navigate = useNavigate()
   const { scrollY } = useScroll()
   const { pathname } = useLocation()
-  const [hidden, setHidden] = useState(false)
+  const [hidden, setHidden] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   const [prevScrollY, setPrevScrollY] = useState<number>(0)
   const [currentScrollY, setCurrentScrollY] = useState<number>(0)
 
@@ -35,6 +35,8 @@ const Navigation: React.FC = () => {
       setHidden(true)
     }
   }
+
+  const handleClickOpen = () => setOpen(true)
 
   const variants = {
     /** this is the "visible" key and it's correlating styles **/
@@ -87,7 +89,11 @@ const Navigation: React.FC = () => {
                   }
                   className='border border-white hover:border-darkWhite text-primary'
                 />
-                <Users />
+                <Users
+                  open={open}
+                  navigate={navigate}
+                  handleClickOpen={handleClickOpen}
+                />
               </>
             ) : (
               <>
