@@ -2,9 +2,13 @@ import { createBrowserRouter } from 'react-router-dom'
 import Login from './views/Auth/Login'
 import NotFound from './views/NotFound'
 import Home from './views/Home/Home'
+import OfferSeats from './views/OfferSeats/OfferSeats'
 import Register from './views/Auth/Register'
 import Search from './views/Search/Search'
 import AuthProtectedRoute from './views/AuthProtectedRoute'
+import ProtectedRoute from './views/ProtectedRoute'
+import Tickets from './views/Tickets/Tickets'
+import Profile from './views/Profile/Profile'
 import App from './App'
 
 export const router = createBrowserRouter([
@@ -19,8 +23,32 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'app/search',
+        path: '/search',
         element: <Search />,
+      },
+      {
+        path: 'app/account',
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'app/after-sales',
+        element: (
+          <ProtectedRoute>
+            <Tickets />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'app/offer-seats',
+        element: (
+          <ProtectedRoute>
+            <OfferSeats />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/login/*',

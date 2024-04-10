@@ -73,7 +73,7 @@ const Navigation: React.FC = () => {
             <Button
               type='button'
               text='search'
-              onClick={() => navigate('/app/search')}
+              onClick={() => navigate('/search')}
               icon={
                 <MagnifyingGlassIcon className='h-5 w-5' aria-hidden='true' />
               }
@@ -84,6 +84,7 @@ const Navigation: React.FC = () => {
                 <Button
                   type='button'
                   text='Publish'
+                  onClick={() => navigate('/app/offer-seats')}
                   icon={
                     <PlusCircleIcon className='h-5 w-5' aria-hidden='true' />
                   }
