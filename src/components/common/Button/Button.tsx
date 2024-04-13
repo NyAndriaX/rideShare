@@ -8,11 +8,13 @@ interface ButtonProps {
   disabled?: boolean
   className?: string
   icon?: ReactNode
+  endIcon?: boolean
 }
 
 export default function Button({
   type,
   text,
+  endIcon,
   onClick,
   disabled,
   className,
@@ -28,10 +30,24 @@ export default function Button({
       disabled={disabled}
       aria-label={text}
     >
-      <span>
-        {icon && typeof icon !== 'string' && React.isValidElement(icon) && icon}
-      </span>
+      {!endIcon && (
+        <span>
+          {icon &&
+            typeof icon !== 'string' &&
+            React.isValidElement(icon) &&
+            icon}
+        </span>
+      )}
+
       <span>{text}</span>
+      {endIcon && (
+        <span>
+          {icon &&
+            typeof icon !== 'string' &&
+            React.isValidElement(icon) &&
+            icon}
+        </span>
+      )}
     </button>
   )
 }
