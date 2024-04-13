@@ -74,7 +74,7 @@ const Travel: React.FC<TravelProps> = ({
   const isRefundable = true
 
   return (
-    <div className='flex flex-col rounded-md shadow-lg'>
+    <div className='flex flex-col bg-white rounded-md shadow-lg'>
       <header className='flex flex-row justify-between items-center px-4 border-b border-lightGrey'>
         <img src='/public/icons/cars.png' alt='cars' className='w-10' />
         <div className='flex flex-row items-center gap-2 text-slateBlue'>

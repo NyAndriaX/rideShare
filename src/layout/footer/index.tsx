@@ -1,81 +1,110 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { styled } from 'styled-components'
+import {
+  FacebookIcon,
+  GithubIcon,
+  MailIcon,
+  LinkedInIcon,
+} from '@/components/common/Icons/Icons'
+import Logo from '@/components/common/Logo/Logo'
 import { motion } from 'framer-motion'
-import Input from '@/components/common/Input/Input'
-import Button from '@/components/common/Button/Button'
 
-const container = {
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-}
+const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0 0;
+  font-weight: 100;
+  text-align: left;
+  width: 100%;
+`
 
-// const item = {
-//   hide: {
-//     opacity: 0,
-//     y: 400,
-//   },
-//   show: {
-//     opacity: 1,
-//     y: 0,
-//     transition: {
-//       duration: 0.8,
-//       staggerChildren: 0.2,
-//       delayChildren: 0.2,
-//     },
-//   },
-// };
+const ListItem = styled.li`
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.025rem;
+`
+
+const ListItemLink = styled(Link)`
+  color: var(--color-slate-blue);
+  text-decoration-line: none;
+  text-transform: capitalize;
+  &:hover {
+    color: white;
+  }
+`
+
+const SocialList = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 0 0.75rem;
+`
+
+const SocialListItemLink = styled(Link)`
+  color: var(--color-slate-blue);
+  &:hover {
+    color: white;
+  }
+`
 
 const Footer: React.FC = () => {
-  const viewportConfig = {
-    once: true,
-    margin: '320px',
-  }
   return (
-    <div className='mt-10'>
-      <motion.footer
-        variants={container}
-        initial='hide'
-        whileInView='show'
-        viewport={viewportConfig}
-      >
-        <div className='flex flex-col'>
-          <div className='flex flex-col items-center text-center justify-center bg-primary text-white py-14 px-4'>
-            <div className='flex flex-col gap-4 w-1/2'>
-              <div>
-                <p className='text-2xl font-semibold'>
-                  Subscribe to our newsletter
-                </p>
-                <p className='text-lg'>Stay tuned for good deals.</p>
-              </div>
-              <form className='flex flex-row items-center justify-between gap-2'>
-                <div className='w-2/3'>
-                  <Input
-                    type='text'
-                    placeholder='Email'
-                    className='text-midnightBlue'
-                  />
-                </div>
-                <div className='w-1/3'>
-                  <Button
-                    type='button'
-                    text='Send'
-                    className='bg-yellow text-black font-semibold'
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className='flex flex-row justify-between items-center text-white bg-midnightBlue p-4'>
-            <div>Logo and link</div>
-            <div>About Site</div>
-            <div>About to travel</div>
-            <div>About Contact</div>
-          </div>
+    <motion.footer className='bg-midnightBlue text-white pt-12 pb-8 px-4'>
+      <div className='mx-auto px-4 container overflow-hidden flex flex-col lg:flex-row justify-between'>
+        <Logo />
+        <div className='w-2/3 block sm:flex text-sm mt-6 lg:mt-0'>
+          <List>
+            <ListItem>Rideshare</ListItem>
+            <ListItem>
+              <ListItemLink to='/#'>About</ListItemLink>
+            </ListItem>
+            <ListItem>
+              <ListItemLink to='/#'>Jobs</ListItemLink>
+            </ListItem>
+            <ListItem>
+              <ListItemLink to='/#'>Blog</ListItemLink>
+            </ListItem>
+            <ListItem>
+              <ListItemLink to='/#'>Legal Notice</ListItemLink>
+            </ListItem>
+            <ListItem>
+              <ListItemLink to='/#'>Privacy Policy</ListItemLink>
+            </ListItem>
+          </List>
+          <List>
+            <ListItem>to travel</ListItem>
+            <ListItem>
+              <ListItemLink to='/#'>Destinations</ListItemLink>
+            </ListItem>
+            <ListItem>
+              <ListItemLink to='/#'>Terms of service</ListItemLink>
+            </ListItem>
+          </List>
+          <List>
+            <ListItem>Follow us</ListItem>
+            <SocialList>
+              <SocialListItemLink to='/#'>
+                <FacebookIcon className='h-5 w-5' />
+              </SocialListItemLink>
+              <SocialListItemLink to='/#'>
+                <GithubIcon className='h-5 w-5' />
+              </SocialListItemLink>
+              <SocialListItemLink to='/#'>
+                <MailIcon className='h-5 w-5' />
+              </SocialListItemLink>
+            </SocialList>
+          </List>
         </div>
-      </motion.footer>
-    </div>
+      </div>
+      <div className='mt-4 pt-6 text-slateBlue border-t border-slateBlue text-center'>
+        © 2024 Rideshare. All rights reserved.
+      </div>
+    </motion.footer>
   )
 }
 

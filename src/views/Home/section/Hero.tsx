@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
   const isMobile = window.innerWidth < 768
 
   return (
-    <main className='w-full' style={{ height: isMobile ? '460px' : '525px' }}>
+    <main className='w-full' style={{ height: isMobile ? '460px' : '600px' }}>
       <div className='w-full absolute left-0 z-0'>
         <div
           className='w-full bg-primary'
