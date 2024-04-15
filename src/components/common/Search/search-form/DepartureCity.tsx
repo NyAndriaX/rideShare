@@ -26,13 +26,13 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
   const [query, setQuery] = useState<string>('')
   const currentCountry = useCurrentCountryState()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [currentRegion, setCurrentRegion] = useState<string[] | []>([])
+  const [currentProvince, setCurrentProvince] = useState<string[] | []>([])
 
-  const filteredRegion =
+  const filteredProvince =
     query === ''
-      ? currentRegion
-      : currentRegion.filter((region) =>
-          region
+      ? currentProvince
+      : currentProvince.filter((province) =>
+          province
             .toLocaleLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLocaleLowerCase().replace(/\s+/g, '')),
@@ -43,10 +43,10 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
       (country) => country.code === currentCountry,
     )
 
-    const regions =
-      filteredCountries.length > 0 ? filteredCountries[0].regions : []
+    const provinces =
+      filteredCountries.length > 0 ? filteredCountries[0].province : []
 
-    setCurrentRegion(regions)
+    setCurrentProvince(provinces)
   }, [currentCountry])
 
   const closeModal = () => setIsOpen(false)
@@ -141,14 +141,14 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
                           afterLeave={() => setQuery('')}
                         >
                           <Combobox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
-                            {filteredRegion.length === 0 && query !== '' ? (
+                            {filteredProvince.length === 0 && query !== '' ? (
                               <div className='relative cursor-default select-none px-4 py-2 text-gray-700'>
                                 Nothing found.
                               </div>
                             ) : (
-                              filteredRegion.map((region) => (
+                              filteredProvince.map((province) => (
                                 <Combobox.Option
-                                  key={region}
+                                  key={province}
                                   className={({ active }) =>
                                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                                       active
@@ -156,7 +156,7 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
                                         : 'text-gray-900'
                                     }`
                                   }
-                                  value={region}
+                                  value={province}
                                 >
                                   {({ selected, active }) => (
                                     <>
@@ -167,7 +167,7 @@ const DepartureCity: React.FC<DepartureCityProps> = ({
                                             : 'font-normal'
                                         }`}
                                       >
-                                        {region}
+                                        {province}
                                       </span>
                                       {selected ? (
                                         <span

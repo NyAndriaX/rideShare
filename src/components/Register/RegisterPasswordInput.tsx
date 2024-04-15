@@ -4,8 +4,8 @@ import Input from '../common/Input/Input'
 import { useForm } from 'react-hook-form'
 import { RegisterInput } from '@/types/interface'
 import Button from '../common/Button/Button'
-import { useFormData } from '@/stores/use-form-store'
-import { useFormActions } from '@/stores/use-form-store'
+import { useFormAuthData } from '@/stores/use-form-auth-store'
+import { useFormAuthActions } from '@/stores/use-form-auth-store'
 import { useAuthActions } from '@/stores/use-auth-store'
 import { toast } from 'react-toastify'
 
@@ -18,8 +18,8 @@ const RegisterPasswordInput: React.FC = () => {
     mode: 'onSubmit',
     defaultValues: { password: '' },
   })
-  const formData = useFormData()
-  const { resetDataState } = useFormActions()
+  const formData = useFormAuthData()
+  const { resetAuthDataState } = useFormAuthActions()
   const authStoreAction = useAuthActions()
 
   const submit = async (data: { password: string }) => {
@@ -29,7 +29,7 @@ const RegisterPasswordInput: React.FC = () => {
         ...data,
       } as RegisterInput)
       statusText === 'OK' && toast.success('Register success')
-      resetDataState()
+      resetAuthDataState()
     } catch (e: any) {
       toast.error(e.response?.data?.err[0])
     }

@@ -5,6 +5,7 @@ import { getItem, setItem } from '@/utils/storage'
 
 interface UseCountryStoreProps {
   currentCountry: string
+
   actions: {
     setCurrentCountry: (data: string) => void
   }
@@ -12,7 +13,7 @@ interface UseCountryStoreProps {
 
 const useCountryStore = create<UseCountryStoreProps>()(
   devtools((set) => ({
-    currentCountry: getItem<string | null>(StorageEnum.currentCountry) ?? 'FR',
+    currentCountry: getItem<string | null>(StorageEnum.currentCountry) ?? 'MG',
     actions: {
       setCurrentCountry: (data: string) => {
         set({ currentCountry: data })

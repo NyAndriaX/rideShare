@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'app/offer-seats',
+        path: 'app/offer-seats/*',
         element: (
           <ProtectedRoute>
             <OfferSeats />

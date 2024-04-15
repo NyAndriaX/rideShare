@@ -1,21 +1,21 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { useFormActions } from '@/stores/use-form-store'
-import { useFormData } from '@/stores/use-form-store'
+import { useFormAuthData } from '@/stores/use-form-auth-store'
+import { useFormAuthActions } from '@/stores/use-form-auth-store'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 const RegisterGenre: React.FC = () => {
   const navigate = useNavigate()
-  const formData = useFormData()
-  const { setFormData } = useFormActions()
+  const formAuthData = useFormAuthData()
+  const { setFormAuthData } = useFormAuthActions()
 
   const handleGenreSelection = async (data: { gender: string }) => {
-    await setFormData(data)
+    await setFormAuthData(data)
     navigate('/register/password')
   }
 
-  return formData?.dateOfBirth ? (
+  return formAuthData?.dateOfBirth ? (
     <div className='flex flex-col gap-8 w-1/2'>
       <p className='text-2xl font-bold text-midnightBlue text-center'>
         What do you prefer to be called?

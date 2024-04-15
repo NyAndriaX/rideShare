@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import Input from '../common/Input/Input'
 import Button from '../common/Button/Button'
 import { useForm } from 'react-hook-form'
-import { useFormData } from '@/stores/use-form-store'
-import { useFormActions } from '@/stores/use-form-store'
+import { useFormAuthData } from '@/stores/use-form-auth-store'
+import { useFormAuthActions } from '@/stores/use-form-auth-store'
 
 const RegisterDateOfBirth: React.FC = () => {
-  const formData = useFormData()
+  const formData = useFormAuthData()
   const {
     register,
     handleSubmit,
@@ -20,10 +20,10 @@ const RegisterDateOfBirth: React.FC = () => {
     },
   })
   const navigate = useNavigate()
-  const { setFormData } = useFormActions()
+  const { setFormAuthData } = useFormAuthActions()
 
   const submit = async (data: { dateOfBirth: Date }) => {
-    await setFormData(data)
+    await setFormAuthData(data)
     navigate('/register/gender')
   }
 

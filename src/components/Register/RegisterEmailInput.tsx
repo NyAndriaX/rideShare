@@ -2,13 +2,13 @@ import React from 'react'
 import Input from '../common/Input/Input'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useFormData } from '@/stores/use-form-store'
-import { useFormActions } from '@/stores/use-form-store'
+import { useFormAuthData } from '@/stores/use-form-auth-store'
+import { useFormAuthActions } from '@/stores/use-form-auth-store'
 import { EMAIL_REGEX } from '@/constants/app-constants'
 import Button from '../common/Button/Button'
 
 const RegisterEmailInput: React.FC = () => {
-  const formData = useFormData()
+  const formData = useFormAuthData()
   const {
     register,
     handleSubmit,
@@ -21,12 +21,12 @@ const RegisterEmailInput: React.FC = () => {
     },
   })
   const navigate = useNavigate()
-  const { setFormData } = useFormActions()
+  const { setFormAuthData } = useFormAuthActions()
 
   console.log(formData)
 
   const submit = async (data: { email: string; unsubscribe: boolean }) => {
-    await setFormData(data)
+    await setFormAuthData(data)
     navigate('/register/name')
   }
 
@@ -69,7 +69,7 @@ const RegisterEmailInput: React.FC = () => {
           type='submit'
           text='Coninue'
           disabled={isSubmitting}
-          className={`${isSubmitting && 'hidden'} rounded-md font-semibold text-midnightBlue bg-yellow`}
+          className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
         />
       </form>
     </div>

@@ -2,7 +2,8 @@ export enum StorageEnum {
   User = 'user',
   Token = 'token',
   currentCountry = 'currentCountry',
-  formDataRegister = 'formDataRegister'
+  formAuthDataRegister = 'formAuthDataRegister',
+  formOfferSeats ='formOfferSeats' 
 }
 
 export enum GenreEnum {

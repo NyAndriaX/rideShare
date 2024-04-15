@@ -1,10 +1,21 @@
 import React from 'react'
-import WelcomeBonus from './section/WelcomeBonus'
+import { Routes, Route } from 'react-router-dom'
+import GiftVoucher from '@/components/OfferSeats/GiftVoucher'
+import DepartureCity from '@/components/OfferSeats/DepartureCity'
+import CityOfArrival from '@/components/OfferSeats/CityOfArrival'
+import TripPostingBenefits from '@/components/OfferSeats/TripPostingBenefits'
 
 const OfferSeats: React.FC = () => {
   return (
     <div className='flex flex-col relative z-0 pt-24'>
-      <WelcomeBonus />
+      <div className='flex w-full justify-center items-center'>
+        <Routes>
+          <Route path='/' element={<TripPostingBenefits />} />
+          <Route path='/gift-voucher' element={<GiftVoucher />} />
+          <Route path='/departure/*' element={<DepartureCity />} />
+          <Route path='/arrival/*' element={<CityOfArrival />} />
+        </Routes>
+      </div>
     </div>
   )
 }

@@ -1,59 +1,60 @@
 import React from 'react'
 import { UserIcon, CheckIcon, ClockIcon } from '@heroicons/react/24/outline'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
-const DoteContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 44px;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+`
+
+const Header = styled.header`
+  display: flex;
   justify-content: space-between;
-  width: 20px;
   align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #edf2f7;
 `
 
-const DoteOutlined = styled.div`
-  width: 13px;
-  height: 13px;
+const Main = styled.main`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+`
+
+const DotContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+`
+
+const DotOutlined = styled.div`
+  width: 0.8125rem;
+  height: 0.8125rem;
   border: 1px solid #ccc;
-  border-radius: 100%;
+  border-radius: 50%;
 `
 
-const DoteContained = styled.div`
-  width: 13px;
-  height: 13px;
+const DotContained = styled.div`
+  width: 0.8125rem;
+  height: 0.8125rem;
   background-color: #ccc;
-  border-radius: 100%;
+  border-radius: 50%;
 `
 
 const Line = styled.div`
   height: 50%;
-  border-left: 2px dotted #ccc;
+  border-left: 1px dotted #ccc;
 `
 
-const Date = styled.p`
-  font-size: 14px;
-  color: var(--color-deep-sea-blue);
-`
-const Country = styled.p`
-  font-weight: 500;
-  font-size: 14px;
-  color: var(--color-deep-sea-blue);
-`
-const CountrySpan = styled.span`
-  font-weight: 600;
-`
-
-const Count = styled.div`
-  display: flex;
-  align-items: center;
-`
-const CountSpan = styled.span`
-  font-size: 14px;
-`
-const Price = styled.p`
-  font-size: 23px;
-  font-weight: bold;
-  color: var(--color-primary);
+const Text = styled.p`
+  font-size: 0.75rem;
+  color: #4a5568;
 `
 
 interface TravelProps {
@@ -74,49 +75,43 @@ const Travel: React.FC<TravelProps> = ({
   const isRefundable = true
 
   return (
-    <div className='flex flex-col bg-white rounded-md shadow-lg'>
-      <header className='flex flex-row justify-between items-center px-4 border-b border-lightGrey'>
+    <Container>
+      <Header>
         <img src='/public/icons/cars.png' alt='cars' className='w-10' />
-        <div className='flex flex-row items-center gap-2 text-slateBlue'>
+        <div className='flex items-center gap-2 text-slateBlue'>
           <ClockIcon className='h-4 w-4' />
-          <p className='text-sm'>03h20min</p>
+          <Text>03h20min</Text>
         </div>
-      </header>
-      <main className='flex flex-row w-full p-4 justify-between items-center'>
+      </Header>
+      <Main>
         <div className='flex flex-col gap-2'>
-          <Date>{dateOfDeparture}</Date>
-          <Date>{dateOfArrival}</Date>
+          <Text>{dateOfDeparture}</Text>
+          <Text>{dateOfArrival}</Text>
         </div>
-        <DoteContainer>
-          <DoteOutlined />
+        <DotContainer>
+          <DotOutlined />
           <Line />
-          <DoteContained />
-        </DoteContainer>
-        <div className='flex flex-col gap-2'>
-          <Country>
-            <CountrySpan>{departureCity}</CountrySpan> Paris-Gare-de-Lyon
-          </Country>
-          <Country>
-            <CountrySpan>{cityOfArrival}</CountrySpan> Marseill-Saint-Chris
-          </Country>
+          <DotContained />
+        </DotContainer>
+        <div className='flex flex-col gap-2 '>
+          <Text>{departureCity}</Text>
+          <Text>{cityOfArrival}</Text>
         </div>
         <div className='flex flex-col items-center justify-center'>
-          <div className='flex flex-row gap-1 text-slateBlue'>
-            <Count>
-              <CountSpan>4</CountSpan>
-              <UserIcon className='h-5 w-5' />
-            </Count>
-            <Price>{price} Ar</Price>
+          <div className='flex items-center gap-1 text-slateBlue'>
+            <Text>4</Text>
+            <UserIcon className='h-5 w-5' />
+            <Text>{price} Ar</Text>
           </div>
           {isRefundable && (
-            <p className='flex flex-row gap-1 items-center justify-center text-xs text-success'>
+            <p className='flex items-center gap-1 text-xs text-success'>
               <CheckIcon className='h-3 w-3' />
-              Refundable
+              <Text>Refundable</Text>
             </p>
           )}
         </div>
-      </main>
-    </div>
+      </Main>
+    </Container>
   )
 }
 

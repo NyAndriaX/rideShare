@@ -57,3 +57,29 @@ export interface ErrorFormSearch{
   departureCity:boolean
   cityOfArrival:boolean
 }
+
+interface Stop {
+  stopNumber: number;
+  stopLocation: string;
+}
+
+
+export interface FormOfferSeatsData {
+  departureProvince: string;
+  departurePrecise: string;
+  destinationProvince: string;
+  destinationPrecise: string;
+  stops: Stop[];
+  seatsOffered: {
+    totalSeats: number;
+    adultSeats: number;
+    childSeats: number;
+    disabledSeats: number;
+  };
+  departureDatetime: string;
+  returnDatetime?: string;
+  pricePerSeat: number;
+  additionalNotes: string;
+  refundable:boolean;
+  oneWay:boolean
+}

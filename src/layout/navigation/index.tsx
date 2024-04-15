@@ -59,7 +59,10 @@ const Navigation: React.FC = () => {
       <div className='flex flex-row justify-between items-center p-4'>
         <div className='flex flex-row justify-between items-center gap-10'>
           <Logo />
-          {!pathname.startsWith('/register') && (
+          {!(
+            pathname.startsWith('/register') ||
+            pathname.startsWith('/app/offer-seats/')
+          ) && (
             <div className='flex flex-row gap-4'>
               <NavList>Carpooling</NavList>
               <NavList>Bus</NavList>
@@ -67,7 +70,10 @@ const Navigation: React.FC = () => {
             </div>
           )}
         </div>
-        {!pathname.startsWith('/register') && (
+        {!(
+          pathname.startsWith('/register') ||
+          pathname.startsWith('/app/offer-seats/')
+        ) && (
           <div className='flex flex-row items-center justify-center gap-4'>
             <SetCountry />
             <Button

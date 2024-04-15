@@ -28,10 +28,12 @@ const Hero: React.FC = () => {
           <SearchCard />
         </div>
         <div className='flex flex-col gap-4 w-1/2 mt-4'>
-          <p className='flex flex-col gap-2 text-2xl text-white text-center font-semibold'>
-            <span>RideShare</span>
-            <span>All information on free carpooling</span>
-          </p>
+          <h1 className='text-6xl md:text-7xl font-bold mb-5 text-white text-center'>
+            RideShare
+          </h1>
+          <h3 className='text-xl mb-5 font-light text-center text-white'>
+            All information on free carpooling
+          </h3>
           <div className='flex flex-row items-center justify-center py-4 gap-24'>
             <div className='flex flex-row justify-center items-center gap-4'>
               <div className='flex flex-col '>

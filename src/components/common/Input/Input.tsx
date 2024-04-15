@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, ReactNode } from 'react'
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
@@ -8,6 +8,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type: string
   error?: string
   value?: string
+  icon?: ReactNode
   disabled?: boolean
   autocomplete?: string
   autofocus?: boolean
@@ -23,6 +24,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
     ariaInvalid,
     error,
     value,
+    icon,
     disabled,
     autocomplete,
     autofocus,
@@ -35,17 +37,25 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
     <div className='flex flex-col relative'>
       <label className='text-black text-sm mb-1'>{label}</label>
       <div className='flex items-center gep-4'>
-        <input
-          ref={ref}
-          type={type}
-          placeholder={placeholder}
-          {...props}
-          className={`z-1 px-4 p-3  w-full bg-offWhite rounded-md ${error && 'border-red-500'} ${inputClassName} ${className}`}
-          value={value}
-          disabled={disabled}
-          autoFocus={autofocus}
-          autoComplete={autocomplete}
-        />
+        <div className='flex flex-row items-center w-full'>
+          <span className='absolute ml-2'>
+            {icon &&
+              typeof icon !== 'string' &&
+              React.isValidElement(icon) &&
+              icon}
+          </span>
+          <input
+            ref={ref}
+            type={type}
+            placeholder={placeholder}
+            {...props}
+            className={`z-1 px-4 p-3  w-full bg-offWhite rounded-md ${icon && 'pl-10'}  ${error && 'border-red-500'} ${inputClassName} ${className}`}
+            value={value}
+            disabled={disabled}
+            autoFocus={autofocus}
+            autoComplete={autocomplete}
+          />
+        </div>
       </div>
       {error && (
         <p role='alert' className='text-sm text-red-500 font-semibold'>
