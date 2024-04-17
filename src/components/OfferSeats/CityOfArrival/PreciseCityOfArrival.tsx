@@ -28,7 +28,7 @@ const PreciseCityOfArrival: React.FC = () => {
 
   const submit = async (data: Partial<FormOfferSeatsData>) => {
     await setFormOfferSeatsData(data)
-    navigate('/app/offer-seats/arrival')
+    navigate('/app/offer-seats/declared-stopovers')
   }
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>

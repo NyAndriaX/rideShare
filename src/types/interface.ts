@@ -58,9 +58,9 @@ export interface ErrorFormSearch{
   cityOfArrival:boolean
 }
 
-interface Stop {
-  stopNumber: number;
+export interface Stop {
   stopLocation: string;
+  checked:boolean
 }
 
 
