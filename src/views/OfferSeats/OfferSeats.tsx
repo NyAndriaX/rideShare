@@ -16,7 +16,7 @@ const OfferSeats: React.FC = () => {
           <Route path='/gift-voucher' element={<GiftVoucher />} />
           <Route path='/departure/*' element={<DepartureCity />} />
           <Route path='/arrival/*' element={<CityOfArrival />} />
-          <Route path='/meeting-points' element={<MeetingPoints />} />
+          <Route path='/meeting-points/*' element={<MeetingPoints />} />
           <Route path='/declared-stopovers/*' element={<DeclaredStopovers />} />
         </Routes>
       </div>

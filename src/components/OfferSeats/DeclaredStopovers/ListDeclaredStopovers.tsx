@@ -51,8 +51,9 @@ const ListDeclaredStopovers: React.FC<ListDeclaredStopoversProps> = ({
 
   const onSubmit = async (event: any) => {
     event.preventDefault()
+    const stops: Stop[] = listStopovers.filter((stop) => stop.checked === true)
     await setFormOfferSeatsData({
-      stops: listStopovers,
+      stops,
     } as Partial<FormOfferSeatsData>)
     navigate('/app/offer-seats/meeting-points')
   }
