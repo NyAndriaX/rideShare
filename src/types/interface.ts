@@ -63,6 +63,15 @@ export interface Stop {
   checked:boolean
 }
 
+export interface DepartureDate{
+  date:string,
+  time:string
+}
+
+export interface ReturnDate{
+  date:string,
+  time:string
+}
 
 export interface FormOfferSeatsData {
   departureProvince: string;
@@ -76,8 +85,8 @@ export interface FormOfferSeatsData {
     childSeats: number;
     disabledSeats: number;
   };
-  departureDatetime: string;
-  returnDatetime?: string;
+  departureDate: DepartureDate;
+  returnDatetime?: ReturnDate;
   pricePerSeat: number;
   additionalNotes: string;
   refundable:boolean;

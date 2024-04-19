@@ -86,11 +86,12 @@ const ListMeetingPoints: React.FC = () => {
     setFormOfferSeatsData({
       stops: stopovers,
     } as Partial<FormOfferSeatsData>)
+    navigate('/app/offer-seats/departure-date')
   }
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-2xl font-bold text-midnightBlue text-center text-gray-700'>
+      <p className='text-4xl font-bold text-midnightBlue text-center text-gray-700'>
         Here are the best places to stop in these towns. Does it suit you ?
       </p>
       <DoteContainer>

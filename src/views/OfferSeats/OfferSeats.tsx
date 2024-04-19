@@ -4,6 +4,7 @@ import GiftVoucher from '@/components/OfferSeats/GiftVoucher'
 import DepartureCity from '@/components/OfferSeats/DepartureCity'
 import CityOfArrival from '@/components/OfferSeats/CityOfArrival'
 import MeetingPoints from '@/components/OfferSeats/MeetingPoints'
+import DateOfDeparture from '@/components/OfferSeats/DateOfDeparture'
 import DeclaredStopovers from '@/components/OfferSeats/DeclaredStopovers'
 import TripPostingBenefits from '@/components/OfferSeats/TripPostingBenefits'
 
@@ -18,6 +19,7 @@ const OfferSeats: React.FC = () => {
           <Route path='/arrival/*' element={<CityOfArrival />} />
           <Route path='/meeting-points/*' element={<MeetingPoints />} />
           <Route path='/declared-stopovers/*' element={<DeclaredStopovers />} />
+          <Route path='/departure-date/*' element={<DateOfDeparture />} />
         </Routes>
       </div>
     </div>

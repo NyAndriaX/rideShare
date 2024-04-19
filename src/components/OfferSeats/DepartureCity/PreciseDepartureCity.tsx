@@ -33,7 +33,7 @@ const PreciseDepartureCity: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-2xl font-bold text-midnightBlue text-center'>
+      <p className='text-4xl font-bold text-midnightBlue text-center'>
         Where do you want to collect your passengers?
       </p>
       <div className='flex flex-col gap-2'>
