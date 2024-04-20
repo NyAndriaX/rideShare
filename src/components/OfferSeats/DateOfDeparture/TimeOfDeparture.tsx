@@ -1,13 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { DepartureDate } from '@/types/interface'
-// import { FormOfferSeatsData } from '@/types/interface'
+import { FormOfferSeatsData } from '@/types/interface'
 import Input from '@/components/common/Input/Input'
 import Button from '@/components/common/Button/Button'
 import {
   useFormOfferSeatsData,
-  // useFormOfferSeatsActions,
+  useFormOfferSeatsActions,
 } from '@/stores/use-form-offer-seats-store'
 
 const getCurrentTime = () => {
@@ -19,9 +19,9 @@ const getCurrentTime = () => {
 
 const TimeOfDeparture: React.FC = () => {
   const today = new Date()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const formOfferSeatsData = useFormOfferSeatsData()
-  // const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
   const defaultDate =
     formOfferSeatsData?.departureDate?.date || today.toISOString().split('T')[0]
   const defaultTime = getCurrentTime()
@@ -38,9 +38,10 @@ const TimeOfDeparture: React.FC = () => {
   })
 
   const submit = async (data: Partial<DepartureDate>) => {
-    console.log(data)
-    // await setFormOfferSeatsData(data)
-    // navigate('/app/offer-seats/arrival')
+    await setFormOfferSeatsData({
+      departureDate: data,
+    } as Partial<FormOfferSeatsData>)
+    navigate('/app/offer-seats/confort')
   }
 
   return (
@@ -60,6 +61,8 @@ const TimeOfDeparture: React.FC = () => {
           ariaInvalid={isDirty}
           type='time'
           autofocus
+          min='00:00'
+          max='23:59'
           autoComplete='off'
         />
         {isValid && (

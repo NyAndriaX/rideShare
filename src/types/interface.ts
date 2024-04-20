@@ -73,6 +73,7 @@ export interface ReturnDate{
   time:string
 }
 
+
 export interface FormOfferSeatsData {
   departureProvince: string;
   departurePrecise: string;
@@ -85,8 +86,10 @@ export interface FormOfferSeatsData {
     childSeats: number;
     disabledSeats: number;
   };
+  seats:number;
   departureDate: DepartureDate;
   returnDatetime?: ReturnDate;
+  isComfort:boolean;
   pricePerSeat: number;
   additionalNotes: string;
   refundable:boolean;
