@@ -3,7 +3,7 @@
 @import 'tailwindcss/utilities';
 
 :root {
-  font-family: Mulish;
+  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --color-primary: rgb(32 140 251);
   --color-dark-primary: rgb(18, 109, 201);
   --color-success: rgb(128 200 95);
@@ -22,17 +22,16 @@
   border: none !important;
 }
 
-.rdp-day_selected {
-  background-color: var(--color-primary);
-  color: var(--color-dark-white);
+h1 {
   font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  text-align: center;
 }
-.rdp-day_selected:hover {
-  background-color: var(--color-primary);
-  color: var(--color-dark-white);
-  font-weight: bold;
-}
-.rdp-multiple_months {
-  color: var(--color-primary);
-  font-family: Mulish;
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
 }

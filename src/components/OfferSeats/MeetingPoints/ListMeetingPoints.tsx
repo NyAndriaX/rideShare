@@ -91,9 +91,9 @@ const ListMeetingPoints: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center text-gray-700'>
+      <h1 className='text-blue-900'>
         Here are the best places to stop in these towns. Does it suit you ?
-      </p>
+      </h1>
       <DoteContainer>
         <div className='flex flex-row relative'>
           <DoteOutlined />
@@ -140,7 +140,7 @@ const ListMeetingPoints: React.FC = () => {
       <Button
         type='button'
         onClick={onSubmit}
-        text='Coninue'
+        text='Continue'
         className={` rounded-md font-semibold text-midnightBlue bg-yellow`}
       />
     </div>

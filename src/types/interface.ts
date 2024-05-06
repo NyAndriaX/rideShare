@@ -73,6 +73,10 @@ export interface ReturnDate{
   time:string
 }
 
+export interface StopPrice {
+  stopId:string;
+  price:number
+}
 
 export interface FormOfferSeatsData {
   departureProvince: string;
@@ -80,7 +84,7 @@ export interface FormOfferSeatsData {
   destinationProvince: string;
   destinationPrecise: string;
   stops: Stop[];
-  seatsOffered: {
+  seatsOffered: { // This state is deleted after submitting in backend 
     totalSeats: number;
     adultSeats: number;
     childSeats: number;
@@ -90,7 +94,8 @@ export interface FormOfferSeatsData {
   departureDate: DepartureDate;
   returnDatetime?: ReturnDate;
   isComfort:boolean;
-  pricePerSeat: number;
+  pricePerSeat: number; // This is value of price
+  stopPrices?:StopPrice[]; // this is value of stop price
   additionalNotes: string;
   refundable:boolean;
   oneWay:boolean

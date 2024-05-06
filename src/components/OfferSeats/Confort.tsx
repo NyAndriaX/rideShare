@@ -1,6 +1,5 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import Button from '../common/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { FormOfferSeatsData } from '@/types/interface'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
@@ -78,11 +77,6 @@ const Confort: React.FC = () => {
             </div>
           </div>
         ))}
-        <Button
-          type='submit'
-          text='Coninue'
-          className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
-        />
       </div>
     </div>
   )

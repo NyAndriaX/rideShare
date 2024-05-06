@@ -8,7 +8,7 @@ const TransBookCompare: React.FC = () => {
       <div className='w-full bg-white border-t border-b border-gray-200 px-5 py-16 md:py-24 text-gray-800'>
         <div className='w-full max-w-6xl mx-auto'>
           <div className='text-center max-w-xl mx-auto'>
-            <h1 className='text-6xl md:text-7xl font-bold mb-5 text-gray-600'>
+            <h1 className=' text-gray-600'>
               What people <br />
               are saying.
             </h1>

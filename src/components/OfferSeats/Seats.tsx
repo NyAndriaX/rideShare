@@ -34,7 +34,7 @@ const Seats: React.FC = () => {
     await setFormOfferSeatsData({
       seats,
     } as Partial<FormOfferSeatsData>)
-    navigate('/app/offer-seats/return-trip')
+    navigate('/app/offer-seats/price-recommendation')
   }
 
   return (
