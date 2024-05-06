@@ -85,7 +85,7 @@ const IncrementalPriceComponent: React.FC = () => {
           } else {
             return {
               stopId: stop.stopLocation,
-              price: 0,
+              price: 1000,
             }
           }
         },
@@ -161,6 +161,7 @@ const IncrementalPriceComponent: React.FC = () => {
     await setFormOfferSeatsData({
       stopPrices: stopPrices,
       pricePerSeat: pricePerSeat,
+      fixedPrice: false,
     } as Partial<FormOfferSeatsData>)
 
     navigate('/app/offer-seats/return-trip')

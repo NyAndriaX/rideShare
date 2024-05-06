@@ -94,6 +94,7 @@ export interface FormOfferSeatsData {
   departureDate: DepartureDate;
   returnDatetime?: ReturnDate;
   isComfort:boolean;
+  fixedPrice:boolean;
   pricePerSeat: number; // This is value of price
   stopPrices?:StopPrice[]; // this is value of stop price
   additionalNotes: string;
