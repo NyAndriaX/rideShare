@@ -13,18 +13,13 @@ const ContainerOptions = styled.div`
   cursor: pointer;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-white);
-  &:hover {
-    background-color: var(--color-off-white);
-  }
 `
 
 const TextOptions = styled.p`
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 600;
-  text-transform: capitalize;
-  color: var(--color-deep-sea-blue);
+  text-transform: lowercase;
 `
 
 interface ReturnTripItem {
@@ -54,18 +49,14 @@ const ReturnTrip: React.FC = () => {
     await setFormOfferSeatsData({
       oneWay: data.value,
     } as Partial<FormOfferSeatsData>)
-    if (data.value) {
-      navigate('/app/offer-seats/return-date')
-    } else {
-      console.log(data)
-    }
+    data.value ? navigate('/app/offer-seats/return-date') : null
   }
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center text-gray-700'>
+      <h1 className='text-blue-900'>
         Are you also making the return trip? Publish your trip now
-      </p>
+      </h1>
       <div className='flex flex-col items-center justify-center gap-6'>
         {returnTripState.map((state) => (
           <div
@@ -74,11 +65,13 @@ const ReturnTrip: React.FC = () => {
             className='flex flex-col w-full items-center justify-center gap-2'
           >
             <div className='flex flex-col w-full gap-1'>
-              <ContainerOptions>
-                <TextOptions>{state.text}</TextOptions>
-                <ChevronRightIcon className='h-6 w-6' />
+              <ContainerOptions className='bg-white hover:bg-gray-50'>
+                <TextOptions className='text-blue-900'>
+                  {state.text}
+                </TextOptions>
+                <ChevronRightIcon className='h-6 w-6 text-gray-400' />
               </ContainerOptions>
-              <div className='border-b border-gray-200' />
+              <div className='border-b border-gray-100' />
             </div>
           </div>
         ))}

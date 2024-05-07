@@ -29,9 +29,8 @@ const DateOfDeparture: React.FC = () => {
     return day < today
   }
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setFormOfferSeatsData({
+  const handleSubmit = async () => {
+    await setFormOfferSeatsData({
       departureDate,
     } as Partial<FormOfferSeatsData>)
     navigate('time')
@@ -39,10 +38,8 @@ const DateOfDeparture: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center'>
-        When are you leaving ?
-      </p>
-      <form className='flex flex-col gap-6' onSubmit={onSubmit}>
+      <h1 className='text-blue-900'>When are you leaving ?</h1>
+      <div className='flex flex-col gap-6'>
         <DayPicker
           mode='single'
           captionLayout='dropdown-buttons'
@@ -71,10 +68,11 @@ const DateOfDeparture: React.FC = () => {
         />
         <Button
           type='submit'
-          text='Coninue'
+          text='Continue'
+          onClick={handleSubmit}
           className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
         />
-      </form>
+      </div>
     </div>
   )
 }

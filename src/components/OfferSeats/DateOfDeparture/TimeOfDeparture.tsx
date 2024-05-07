@@ -46,9 +46,9 @@ const TimeOfDeparture: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center'>
+      <h1 className='text-blue-900'>
         What time do you want to meet your passengers?
-      </p>
+      </h1>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => submit(data))}
@@ -68,9 +68,9 @@ const TimeOfDeparture: React.FC = () => {
         {isValid && (
           <Button
             type='submit'
-            text='Coninue'
+            text='Continue'
             disabled={!isValid}
-            className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
+            className={`rounded-md font-semibold text-blue-900 bg-yellow`}
           />
         )}
       </form>

@@ -92,7 +92,7 @@ export interface FormOfferSeatsData {
   };
   seats:number;
   departureDate: DepartureDate;
-  returnDatetime?: ReturnDate;
+  returnDate?: ReturnDate;
   isComfort:boolean;
   fixedPrice:boolean;
   pricePerSeat: number; // This is value of price
