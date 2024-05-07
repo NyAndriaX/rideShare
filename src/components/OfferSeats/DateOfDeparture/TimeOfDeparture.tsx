@@ -65,14 +65,12 @@ const TimeOfDeparture: React.FC = () => {
           max='23:59'
           autoComplete='off'
         />
-        {isValid && (
-          <Button
-            type='submit'
-            text='Continue'
-            disabled={!isValid}
-            className={`rounded-md font-semibold text-blue-900 bg-yellow`}
-          />
-        )}
+        <Button
+          type='submit'
+          text='Continue'
+          disabled={!isValid}
+          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+        />
       </form>
     </div>
   )

@@ -16,10 +16,6 @@ const ContainerOptionsProvince = styled.div`
   cursor: pointer;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-white);
-  &:hover {
-    background-color: var(--color-off-white);
-  }
 `
 
 const Label = styled.label`
@@ -27,7 +23,6 @@ const Label = styled.label`
   line-height: 1.5rem;
   font-weight: 600;
   text-transform: capitalize;
-  color: var(--color-deep-sea-blue);
 `
 
 interface ListDeclaredStopoversProps {
@@ -60,9 +55,7 @@ const ListDeclaredStopovers: React.FC<ListDeclaredStopoversProps> = ({
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center'>
-        Add steps to find more passengers
-      </p>
+      <h1 className='text-blue-900'>Add steps to find more passengers</h1>
       <form
         className='flex flex-col gap-8 w-full'
         onSubmit={(event) => onSubmit(event)}
@@ -78,24 +71,24 @@ const ListDeclaredStopovers: React.FC<ListDeclaredStopoversProps> = ({
               value={stop}
               onClick={() => handleToggleChecked(index)}
             >
-              <ContainerOptionsProvince>
-                <Label>{stop.stopLocation}</Label>
+              <ContainerOptionsProvince className='bg-white hover:bg-gray-50'>
+                <Label className='text-blue-900'>{stop.stopLocation}</Label>
                 <input type='checkbox' checked={listStopovers[index].checked} />
               </ContainerOptionsProvince>
-              <div className='border-b border-gray-200' />
+              <div className='border-b border-gray-100' />
             </Reorder.Item>
           ))}
         </Reorder.Group>
         <Link
-          className='text-primary'
+          className='text-blue-500'
           to='/app/offer-seats/declared-stopovers/add'
         >
           Ajouter une étape
         </Link>
         <Button
           type='submit'
-          text='Coninue'
-          className={` rounded-md font-semibold text-midnightBlue bg-yellow`}
+          text='Continue'
+          className={` rounded-md font-semibold text-blue-900 bg-yellow`}
         />
       </form>
     </div>

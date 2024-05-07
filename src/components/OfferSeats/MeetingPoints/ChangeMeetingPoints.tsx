@@ -44,9 +44,9 @@ const ChangeMeetingPoints: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center'>
+      <h1 className='text-blue-900'>
         Where do you want to drop off your passengers?
-      </p>
+      </h1>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => submit(data))}
@@ -63,14 +63,12 @@ const ChangeMeetingPoints: React.FC = () => {
           autofocus
           autoComplete='off'
         />
-        {isValid && (
-          <Button
-            type='submit'
-            text='Coninue'
-            disabled={!isValid}
-            className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
-          />
-        )}
+        <Button
+          type='submit'
+          text='Continue'
+          disabled={!isValid}
+          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+        />
       </form>
     </div>
   )

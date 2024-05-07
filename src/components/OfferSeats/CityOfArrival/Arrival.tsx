@@ -24,10 +24,6 @@ const ContainerOptionsProvince = styled.div`
   cursor: pointer;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-white);
-  &:hover {
-    background-color: var(--color-off-white);
-  }
 `
 
 const TextOptionsProvince = styled.p`
@@ -35,7 +31,6 @@ const TextOptionsProvince = styled.p`
   line-height: 1.5rem;
   font-weight: 600;
   text-transform: capitalize;
-  color: var(--color-deep-sea-blue);
 `
 
 const Arrival: React.FC = () => {
@@ -103,9 +98,7 @@ const Arrival: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center'>
-        Where are you going ?
-      </p>
+      <h1 className='text-blue-900'>Where are you going ?</h1>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => submit(data))}
@@ -141,12 +134,15 @@ const Arrival: React.FC = () => {
               filteredProvince.map((province) => (
                 <div key={province} className='flex flex-col w-full gap-1'>
                   <ContainerOptionsProvince
+                    className='bg-white hover:bg-gray-50'
                     onClick={() => handleChoiceProvince(province)}
                   >
-                    <TextOptionsProvince>{province}</TextOptionsProvince>
-                    <ChevronRightIcon className='h-6 w-6' />
+                    <TextOptionsProvince className='text-blue-900'>
+                      {province}
+                    </TextOptionsProvince>
+                    <ChevronRightIcon className='h-6 w-6 text-gray-400' />
                   </ContainerOptionsProvince>
-                  <div className='border-b border-gray-200' />
+                  <div className='border-b border-gray-100' />
                 </div>
               ))
             )}
@@ -155,9 +151,9 @@ const Arrival: React.FC = () => {
         {isValid && (
           <Button
             type='submit'
-            text='Coninue'
+            text='Continue'
             disabled={!isValid}
-            className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
+            className={`rounded-md font-semibold text-blue-900 bg-yellow`}
           />
         )}
       </form>

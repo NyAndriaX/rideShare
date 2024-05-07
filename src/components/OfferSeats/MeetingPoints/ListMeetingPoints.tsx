@@ -25,9 +25,7 @@ const DoteContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `
-const Line = styled.div`
-  border-left: 3px solid #ccc;
-`
+const Line = styled.div``
 
 const ContainerStopovers = styled.div`
   display: flex;
@@ -54,8 +52,6 @@ const DoteOutlinedStopovers = styled.div`
   position: relative;
   top: 8px;
   border-radius: 100%;
-  background-color: white;
-  border: 3px solid var(--color-midnight-blue);
 `
 
 const ItemStopovers = styled.div`
@@ -67,9 +63,6 @@ const ItemStopovers = styled.div`
   border-radius: 8px;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  &:hover {
-    background-color: #eaeaea8a;
-  }
 `
 
 const ListMeetingPoints: React.FC = () => {
@@ -102,28 +95,29 @@ const ListMeetingPoints: React.FC = () => {
           </p>
         </div>
         <ContainerStopovers>
-          <Line />
+          <Line className='border-l-2 border-gray-200' />
           <ContainerItemStopovers>
             <Reorder.Group axis='y' values={stopovers} onReorder={setStopovers}>
               {stopovers?.map((stop, index) => (
                 <Reorder.Item key={index} value={stop}>
                   <ItemStopovers
+                    className='hover:bg-gray-50'
                     onClick={() =>
                       navigate(`change?meetingPointsIndex=${index}`)
                     }
                   >
                     <div className='flex flex-row gap-4 '>
-                      <DoteOutlinedStopovers />
+                      <DoteOutlinedStopovers className='bg-white border-4 border-blue-900' />
                       <div className='flex flex-col'>
-                        <p className='text-lg font-bold text-midnightBlue'>
+                        <p className='text-lg font-bold text-blue-900'>
                           {stop.stopLocation}
                         </p>
-                        <p className='text-xs font-semibold text-midnightBlue'>
+                        <p className='text-xs font-semibold text-gray-400'>
                           ville
                         </p>
                       </div>
                     </div>
-                    <ChevronRightIcon className='h-8 w-8 text-gray-400' />
+                    <ChevronRightIcon className='h-6 w-6 text-gray-400' />
                   </ItemStopovers>
                 </Reorder.Item>
               ))}
@@ -141,7 +135,7 @@ const ListMeetingPoints: React.FC = () => {
         type='button'
         onClick={onSubmit}
         text='Continue'
-        className={` rounded-md font-semibold text-midnightBlue bg-yellow`}
+        className={` rounded-md font-semibold text-blue-900 bg-yellow`}
       />
     </div>
   )

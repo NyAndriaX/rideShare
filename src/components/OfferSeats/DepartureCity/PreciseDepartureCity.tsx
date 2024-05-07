@@ -5,7 +5,7 @@ import Input from '@/components/common/Input/Input'
 import { FormOfferSeatsData } from '@/types/interface'
 import Button from '@/components/common/Button/Button'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
+import AddressExplanationModal from '../AddressExplanationModal'
 import {
   useFormOfferSeatsData,
   useFormOfferSeatsActions,
@@ -33,17 +33,11 @@ const PreciseDepartureCity: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center'>
+      <h1 className='text-blue-900'>
         Where do you want to collect your passengers?
-      </p>
+      </h1>
       <div className='flex flex-col gap-2'>
-        <button
-          className='inline-flex items-center px-6 py-2 gap-4 border border-lightGrey rounded-md text-gray-400'
-          style={{ width: 'fit-content' }}
-        >
-          <QuestionMarkCircleIcon className='h-6 w-6 text-gray-400' />
-          <span>Why a precise address</span>
-        </button>
+        <AddressExplanationModal />
         <form
           className='flex flex-col gap-6'
           onSubmit={handleSubmit((data) => submit(data))}
@@ -60,14 +54,12 @@ const PreciseDepartureCity: React.FC = () => {
             autofocus
             autoComplete='off'
           />
-          {isValid && (
-            <Button
-              type='submit'
-              text='Coninue'
-              disabled={!isValid}
-              className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
-            />
-          )}
+          <Button
+            type='submit'
+            text='Continue'
+            disabled={!isValid}
+            className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+          />
         </form>
       </div>
     </div>

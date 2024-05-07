@@ -61,14 +61,12 @@ const AddNewDeclaredStopovers: React.FC<AddNewDeclaredStopoversProps> = ({
           autofocus
           autoComplete='off'
         />
-        {isValid && (
-          <Button
-            type='submit'
-            text='Coninue'
-            disabled={!isValid}
-            className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
-          />
-        )}
+        <Button
+          type='submit'
+          text='Continue'
+          disabled={!isValid}
+          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+        />
       </form>
     </div>
   )

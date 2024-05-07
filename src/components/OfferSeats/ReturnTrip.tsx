@@ -43,13 +43,22 @@ const returnTripState: ReturnTripItem[] = [
 
 const ReturnTrip: React.FC = () => {
   const navigate = useNavigate()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const { setFormOfferSeatsData, resetItem } = useFormOfferSeatsActions()
 
   const handleChoice = async (data: ReturnTripItem) => {
     await setFormOfferSeatsData({
       oneWay: data.value,
     } as Partial<FormOfferSeatsData>)
-    data.value ? navigate('/app/offer-seats/return-date') : null
+    if (data.value) {
+      await setFormOfferSeatsData({
+        oneWay: data.value,
+      } as Partial<FormOfferSeatsData>)
+      navigate('/app/offer-seats/return-date')
+    } else {
+      await resetItem('returnDate')
+      await resetItem('returnPrice')
+      navigate('/app/offer-seats/phone-verification-fill')
+    }
   }
 
   return (

@@ -22,10 +22,6 @@ const ContainerOptionsProvince = styled.div`
   cursor: pointer;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-white);
-  &:hover {
-    background-color: var(--color-off-white);
-  }
 `
 
 const TextOptionsProvince = styled.p`
@@ -33,7 +29,6 @@ const TextOptionsProvince = styled.p`
   line-height: 1.5rem;
   font-weight: 600;
   text-transform: capitalize;
-  color: var(--color-deep-sea-blue);
 `
 
 const Departure: React.FC = () => {
@@ -137,12 +132,15 @@ const Departure: React.FC = () => {
               filteredProvince.map((province) => (
                 <div key={province} className='flex flex-col w-full gap-1'>
                   <ContainerOptionsProvince
+                    className='bg-white hover:bg-gray-50'
                     onClick={() => handleChoiceProvince(province)}
                   >
-                    <TextOptionsProvince>{province}</TextOptionsProvince>
-                    <ChevronRightIcon className='h-6 w-6' />
+                    <TextOptionsProvince className='text-blue-900'>
+                      {province}
+                    </TextOptionsProvince>
+                    <ChevronRightIcon className='h-6 w-6 text-gray-400' />
                   </ContainerOptionsProvince>
-                  <div className='border-b border-gray-200' />
+                  <div className='border-b border-gray-100' />
                 </div>
               ))
             )}
@@ -152,7 +150,7 @@ const Departure: React.FC = () => {
         {isValid && (
           <Button
             type='submit'
-            text='Coninue'
+            text='Continue'
             disabled={!isValid}
             className={`rounded-md font-semibold text-blue-500 bg-yellow`}
           />
