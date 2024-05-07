@@ -21,6 +21,7 @@
     "date-fns": "^3.6.0",
     "firebase": "^10.9.0",
     "framer-motion": "^11.0.14",
+    "google-libphonenumber": "^3.2.34",
     "immer": "^10.0.4",
     "jwt-decode": "^4.0.0",
     "keen-slider": "^6.8.6",
@@ -35,6 +36,7 @@
     "react-flagkit": "^2.0.4",
     "react-hook-form": "^7.51.1",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-international-phone": "^4.2.9",
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
     "styled-components": "^6.1.8",
@@ -42,6 +44,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "^20.11.29",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",

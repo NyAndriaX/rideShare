@@ -105,6 +105,7 @@ export interface FormOfferSeatsData {
   stopPrices?:StopPrice[]; // this is value of stop price
   returnPrice?:returnPrice
   additionalNotes: string;
+  phoneNumber:string;
   refundable:boolean;
   oneWay:boolean
 }

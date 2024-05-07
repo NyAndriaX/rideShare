@@ -53,28 +53,37 @@ const ReturnTrip: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <h1 className='text-blue-900'>
-        Are you also making the return trip? Publish your trip now
-      </h1>
-      <div className='flex flex-col items-center justify-center gap-6'>
-        {returnTripState.map((state) => (
-          <div
-            key={state.id}
-            onClick={() => handleChoice(state)}
-            className='flex flex-col w-full items-center justify-center gap-2'
-          >
-            <div className='flex flex-col w-full gap-1'>
-              <ContainerOptions className='bg-white hover:bg-gray-50'>
-                <TextOptions className='text-blue-900'>
-                  {state.text}
-                </TextOptions>
-                <ChevronRightIcon className='h-6 w-6 text-gray-400' />
-              </ContainerOptions>
-              <div className='border-b border-gray-100' />
+    <div className='flex flex-row gap-4 justify-between items-start'>
+      <div className='flex'>
+        <img
+          className='w-full'
+          src='/public/image/personne-qui-commande-taxi-aeroport-ligne_74855-15496.jpg'
+          alt='personne qui commande taxi aeroport'
+        />
+      </div>
+      <div className='flex flex-col gap-8 px-4 pt-10 pb-28'>
+        <h1 className='text-blue-900'>
+          Are you also making the return trip? Publish your trip now
+        </h1>
+        <div className='flex flex-col items-center justify-center gap-6'>
+          {returnTripState.map((state) => (
+            <div
+              key={state.id}
+              onClick={() => handleChoice(state)}
+              className='flex flex-col w-full items-center justify-center gap-2'
+            >
+              <div className='flex flex-col w-full gap-1'>
+                <ContainerOptions className='bg-white hover:bg-gray-50'>
+                  <TextOptions className='text-blue-900'>
+                    {state.text}
+                  </TextOptions>
+                  <ChevronRightIcon className='h-6 w-6 text-gray-400' />
+                </ContainerOptions>
+                <div className='border-b border-gray-100' />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

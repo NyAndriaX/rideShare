@@ -101,9 +101,7 @@ const Departure: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center'>
-        Where are you leaving from ?
-      </p>
+      <h1 className='text-blue-900'>Where are you leaving from ?</h1>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => submit(data))}
@@ -156,7 +154,7 @@ const Departure: React.FC = () => {
             type='submit'
             text='Coninue'
             disabled={!isValid}
-            className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
+            className={`rounded-md font-semibold text-blue-500 bg-yellow`}
           />
         )}
       </form>
