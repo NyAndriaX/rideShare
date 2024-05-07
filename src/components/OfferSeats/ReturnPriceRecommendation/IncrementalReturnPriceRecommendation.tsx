@@ -59,37 +59,36 @@ const ContainerStopovers = styled.div`
   width: 50vw;
 `
 
-const IncrementalPriceComponent: React.FC = () => {
+const IncrementalReturnPriceRecommendation: React.FC = () => {
   const navigate = useNavigate()
   const formOfferSeatsData = useFormOfferSeatsData()
   const [isEdit, setIsEdit] = useState<boolean[]>([])
+  const stops = formOfferSeatsData?.stops?.reverse() ?? []
   const { setFormOfferSeatsData } = useFormOfferSeatsActions()
   const [inputValue, setInputValue] = useState<StopPrice[]>([])
   const [stopPrices, setStopPrices] = useState<StopPrice[]>([])
 
   useEffect(() => {
-    if (formOfferSeatsData && formOfferSeatsData.stops) {
-      setIsEdit(new Array(formOfferSeatsData.stops.length).fill(false))
-      const initialStopPrices: StopPrice[] = formOfferSeatsData.stops.map(
-        (stop) => {
-          const correspondStopPrice =
-            formOfferSeatsData.stopPrices &&
-            formOfferSeatsData.stopPrices.find(
-              (stopPrice) => stopPrice.stopId === stop.stopLocation,
-            )
-          if (correspondStopPrice) {
-            return {
-              stopId: stop.stopLocation,
-              price: correspondStopPrice.price,
-            }
-          } else {
-            return {
-              stopId: stop.stopLocation,
-              price: 1000,
-            }
+    if (formOfferSeatsData && stops) {
+      setIsEdit(new Array(stops.length).fill(false))
+      const initialStopPrices: StopPrice[] = stops.map((stop) => {
+        const correspondStopPrice =
+          formOfferSeatsData.returnPrice?.stopPrices &&
+          formOfferSeatsData.returnPrice.stopPrices.find(
+            (stopPrice) => stopPrice.stopId === stop.stopLocation,
+          )
+        if (correspondStopPrice) {
+          return {
+            stopId: stop.stopLocation,
+            price: correspondStopPrice.price,
           }
-        },
-      )
+        } else {
+          return {
+            stopId: stop.stopLocation,
+            price: 1000,
+          }
+        }
+      })
       setInputValue([...initialStopPrices])
       setStopPrices([...initialStopPrices])
     }
@@ -159,27 +158,27 @@ const IncrementalPriceComponent: React.FC = () => {
       0,
     )
     await setFormOfferSeatsData({
-      stopPrices: stopPrices,
-      pricePerSeat: pricePerSeat,
-      fixedPrice: false,
+      returnPrice: {
+        stopPrices: stopPrices,
+        pricePerSeat: pricePerSeat,
+        fixedPrice: false,
+      },
     } as Partial<FormOfferSeatsData>)
-
-    navigate('/app/offer-seats/return-trip')
+    navigate('/app/offer-seats/phone-verification-fill')
   }
 
   return (
     <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
       <h1 className='text-blue-900'>Change our recommended price per seat</h1>
-      {formOfferSeatsData?.stops?.map((stop, index) => (
+      {stops.map((stop, index) => (
         <div key={index} className='flex flex-row justify-between items-center'>
           <DoteContainer>
             <div className='flex flex-row relative'>
               <DoteOutlined />
               <p className='text-xs absolute left-4 text-gray-500 font-bold w-52'>
                 {index === 0
-                  ? formOfferSeatsData?.departureProvince
-                  : formOfferSeatsData?.stops &&
-                    formOfferSeatsData.stops[index - 1]?.stopLocation}
+                  ? formOfferSeatsData?.destinationProvince
+                  : stops && stops[index - 1]?.stopLocation}
               </p>
             </div>
             <ContainerStopovers>
@@ -188,10 +187,8 @@ const IncrementalPriceComponent: React.FC = () => {
             <div className='flex flex-row relative'>
               <DoteOutlined />
               <p className='text-xs absolute left-4 text-gray-500 font-bold w-52'>
-                {index ===
-                (formOfferSeatsData.stops &&
-                  formOfferSeatsData.stops?.length - 1)
-                  ? formOfferSeatsData.destinationProvince
+                {index === (stops && stops?.length - 1)
+                  ? formOfferSeatsData?.departureProvince
                   : stop.stopLocation}
               </p>
             </div>
@@ -272,5 +269,4 @@ const IncrementalPriceComponent: React.FC = () => {
     </div>
   )
 }
-
-export default IncrementalPriceComponent
+export default IncrementalReturnPriceRecommendation

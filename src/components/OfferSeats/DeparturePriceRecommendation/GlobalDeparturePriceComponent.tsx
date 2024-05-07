@@ -46,7 +46,7 @@ const TextOptions = styled.p`
   text-transform: capitalize;
 `
 
-const GlobalPriceComponent: React.FC = () => {
+const GlobalDeparturePriceComponent: React.FC = () => {
   const navigate = useNavigate()
   const formOfferSeatsData = useFormOfferSeatsData()
   const theStops = formOfferSeatsData?.stops
@@ -201,4 +201,4 @@ const GlobalPriceComponent: React.FC = () => {
   )
 }
 
-export default GlobalPriceComponent
+export default GlobalDeparturePriceComponent

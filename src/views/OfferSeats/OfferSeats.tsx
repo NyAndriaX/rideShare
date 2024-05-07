@@ -11,7 +11,9 @@ import MeetingPoints from '@/components/OfferSeats/MeetingPoints'
 import DateOfDeparture from '@/components/OfferSeats/DateOfDeparture'
 import DeclaredStopovers from '@/components/OfferSeats/DeclaredStopovers'
 import TripPostingBenefits from '@/components/OfferSeats/TripPostingBenefits'
-import PriceRecommendation from '@/components/OfferSeats/PriceRecommendation'
+import PhoneVerificationFill from '@/components/OfferSeats/PhoneVerificationFill'
+import ReturnPriceRecommendation from '@/components/OfferSeats/ReturnPriceRecommendation'
+import DeparturePriceRecommendation from '@/components/OfferSeats/DeparturePriceRecommendation'
 
 const OfferSeats: React.FC = () => {
   return (
@@ -29,10 +31,18 @@ const OfferSeats: React.FC = () => {
           <Route path='/seats' element={<Seats />} />
           <Route path='/return-trip/*' element={<ReturnTrip />} />
           <Route
-            path='/price-recommendation/*'
-            element={<PriceRecommendation />}
+            path='/departure-price-recommendation/*'
+            element={<DeparturePriceRecommendation />}
           />
           <Route path='/return-date/*' element={<ReturnDate />} />
+          <Route
+            path='/return-price-recommendation/*'
+            element={<ReturnPriceRecommendation />}
+          />
+          <Route
+            path='/phone-verification-fill/*'
+            element={<PhoneVerificationFill />}
+          />
         </Routes>
       </div>
     </div>

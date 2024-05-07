@@ -78,6 +78,12 @@ export interface StopPrice {
   price:number
 }
 
+export interface returnPrice {
+  fixedPrice:boolean;
+  pricePerSeat:number;
+  stopPrices?:StopPrice[]
+}
+
 export interface FormOfferSeatsData {
   departureProvince: string;
   departurePrecise: string;
@@ -97,6 +103,7 @@ export interface FormOfferSeatsData {
   fixedPrice:boolean;
   pricePerSeat: number; // This is value of price
   stopPrices?:StopPrice[]; // this is value of stop price
+  returnPrice?:returnPrice
   additionalNotes: string;
   refundable:boolean;
   oneWay:boolean

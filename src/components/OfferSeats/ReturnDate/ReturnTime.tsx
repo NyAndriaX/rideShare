@@ -30,6 +30,7 @@ const ReturnTime: React.FC = () => {
     await setFormOfferSeatsData({
       returnDate: data,
     } as Partial<FormOfferSeatsData>)
+    navigate('/app/offer-seats/return-price-recommendation')
   }
 
   return (

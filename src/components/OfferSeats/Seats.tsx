@@ -34,29 +34,29 @@ const Seats: React.FC = () => {
     await setFormOfferSeatsData({
       seats,
     } as Partial<FormOfferSeatsData>)
-    navigate('/app/offer-seats/price-recommendation')
+    navigate('/app/offer-seats/departure-price-recommendation')
   }
 
   return (
     <div className='flex flex-col gap-12 w-1/2 pt-10 pb-28'>
-      <p className='text-4xl font-bold text-midnightBlue text-center text-gray-700'>
+      <h1 className='text-blue-900'>
         How many Rideshare passengers can you accept?
-      </p>
+      </h1>
       <div className='flex flex-col items-center justify-center gap-14'>
         <div className='flex w-full flex-row justify-between items-center'>
           <IconButton onClick={decrement} disabled={seats <= 1}>
-            <MinusCircleIcon className='h-10 w-10' />
+            <MinusCircleIcon className='h-8 w-8' />
           </IconButton>
-          <p className='text-5xl font-bold text-midnightBlue'>{seats}</p>
+          <p className='text-4xl font-bold text-blue-900'>{seats}</p>
           <IconButton onClick={increment}>
-            <PlusCircleIcon className='h-10 w-10' />
+            <PlusCircleIcon className='h-8 w-8' />
           </IconButton>
         </div>
         <Button
           type='submit'
-          text='Coninue'
+          text='Continue'
           onClick={onSubmit}
-          className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
+          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
         />
       </div>
     </div>
