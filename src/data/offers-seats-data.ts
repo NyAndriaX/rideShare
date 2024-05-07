@@ -12,9 +12,20 @@ export const initialOfferSeatsValues: FormOfferSeatsData = {
     childSeats: 0,
     disabledSeats: 0
   },
-  departureDatetime: "",
+  departureDate: {
+    date: '',
+    time: ''
+  },
+  returnDate: {
+    date: "",
+    time: ''
+  },
   pricePerSeat: 20000,
   additionalNotes: "",
-  refundable:true,
-  oneWay:true
+  refundable: true,
+  oneWay: true,
+  seats: 0,
+  isComfort: false,
+  fixedPrice: false,
+  phoneNumber: ""
 };
