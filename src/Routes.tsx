@@ -9,6 +9,7 @@ import AuthProtectedRoute from './views/AuthProtectedRoute'
 import ProtectedRoute from './views/ProtectedRoute'
 import Tickets from './views/Tickets/Tickets'
 import Profile from './views/Profile/Profile'
+import Travels from './views/Travel/Travels'
 import App from './App'
 
 export const router = createBrowserRouter([
@@ -47,6 +48,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <OfferSeats />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'app/travels/*',
+        element: (
+          <ProtectedRoute>
+            <Travels />
           </ProtectedRoute>
         ),
       },

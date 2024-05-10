@@ -152,7 +152,7 @@ const Departure: React.FC = () => {
             type='submit'
             text='Continue'
             disabled={!isValid}
-            className={`rounded-md font-semibold text-blue-500 bg-yellow`}
+            className={`rounded-md font-semibold text-blue-900 bg-yellow`}
           />
         )}
       </form>

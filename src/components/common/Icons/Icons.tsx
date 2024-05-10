@@ -127,3 +127,48 @@ export const MissileIcon: React.FC<IconProps> = ({ className }) => (
     </g>
   </svg>
 )
+
+export const CarsIcon: React.FC<IconProps> = ({ className }) => (
+  <svg
+    viewBox='0 0 24 24'
+    xmlns='http://www.w3.org/2000/svg'
+    role='img'
+    aria-hidden='true'
+    className={`_1rks9rr1 ejccx3g9 ejccx3u ejccx3gt ejccx3u ${className}`}
+    style={{
+      fill: 'var(--_1gzv7bhc)',
+    }}
+  >
+    <g color='neutralIconDefault'>
+      <g color='currentColor'>
+        <path
+          fill='currentColor'
+          fill-rule='evenodd'
+          d='M13.544 7.54 17.35 11h1.05a3.6 3.6 0 0 1 3.6 3.6.9.9 0 0 1-.9.9h-1.704a2.751 2.751 0 0 1-5.292 0H8.896a2.751 2.751 0 0 1-5.292 0H3a1 1 0 0 1-1-1v-3.034a1.8 1.8 0 0 1 .227-.874l1.13-2.035A4 4 0 0 1 6.854 6.5h4a4 4 0 0 1 2.69 1.04m-1.009 1.11L15.12 11H9.5V8h1.354a2.5 2.5 0 0 1 1.681.65M8 11H3.716l.952-1.714A2.5 2.5 0 0 1 6.854 8H8zm-1.75 5a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5m10.5 0a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5'
+          clip-rule='evenodd'
+        ></path>
+      </g>
+    </g>
+  </svg>
+)
+
+export const BusIson: React.FC<IconProps> = ({ className }) => (
+  <svg
+    viewBox='0 0 24 24'
+    xmlns='http://www.w3.org/2000/svg'
+    role='img'
+    aria-hidden='true'
+    className={`_1rks9rr1 ejccx3g9 ejccx3u ejccx3gt ejccx3u ${className}`}
+  >
+    <g color='neutralIconDefault'>
+      <g color='currentColor'>
+        <path
+          fill='currentColor'
+          fill-rule='evenodd'
+          d='M2 8a2 2 0 0 1 2-2h14a4 4 0 0 1 4 4v4.5a1 1 0 0 1-1 1h-2.604a2.751 2.751 0 0 1-5.292 0H8.896a2.751 2.751 0 0 1-5.292 0H3a1 1 0 0 1-1-1zm15 4.3c.337.172.633.411.871.7H20a.5.5 0 0 0 .5-.5V10A2.5 2.5 0 0 0 18 7.5h-.5a.5.5 0 0 0-.5.5zm-6.5-4.8h-2A.5.5 0 0 0 8 8v2.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V8a.5.5 0 0 0-.5-.5M4 7.5h2a.5.5 0 0 1 .5.5v2.5a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V8a.5.5 0 0 1 .5-.5m11 0h-2a.5.5 0 0 0-.5.5v2.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V8a.5.5 0 0 0-.5-.5M6.25 16a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5M17 14.75a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0'
+          clip-rule='evenodd'
+        ></path>
+      </g>
+    </g>
+  </svg>
+)

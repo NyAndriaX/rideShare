@@ -52,9 +52,11 @@ const Navigation: React.FC = () => {
   return (
     <motion.header
       variants={variants}
-      animate={hidden ? 'hidden' : 'visible'}
+      animate={
+        pathname.startsWith('/app/search') && hidden ? 'hidden' : 'visible'
+      }
       transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}
-      className={`fixed z-10 bg-white w-full ${currentScrollY <= 0 ? 'bg-opacity-100' : 'bg-opacity-70'}`}
+      className={`fixed z-10 bg-white w-full border-b border-gray-100 ${currentScrollY <= 0 ? 'bg-opacity-100' : 'bg-opacity-70'}`}
     >
       <div className='flex flex-row justify-between items-center p-4'>
         <div className='flex flex-row justify-between items-center gap-10'>
@@ -76,15 +78,6 @@ const Navigation: React.FC = () => {
         ) && (
           <div className='flex flex-row items-center justify-center gap-4'>
             <SetCountry />
-            <Button
-              type='button'
-              text='search'
-              onClick={() => navigate('/search')}
-              icon={
-                <MagnifyingGlassIcon className='h-5 w-5' aria-hidden='true' />
-              }
-              className='border border-white hover:border-darkWhite text-primary'
-            />
             {isConnected ? (
               <>
                 <Button

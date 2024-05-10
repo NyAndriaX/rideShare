@@ -109,3 +109,11 @@ export interface FormOfferSeatsData {
   refundable:boolean;
   oneWay:boolean
 }
+
+export interface FormSearchData{
+  departurePrecise:string;
+  destinationPrecise:string;
+  dateOfDeparture:string;
+  returnOfDate?:string;
+  passenger:number
+}
