@@ -18,11 +18,11 @@ const CountourImage = styled.div`
   border: 1px solid #eaeaea;
 `
 
-interface CardTripPostProps {
+interface CardTravelPostProps {
   isCompleted: boolean
 }
 
-const CardTripPost: React.FC<CardTripPostProps> = ({ isCompleted }) => {
+const CardTravelPost: React.FC<CardTravelPostProps> = ({ isCompleted }) => {
   const isContentsImage: boolean = true
 
   return (
@@ -109,4 +109,5 @@ const CardTripPost: React.FC<CardTripPostProps> = ({ isCompleted }) => {
     </div>
   )
 }
-export default CardTripPost
+
+export default CardTravelPost

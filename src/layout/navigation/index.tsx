@@ -53,7 +53,7 @@ const Navigation: React.FC = () => {
         pathname.startsWith('/app/search') && hidden ? 'hidden' : 'visible'
       }
       transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}
-      className={`fixed z-10 bg-white w-full border-b border-gray-100 ${currentScrollY <= 0 ? 'bg-opacity-100' : 'bg-opacity-70'}`}
+      className={`fixed z-50 bg-white w-full border-b border-gray-100 ${currentScrollY <= 0 ? 'bg-opacity-100' : 'bg-opacity-70'}`}
     >
       <div className='flex flex-row justify-between items-center p-4'>
         <div className='flex flex-row justify-between items-center gap-10'>

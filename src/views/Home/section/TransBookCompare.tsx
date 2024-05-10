@@ -1,5 +1,5 @@
 import React from 'react'
-import Travel from '@/components/Search/Travel'
+import Travel from '@/components/Search(last-version)/Travel'
 import Line from '@/components/common/Line/Line'
 
 const TransBookCompare: React.FC = () => {

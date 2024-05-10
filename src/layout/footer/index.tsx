@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
       {!(
         pathname.startsWith('/login') ||
         pathname.startsWith('/register') ||
-        pathname.startsWith('/app/travels')
+        pathname.startsWith('/search')
       ) && (
         <motion.footer>
           <Subscribe />

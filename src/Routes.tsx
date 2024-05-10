@@ -4,12 +4,12 @@ import NotFound from './views/NotFound'
 import Home from './views/Home/Home'
 import OfferSeats from './views/OfferSeats/OfferSeats'
 import Register from './views/Auth/Register'
-import Search from './views/Search/Search'
 import AuthProtectedRoute from './views/AuthProtectedRoute'
 import ProtectedRoute from './views/ProtectedRoute'
 import Tickets from './views/Tickets/Tickets'
 import Profile from './views/Profile/Profile'
-import Travels from './views/Travel/Travels'
+import Search from './views/Search/Search'
+import Travel from './views/Travel/Travel'
 import App from './App'
 
 export const router = createBrowserRouter([
@@ -23,10 +23,10 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-      {
-        path: '/search',
-        element: <Search />,
-      },
+      // {
+      //   path: '/search',
+      //   element: <Search />,
+      // },
       {
         path: 'app/account',
         element: (
@@ -52,10 +52,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'app/travels/*',
+        path: '/search/*',
         element: (
           <ProtectedRoute>
-            <Travels />
+            <Search />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/travel/*',
+        element: (
+          <ProtectedRoute>
+            <Travel />
           </ProtectedRoute>
         ),
       },

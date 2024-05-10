@@ -1,15 +1,15 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../common/Button/Button'
-import Passenger from './SearchTravel/Passenger'
+import Passenger from './FormSearch/Passenger'
 import { FormSearchData } from '@/types/interface'
-import ReturnOfDate from './SearchTravel/ReturnOfDate'
-import DateOfDeparture from './SearchTravel/DateOfDeparture'
-import DeparturePrecise from './SearchTravel/DeparturePrecise'
-import DestinationPrecise from './SearchTravel/DestinationPrecise'
+import ReturnOfDate from './FormSearch/ReturnOfDate'
+import DateOfDeparture from './FormSearch/DateOfDeparture'
+import DeparturePrecise from './FormSearch/DeparturePrecise'
+import DestinationPrecise from './FormSearch/DestinationPrecise'
 // import { useFormSearchAction } from '@/stores/use-form-search-store'
 
-const SearchTravel: React.FC = () => {
+const FormSearch: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -73,4 +73,4 @@ const SearchTravel: React.FC = () => {
     </div>
   )
 }
-export default SearchTravel
+export default FormSearch
