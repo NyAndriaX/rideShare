@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import SetCountry from './setCountry'
 import { useLocation, useNavigate } from 'react-router-dom'
-import {
-  MagnifyingGlassIcon,
-  PlusCircleIcon,
-} from '@heroicons/react/24/outline'
+import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { styled } from 'styled-components'
 import Button from '@/components/common/Button/Button'
 import Logo from '@/components/common/Logo/Logo'

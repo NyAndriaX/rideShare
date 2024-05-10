@@ -7,13 +7,13 @@ import ReturnOfDate from './SearchTravel/ReturnOfDate'
 import DateOfDeparture from './SearchTravel/DateOfDeparture'
 import DeparturePrecise from './SearchTravel/DeparturePrecise'
 import DestinationPrecise from './SearchTravel/DestinationPrecise'
-import { useFormSearchAction } from '@/stores/use-form-search-store'
+// import { useFormSearchAction } from '@/stores/use-form-search-store'
 
 const SearchTravel: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { isDirty, errors, isValid },
+    formState: { isDirty, errors },
   } = useForm<Partial<FormSearchData>>({
     mode: 'onSubmit',
     defaultValues: {
@@ -24,9 +24,11 @@ const SearchTravel: React.FC = () => {
       passenger: 1,
     },
   })
-  const { findResults } = useFormSearchAction()
+  // const { findResults } = useFormSearchAction()
 
-  const onSubmit = async (data: Partial<FormSearchData>) => {}
+  const onSubmit = async (data: Partial<FormSearchData>) => {
+    console.log(data)
+  }
 
   return (
     <div className='flex flex-col gap-4 w-full bg-white p-4 rounded-md border border-gray-100'>

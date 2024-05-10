@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  MapIcon,
-  ChevronUpDownIcon,
-  CheckIcon,
-} from '@heroicons/react/20/solid'
+import { MapIcon } from '@heroicons/react/20/solid'
 import Input from '@/components/common/Input/Input'
 
 interface DeparturePreciseProps {
