@@ -34,7 +34,7 @@ const CardTripPost: React.FC<CardTripPostProps> = ({ isCompleted }) => {
         {/* Profil */}
         <div className='flex flex-row gap-6 items-center'>
           <img
-            src='/public/image/person.svg'
+            src={new URL('/image/person.svg', import.meta.url).href}
             className='h-14 w-14 rounded-full border border-gray-200'
             alt='Profil user who shared'
           />
@@ -94,7 +94,7 @@ const CardTripPost: React.FC<CardTripPostProps> = ({ isCompleted }) => {
                 <CountourImage>
                   {isContentsImage && (
                     <img
-                      src='/public/image/person.svg'
+                      src={new URL('/image/person.svg', import.meta.url).href}
                       alt='personal reserved'
                       className='w-6 h-6'
                     />

@@ -1,7 +1,6 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { PUBLIC_URL } from '@/constants/app-constants'
 import { FormOfferSeatsData } from '@/types/interface'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useFormOfferSeatsActions } from '@/stores/use-form-offer-seats-store'
@@ -58,8 +57,10 @@ const Confort: React.FC = () => {
         <img
           className='w-full'
           src={
-            PUBLIC_URL +
-            `/image/hehe-voyageant-automobile-isole-illustration-vectorielle-plane-vue-face-du-pere-bande-dessinee-mere-fils-fille-voiture_74855-8399.jpg`
+            new URL(
+              '/image/hehe-voyageant-automobile-isole-illustration-vectorielle-plane-vue-face-du-pere-bande-dessinee-mere-fils-fille-voiture_74855-8399.jpg',
+              import.meta.url,
+            ).href
           }
           alt='une image qui montre la conformité dans une bus'
         />

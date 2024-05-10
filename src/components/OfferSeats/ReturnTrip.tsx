@@ -66,7 +66,12 @@ const ReturnTrip: React.FC = () => {
       <div className='flex'>
         <img
           className='w-full'
-          src='/public/image/personne-qui-commande-taxi-aeroport-ligne_74855-15496.jpg'
+          src={
+            new URL(
+              '/image/personne-qui-commande-taxi-aeroport-ligne_74855-15496.jpg',
+              import.meta.url,
+            ).href
+          }
           alt='personne qui commande taxi aeroport'
         />
       </div>

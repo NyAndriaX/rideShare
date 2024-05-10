@@ -36,7 +36,7 @@ const Users: React.FC<UsersProps> = ({
               src={
                 (userData && userData.profilUrl) === 'default' ||
                 !(userData && userData.profilUrl)
-                  ? '/public/image/person.svg'
+                  ? new URL('/image/person.svg', import.meta.url).href
                   : userData.profilUrl
               }
               alt={userData ? userData.firstName : 'Anonymous'}
