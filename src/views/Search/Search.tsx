@@ -58,6 +58,7 @@ const Search: React.FC = () => {
                     {items.map((items, index) => (
                       <React.Fragment key={index}>
                         <CardTravelPost
+                          className={`w-full border border-gray-100 rounded-md ${items % 2 === 0 ? 'hover:bg-gray-50' : ''}  `}
                           isCompleted={items % 2 === 0 ? false : true}
                         />
                       </React.Fragment>

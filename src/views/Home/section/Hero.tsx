@@ -1,6 +1,7 @@
 import React from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
-import SearchCard from '@/components/common/Search/SearchCard'
+import FormSearch from '@/components/Search/FormSearch'
+// import SearchCard from '@/components/common/Search/SearchCard'
 
 const Hero: React.FC = () => {
   const isMobile = window.innerWidth < 768
@@ -25,7 +26,7 @@ const Hero: React.FC = () => {
       </div>
       <div className='flex flex-row relative top-32 justify-center z-10 gap-4'>
         <div className='w-1/2 p-6'>
-          <SearchCard />
+          <FormSearch />
         </div>
         <div className='flex flex-col gap-4 w-1/2 mt-4'>
           <h1 className='text-6xl md:text-7xl font-bold mb-5 text-white text-center'>

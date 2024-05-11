@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../common/Button/Button'
 import Passenger from './FormSearch/Passenger'
+import { useNavigate } from 'react-router-dom'
 import { FormSearchData } from '@/types/interface'
 import ReturnOfDate from './FormSearch/ReturnOfDate'
 import DateOfDeparture from './FormSearch/DateOfDeparture'
@@ -10,6 +11,7 @@ import DestinationPrecise from './FormSearch/DestinationPrecise'
 // import { useFormSearchAction } from '@/stores/use-form-search-store'
 
 const FormSearch: React.FC = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -28,6 +30,7 @@ const FormSearch: React.FC = () => {
 
   const onSubmit = async (data: Partial<FormSearchData>) => {
     console.log(data)
+    navigate('/search')
   }
 
   return (

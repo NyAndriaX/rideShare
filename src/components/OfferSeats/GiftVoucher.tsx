@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const GiftVoucher: React.FC = () => {
   const navigate = useNavigate()
   return (
-    <div className='min-w-screen w-full flex flex-col items-center justify-center py-5'>
+    <div className='min-w-screen w-full flex flex-col items-center justify-center'>
       <div className='w-full mx-auto bg-yellow text-center'>
         <h1 className='text-3xl font-bold py-6'>Henintsoa, Get $25 Welcome </h1>
       </div>

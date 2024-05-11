@@ -10,6 +10,7 @@ import Tickets from './views/Tickets/Tickets'
 import Profile from './views/Profile/Profile'
 import Search from './views/Search/Search'
 import Travel from './views/Travel/Travel'
+import Payement from './views/Payement/Payement'
 import App from './App'
 
 export const router = createBrowserRouter([
@@ -23,10 +24,10 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-      // {
-      //   path: '/search',
-      //   element: <Search />,
-      // },
+      {
+        path: '/app/payement',
+        element: <Payement />,
+      },
       {
         path: 'app/account',
         element: (
