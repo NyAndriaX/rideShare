@@ -11,6 +11,7 @@ import Profile from './views/Profile/Profile'
 import Search from './views/Search/Search'
 import Travel from './views/Travel/Travel'
 import Payement from './views/Payement/Payement'
+import CreationHistory from './views/CreationHistory/CreationHistory'
 import App from './App'
 
 export const router = createBrowserRouter([
@@ -33,6 +34,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'app/history',
+        element: (
+          <ProtectedRoute>
+            <CreationHistory />
           </ProtectedRoute>
         ),
       },

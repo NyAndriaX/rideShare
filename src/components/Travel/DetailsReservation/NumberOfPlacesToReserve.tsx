@@ -11,14 +11,7 @@ import {
 } from '@heroicons/react/20/solid'
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 
-const people = [
-  { name: 'Wade Cooper' },
-  { name: 'Arlene Mccoy' },
-  { name: 'Devon Webb' },
-  { name: 'Tom Cook' },
-  { name: 'Tanya Fox' },
-  { name: 'Hellen Schmidt' },
-]
+const people = [{ name: '1 place' }, { name: '2 place' }, { name: '3 place' }]
 
 const NumberOfPlacesToReserve: React.FC = () => {
   const navigate = useNavigate()
@@ -52,7 +45,7 @@ const NumberOfPlacesToReserve: React.FC = () => {
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
+            <Listbox.Options className='absolute mt-1 z-10 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
               {people.map((person, personIdx) => (
                 <Listbox.Option
                   key={personIdx}
@@ -86,7 +79,9 @@ const NumberOfPlacesToReserve: React.FC = () => {
         </div>
       </Listbox>
       <div className='flex flex-row gap-4 items-start'>
-        <Input type='checkbox' />
+        <div>
+          <Input type='checkbox' />
+        </div>
         <div className='text-base text-blue-900'>
           I accept the{' '}
           <span className='text-blue-500 cursor-pointer'>

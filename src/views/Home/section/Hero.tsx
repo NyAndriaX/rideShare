@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
       </div>
       <div className='flex flex-row relative top-32 justify-center z-10 gap-4'>
         <div className='w-1/2 p-6'>
-          <FormSearch />
+          <FormSearch displayTitle={false} />
         </div>
         <div className='flex flex-col gap-4 w-1/2 mt-4'>
           <h1 className='text-6xl md:text-7xl font-bold mb-5 text-white text-center'>

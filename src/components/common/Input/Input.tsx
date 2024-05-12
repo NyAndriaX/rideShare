@@ -34,8 +34,10 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
   ref,
 ) => {
   return (
-    <div className='flex flex-col relative gap-1'>
-      <label className='text-black text-sm mb-1'>{label}</label>
+    <div className='flex flex-col w-full relative gap-1'>
+      <label className='text-blue-900 font-semibold text-base mb-1'>
+        {label}
+      </label>
       <div className='flex items-center gep-4'>
         <div className='flex flex-row items-center w-full'>
           <span className='absolute ml-2'>
@@ -49,7 +51,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
             type={type}
             placeholder={placeholder}
             {...props}
-            className={`z-1 px-4 p-3 focus:border-blue-900 w-full bg-gray-100 text-blue-900 rounded-md ${icon && 'pl-10'} ${error && 'border border-red-500'} ${inputClassName} ${className}`}
+            className={`z-1 px-4 p-3 text-lg focus:border-blue-900 w-full bg-gray-100 text-blue-900 rounded-md ${icon && 'pl-10'} ${error && 'border border-red-500'} ${inputClassName} ${className}`}
             value={value}
             disabled={disabled}
             autoFocus={autofocus}

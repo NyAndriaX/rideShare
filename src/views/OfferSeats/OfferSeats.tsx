@@ -17,7 +17,7 @@ import DeparturePriceRecommendation from '@/components/OfferSeats/DeparturePrice
 
 const OfferSeats: React.FC = () => {
   return (
-    <div className='flex flex-col relative justify-center items-center z-0 pt-16 gap-16'>
+    <div className='flex flex-col relative justify-center items-center h-[] z-0 border border-black pt-16 gap-16'>
       <div className='flex w-full justify-center items-center'>
         <Routes>
           <Route path='/' element={<TripPostingBenefits />} />

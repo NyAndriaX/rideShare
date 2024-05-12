@@ -10,7 +10,11 @@ import DeparturePrecise from './FormSearch/DeparturePrecise'
 import DestinationPrecise from './FormSearch/DestinationPrecise'
 // import { useFormSearchAction } from '@/stores/use-form-search-store'
 
-const FormSearch: React.FC = () => {
+interface FormSearchProps {
+  displayTitle: boolean
+}
+
+const FormSearch: React.FC<FormSearchProps> = ({ displayTitle }) => {
   const navigate = useNavigate()
   const {
     register,
@@ -34,15 +38,17 @@ const FormSearch: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col gap-4 w-full bg-white p-4 rounded-md border border-gray-100'>
-      <div className='text-2xl text-blue-500 font-semibold text-center'>
-        Find a route
-      </div>
+    <div className='flex flex-col gap-4 w-full bg-white p-6 rounded-md border border-gray-100'>
+      {displayTitle && (
+        <div className='text-2xl text-blue-500 font-semibold text-center'>
+          Find a route
+        </div>
+      )}
       <form
         className='flex flex-col items-center gap-4'
         onSubmit={handleSubmit((data) => onSubmit(data))}
       >
-        <div className='flex flex-col w-full gap-1 items-center'>
+        <div className='flex flex-col w-full gap-2 items-center'>
           <DeparturePrecise
             register={register}
             isDirty={isDirty}

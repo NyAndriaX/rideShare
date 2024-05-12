@@ -25,7 +25,7 @@ const Search: React.FC = () => {
     <div className='flex pt-20 px-4'>
       <div className='flex flex-row gap-6 w-full'>
         <div className='flex flex-col py-8 gap-8 h-fit w-2/5 sticky top-20'>
-          <FormSearch />
+          <FormSearch displayTitle={true} />
         </div>
         <div className='flex-grow'>
           <div className='flex z-10 h-fit py-8 bg-white sticky top-20'>

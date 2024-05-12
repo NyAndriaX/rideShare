@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import TripSummary from '@/components/Payement/TripSummary'
 import { ArrowLongLeftIcon } from '@heroicons/react/20/solid'
+import ReservationSummary from '@/components/Payement/ReservationSummary'
+import ReservationHighlights from '../../components/Payement/ReservationHighlights'
 
 const Payement: React.FC = () => {
   return (
@@ -11,7 +14,18 @@ const Payement: React.FC = () => {
           Back to ad
         </Link>
       </div>
-      <div className='fle flex-row items-start justify-between gap-4 w-full'></div>
+      <div className='flex flex-row items-start justify-between gap-4 w-full'>
+        <div className='w-2/3 flex flex-col gap-4'>
+          <ReservationHighlights />
+          <ReservationSummary />
+        </div>
+        <div className='w-1/3 rounded-md border border-gray-200'>
+          <div className='p-4 bg-gray-50 text-lg text-gray-500'>Summary</div>
+          <div className='p-4'>
+            <TripSummary />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

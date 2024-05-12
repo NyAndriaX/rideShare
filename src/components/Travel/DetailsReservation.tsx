@@ -3,7 +3,7 @@ import NumberOfPlacesToReserve from './DetailsReservation/NumberOfPlacesToReserv
 
 const DetailsReservation: React.FC = () => {
   return (
-    <div className='flex flex-col gap-4 w-1/3'>
+    <div className='flex flex-col gap-4 w-full'>
       <div className='flex flex-row justify-end items-center text-base text-gray-400'>
         Annonce publiée le 27/11/2017 - vue 0 fois
       </div>

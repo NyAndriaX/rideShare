@@ -34,7 +34,7 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
   return (
     <div
       onClick={() => navigate('/travel')}
-      className={`${className}  flex flex-row p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
+      className={`${className}  flex flex-row w-full p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
     >
       {/* User information */}
       <div className='flex flex-col w-1/4 py-2 gap-4 justify-start items-start border-r border-gray-200'>
