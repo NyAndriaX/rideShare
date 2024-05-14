@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SetCountry from './setCountry'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
@@ -45,6 +45,10 @@ const Navigation: React.FC = () => {
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setCurrentScrollY(latest), update(), setPrevScrollY(currentScrollY)
   })
+
+  useEffect(() => {
+    console.log(pathname)
+  }, [pathname])
 
   return (
     <motion.header

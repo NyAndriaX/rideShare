@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const LogoDiv = styled.div`
   font-family: 'Damion', cursive;
   color: #000;
-  font-size: 25px;
+  font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
 `

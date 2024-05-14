@@ -4,6 +4,7 @@ import FormSearch from '@/components/Search/FormSearch'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import RideOptionsFilter from '@/components/Search/RideOptionsFilter'
 import CardTravelPost from '@/components/CardTravelPost/CardTravelPost'
+import AnimationCircleLoading from '@/components/common/Animation/AnimationCircleLoading'
 import { ArrowLongRightIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const mocksData: number[] = [
@@ -14,6 +15,8 @@ const Search: React.FC = () => {
   const [items, setItems] = useState(mocksData.slice(0, 5))
   // const [isLoading,setIsLoading] = useState<boolean>(false) // need for true data
   const [hasMore, setHasMore] = useState<boolean>(true)
+  const [isLoadingDateLaterChecked, setIsLoadingDateLaterChecked] =
+    useState<boolean>(false)
 
   const fetchMoreData = async () => {
     const nextItems = mocksData.slice(items.length, items.length + 5)
@@ -38,7 +41,11 @@ const Search: React.FC = () => {
                   dataLength={items.length}
                   next={fetchMoreData}
                   hasMore={hasMore}
-                  loader={<div>Loading...</div>}
+                  loader={
+                    <div className='w-full'>
+                      <AnimationCircleLoading height={80} width={80} />
+                    </div>
+                  }
                 >
                   <div className='flex flex-col gap-4 items-start'>
                     <div className='flex flex-col gap-4'>
@@ -93,10 +100,15 @@ const Search: React.FC = () => {
             />
             <button
               type='button'
-              className='flex flex-row items-center gap-2 px-4 py-6 rounded-md max-h-[44px] mt-10 text-blue-500 justify-start font-semibold w-full hover:bg-gray-50'
+              className='flex flex-row items-center justify-between gap-2 px-4 py-6 rounded-md max-h-[44px] mt-10 text-blue-500 font-semibold w-full hover:bg-gray-50'
             >
-              <ChevronDownIcon className='h-7 w-7 text-gray-400' />
-              <span>Departure later</span>
+              <div className='flex-1 flex flex-row items-center gap-2 justify-start'>
+                <ChevronDownIcon className='h-7 w-7 text-gray-400' />
+                <span>Departure later</span>
+              </div>
+              {isLoadingDateLaterChecked && (
+                <AnimationCircleLoading height={80} width={80} />
+              )}
             </button>
           </div>
         </div>

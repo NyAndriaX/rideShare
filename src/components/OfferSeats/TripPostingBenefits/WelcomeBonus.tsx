@@ -8,12 +8,12 @@ const WelcomeBonus: React.FC = () => {
   return (
     <div className='min-w-screen flex flex-col items-center justify-center py-5'>
       <div className='w-full mx-auto bg-yellow text-center'>
-        <h1 className='text-3xl font-bold py-6'>Get $25 Welcome </h1>
+        <h1 className='text-3xl font-bold py-6'>Get 5.000 Ar Welcome </h1>
       </div>
       <div className='flex flex-col gap-12 items-center justify-center font-light bg-midnightBlue w-full py-5'>
         <div className='flex flex-col gap-8 w-1/2 text-white'>
           <p>
-            From May 1, 2024, benefit from a $25 welcome for you encourage
+            From May 1, 2024, benefit from a 5.000 Ar welcome for you encourage
             carpooling!
           </p>
           <h2 className='text-xl font-bold'>

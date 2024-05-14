@@ -8,12 +8,14 @@ const GiftVoucher: React.FC = () => {
   return (
     <div className='min-w-screen w-full flex flex-col items-center justify-center'>
       <div className='w-full mx-auto bg-yellow text-center'>
-        <h1 className='text-3xl font-bold py-6'>Henintsoa, Get $25 Welcome </h1>
+        <h1 className='text-3xl font-bold py-6'>
+          Henintsoa, Get 5.000 Ar Welcome{' '}
+        </h1>
       </div>
       <div className='flex flex-col gap-12 items-center justify-center font-light w-full py-5 '>
         <div className='flex flex-col gap-8 w-1/2 text-deepSeaBlue'>
           <p>
-            From May 1, 2024, benefit from a $25 welcome for you encourage
+            From May 1, 2024, benefit from a 5.000 Ar welcome for you encourage
             carpooling!
           </p>
           <h2 className='text-xl font-bold'>

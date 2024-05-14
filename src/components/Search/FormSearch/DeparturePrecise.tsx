@@ -23,7 +23,7 @@ const DeparturePrecise: React.FC<DeparturePreciseProps> = ({
         error={errors.departurePrecise?.message}
         ariaInvalid={isDirty}
         placeholder='Departure'
-        icon={<MapIcon className='h-6 w-6 text-gray-300' />}
+        icon={<MapIcon className='h-6 w-6 text-blue-500' />}
         autofocus
         autoComplete='off'
       />

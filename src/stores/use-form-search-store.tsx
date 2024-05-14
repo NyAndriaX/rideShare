@@ -3,10 +3,10 @@ import { devtools } from 'zustand/middleware'
 import { FormSearchData } from '@/types/interface'
 
 interface useFormSearchProps {
-  formSearchData: Partial<FormSearchData>
   results: []
-  resultatsLength: number
   page: number
+  resultatsLength: number
+  formSearchData: Partial<FormSearchData>
   actions: {
     setFormSearchData: (data: Partial<FormSearchData>) => void
     findResults: (page: number) => void
@@ -14,14 +14,13 @@ interface useFormSearchProps {
 }
 
 const useFormSearchStore = create<useFormSearchProps>()(
-  devtools((set, get) => ({
+  devtools((set) => ({
     results: [],
     formSearchData: {},
     resultatsLength: 0,
     page: 0,
     actions: {
       setFormSearchData: (data: Partial<FormSearchData>) => {
-        get().formSearchData
         set({ formSearchData: data })
       },
       findResults: async (page: number) => {
@@ -32,7 +31,7 @@ const useFormSearchStore = create<useFormSearchProps>()(
 )
 
 export const useFormSearchData = () =>
-  useFormSearchStore((state) => state.results)
+  useFormSearchStore((state) => state.formSearchData)
 
 export const useFormSearchAction = () =>
   useFormSearchStore((state) => state.actions)

@@ -23,7 +23,7 @@ const DestinationPrecise: React.FC<DestinationPreciseProps> = ({
         error={errors.destinationPrecise?.message}
         placeholder='Destination'
         ariaInvalid={isDirty}
-        icon={<MapPinIcon className='h-6 w-6 text-gray-300' />}
+        icon={<MapPinIcon className='h-6 w-6 text-blue-500' />}
         autofocus
         autoComplete='off'
       />

@@ -8,32 +8,41 @@ import ReturnOfDate from './FormSearch/ReturnOfDate'
 import DateOfDeparture from './FormSearch/DateOfDeparture'
 import DeparturePrecise from './FormSearch/DeparturePrecise'
 import DestinationPrecise from './FormSearch/DestinationPrecise'
-// import { useFormSearchAction } from '@/stores/use-form-search-store'
+import {
+  useFormSearchAction,
+  useFormSearchData,
+} from '@/stores/use-form-search-store'
 
 interface FormSearchProps {
   displayTitle: boolean
 }
 
 const FormSearch: React.FC<FormSearchProps> = ({ displayTitle }) => {
+  const today = new Date()
   const navigate = useNavigate()
+  const formSearchData = useFormSearchData()
   const {
     register,
     handleSubmit,
     formState: { isDirty, errors },
+    setValue,
+    watch,
   } = useForm<Partial<FormSearchData>>({
     mode: 'onSubmit',
     defaultValues: {
-      departurePrecise: '',
-      destinationPrecise: '',
-      dateOfDeparture: '',
-      returnOfDate: '',
-      passenger: 1,
+      departurePrecise: formSearchData.departurePrecise || '',
+      destinationPrecise: formSearchData.destinationPrecise || '',
+      dateOfDeparture:
+        formSearchData.dateOfDeparture || today.toISOString().split('T')[0],
+      returnOfDate: formSearchData.returnOfDate || '',
+      passenger: formSearchData.passenger || 1,
     },
   })
-  // const { findResults } = useFormSearchAction()
+
+  const { setFormSearchData } = useFormSearchAction()
 
   const onSubmit = async (data: Partial<FormSearchData>) => {
-    console.log(data)
+    await setFormSearchData(data)
     navigate('/search')
   }
 
@@ -59,19 +68,11 @@ const FormSearch: React.FC<FormSearchProps> = ({ displayTitle }) => {
             isDirty={isDirty}
             errors={errors}
           />
-          <div className='flex flex-row w-full gap-2'>
-            <DateOfDeparture
-              register={register}
-              isDirty={isDirty}
-              errors={errors}
-            />
-            <ReturnOfDate
-              register={register}
-              isDirty={isDirty}
-              errors={errors}
-            />
+          <div className='flex flex-row w-full gap-4'>
+            <DateOfDeparture watch={watch} setValue={setValue} />
+            <ReturnOfDate watch={watch} setValue={setValue} />
           </div>
-          <Passenger register={register} isDirty={isDirty} errors={errors} />
+          <Passenger watch={watch} setValue={setValue} />
         </div>
         <Button
           type='submit'
