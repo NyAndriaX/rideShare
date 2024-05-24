@@ -23,8 +23,6 @@ const RegisterEmailInput: React.FC = () => {
   const navigate = useNavigate()
   const { setFormAuthData } = useFormAuthActions()
 
-  console.log(formData)
-
   const submit = async (data: { email: string; unsubscribe: boolean }) => {
     await setFormAuthData(data)
     navigate('/register/name')
@@ -32,9 +30,7 @@ const RegisterEmailInput: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 w-1/2'>
-      <p className='text-2xl font-bold text-midnightBlue text-center'>
-        your email address ?
-      </p>
+      <h1 className='text-blue-900'>your email address ?</h1>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => submit(data))}
@@ -55,21 +51,21 @@ const RegisterEmailInput: React.FC = () => {
           autoComplete='off'
         />
         <div className='flex flex-row justify-between items-center'>
-          <p className='text-sm text-midnightBlue font-semibold'>
+          <p className='text-sm text-blue-900 font-semibold'>
             I do not wish to receive information, good deals and gifts from
             rideShare.
           </p>
           <input type='checkbox' {...register('unsubscribe')} />
         </div>
-        <p className='text-sm text-slateBlue font-semibold'>
+        <p className='text-sm text-gray-400 font-semibold'>
           As a subscriber, I can unsubscribe at any time by contacting rideShare
           or by clicking on the link in the newsletter.
         </p>
         <Button
           type='submit'
-          text='Coninue'
+          text='Continue'
           disabled={isSubmitting}
-          className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
+          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
         />
       </form>
     </div>

@@ -43,7 +43,6 @@ const FormSearch: React.FC<FormSearchProps> = ({ displayTitle }) => {
 
   const onSubmit = async (data: Partial<FormSearchData>) => {
     await setFormSearchData(data)
-    navigate('/search')
   }
 
   return (

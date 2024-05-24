@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { _post } from '@/api/api-client'
 import { devtools } from 'zustand/middleware'
 import { FormSearchData } from '@/types/interface'
 
@@ -14,18 +15,18 @@ interface useFormSearchProps {
 }
 
 const useFormSearchStore = create<useFormSearchProps>()(
-  devtools((set) => ({
+  devtools((set, get) => ({
     results: [],
     formSearchData: {},
     resultatsLength: 0,
     page: 0,
     actions: {
-      setFormSearchData: (data: Partial<FormSearchData>) => {
+      setFormSearchData: async (data: Partial<FormSearchData>) => {
         set({ formSearchData: data })
+        const res = await _post<any>(`/trips/search/${get().page}`, data)
+        console.log(res)
       },
-      findResults: async (page: number) => {
-        console.log(page)
-      },
+      findResults: async (page: number) => {},
     },
   })),
 )

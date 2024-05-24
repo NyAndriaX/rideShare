@@ -39,58 +39,54 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
 const Testimonials: React.FC = () => {
   return (
-    <div className='min-w-screen min-h-screen bg-gray-50 flex items-center justify-center py-5'>
-      <div className='w-full bg-white border-t border-b border-gray-200 px-5 py-16 md:py-24 text-gray-800'>
-        <div className='w-full max-w-6xl mx-auto'>
-          <div className='text-center max-w-xl mx-auto'>
-            <h1 className='text-6xl md:text-7xl font-bold mb-5 text-gray-600'>
-              What people <br />
-              are saying.
-            </h1>
-            <h3 className='text-xl mb-5 font-light'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </h3>
-            <Line />
-          </div>
-          <div className='-mx-3 md:flex items-start'>
-            {/* Cartes de témoignages */}
-            <div className='px-3 md:w-1/3'>
-              <TestimonialCard
-                imgSrc='https://i.pravatar.cc/100?img=1'
-                name='Kenzie Edgar'
-                quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt ratione dolor exercitationem minima quas itaque saepe quasi architecto vel! Accusantium, vero sint recusandae cum tempora nemo commodi soluta deleniti.'
-              />
-              <TestimonialCard
-                imgSrc='https://i.pravatar.cc/100?img=2'
-                name='Stevie Tifft'
-                quote='Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Dolore quod necessitatibus, labore sapiente, est, dignissimos ullam error ipsam sint quam tempora vel.'
-              />
-            </div>
-            <div className='px-3 md:w-1/3'>
-              <TestimonialCard
-                imgSrc='https://i.pravatar.cc/100?img=3'
-                name='Tommie Ewart'
-                quote='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, obcaecati ullam excepturi dicta error deleniti sequi.'
-              />
-              <TestimonialCard
-                imgSrc='https://i.pravatar.cc/100?img=4'
-                name='Charlie Howse'
-                quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto inventore voluptatum nostrum atque, corrupti, vitae esse id accusamus dignissimos neque reprehenderit natus, hic sequi itaque dicta nisi voluptatem! Culpa, iusto.'
-              />
-            </div>
-            <div className='px-3 md:w-1/3'>
-              <TestimonialCard
-                imgSrc='https://i.pravatar.cc/100?img=5'
-                name='Nevada Herbertson'
-                quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, voluptatem porro obcaecati dicta, quibusdam sunt ipsum, laboriosam nostrum facere exercitationem pariatur deserunt tempora molestiae assumenda nesciunt alias eius? Illo, autem!'
-              />
-              <TestimonialCard
-                imgSrc='https://i.pravatar.cc/100?img=6'
-                name='Kris Stanton'
-                quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem iusto, explicabo, cupiditate quas totam!'
-              />
-            </div>
-          </div>
+    <div className='w-full px-4 mx-auto'>
+      <div className='text-center max-w-xl mx-auto'>
+        <h1 className='text-6xl text-blue-900'>
+          What people <br />
+          are saying.
+        </h1>
+        <p className='text-lg text-gray-500'>
+          Each review makes us want it even more
+        </p>
+        <Line />
+      </div>
+      <div className='-mx-3 md:flex items-start'>
+        {/* Cartes de témoignages */}
+        <div className='px-3 md:w-1/3'>
+          <TestimonialCard
+            imgSrc='https://i.pravatar.cc/100?img=1'
+            name='Kenzie Edgar'
+            quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt ratione dolor exercitationem minima quas itaque saepe quasi architecto vel! Accusantium, vero sint recusandae cum tempora nemo commodi soluta deleniti.'
+          />
+          <TestimonialCard
+            imgSrc='https://i.pravatar.cc/100?img=2'
+            name='Stevie Tifft'
+            quote='Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Dolore quod necessitatibus, labore sapiente, est, dignissimos ullam error ipsam sint quam tempora vel.'
+          />
+        </div>
+        <div className='px-3 md:w-1/3'>
+          <TestimonialCard
+            imgSrc='https://i.pravatar.cc/100?img=3'
+            name='Tommie Ewart'
+            quote='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, obcaecati ullam excepturi dicta error deleniti sequi.'
+          />
+          <TestimonialCard
+            imgSrc='https://i.pravatar.cc/100?img=4'
+            name='Charlie Howse'
+            quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto inventore voluptatum nostrum atque, corrupti, vitae esse id accusamus dignissimos neque reprehenderit natus, hic sequi itaque dicta nisi voluptatem! Culpa, iusto.'
+          />
+        </div>
+        <div className='px-3 md:w-1/3'>
+          <TestimonialCard
+            imgSrc='https://i.pravatar.cc/100?img=5'
+            name='Nevada Herbertson'
+            quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, voluptatem porro obcaecati dicta, quibusdam sunt ipsum, laboriosam nostrum facere exercitationem pariatur deserunt tempora molestiae assumenda nesciunt alias eius? Illo, autem!'
+          />
+          <TestimonialCard
+            imgSrc='https://i.pravatar.cc/100?img=6'
+            name='Kris Stanton'
+            quote='Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem iusto, explicabo, cupiditate quas totam!'
+          />
         </div>
       </div>
     </div>

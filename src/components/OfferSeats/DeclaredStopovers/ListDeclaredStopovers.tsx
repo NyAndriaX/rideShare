@@ -4,8 +4,8 @@ import { Reorder } from 'framer-motion'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
-import { Stop, FormOfferSeatsData } from '@/types/interface'
-import { useFormOfferSeatsActions } from '@/stores/use-form-offer-seats-store'
+import { DepartureStops, FormTripsData } from '@/types/interface'
+import { useFormTripsActions } from '@/stores/use-form-trips-store'
 
 const ContainerOptionsProvince = styled.div`
   display: flex;
@@ -26,8 +26,8 @@ const Label = styled.label`
 `
 
 interface ListDeclaredStopoversProps {
-  listStopovers: Stop[] | []
-  setListStopovers: Dispatch<SetStateAction<Stop[] | []>>
+  listStopovers: DepartureStops[] | []
+  setListStopovers: Dispatch<SetStateAction<DepartureStops[] | []>>
 }
 
 const ListDeclaredStopovers: React.FC<ListDeclaredStopoversProps> = ({
@@ -35,7 +35,7 @@ const ListDeclaredStopovers: React.FC<ListDeclaredStopoversProps> = ({
   setListStopovers,
 }) => {
   const navigate = useNavigate()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const { setFormTripsData } = useFormTripsActions()
   const handleToggleChecked = (index: number) => {
     setListStopovers((prevList) =>
       prevList.map((stop, i) =>
@@ -46,10 +46,12 @@ const ListDeclaredStopovers: React.FC<ListDeclaredStopoversProps> = ({
 
   const onSubmit = async (event: any) => {
     event.preventDefault()
-    const stops: Stop[] = listStopovers.filter((stop) => stop.checked === true)
-    await setFormOfferSeatsData({
-      stops,
-    } as Partial<FormOfferSeatsData>)
+    const departureStops: DepartureStops[] = listStopovers.filter(
+      (stop) => stop.checked === true,
+    )
+    await setFormTripsData({
+      departureStops,
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/meeting-points')
   }
 
@@ -72,7 +74,7 @@ const ListDeclaredStopovers: React.FC<ListDeclaredStopoversProps> = ({
               onClick={() => handleToggleChecked(index)}
             >
               <ContainerOptionsProvince className='bg-white hover:bg-gray-50'>
-                <Label className='text-blue-900'>{stop.stopLocation}</Label>
+                <Label className='text-blue-900'>{stop.location}</Label>
                 <input type='checkbox' checked={listStopovers[index].checked} />
               </ContainerOptionsProvince>
               <div className='border-b border-gray-100' />

@@ -3,10 +3,10 @@ import { styled } from 'styled-components'
 import Button from '../common/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
-import { FormOfferSeatsData } from '@/types/interface'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
+import { FormTripsData } from '@/types/interface'
 import { PlusCircleIcon, MinusCircleIcon } from '@heroicons/react/24/outline'
 
 const IconButton = styled.button`
@@ -18,9 +18,9 @@ const IconButton = styled.button`
 
 const Seats: React.FC = () => {
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
-  const [seats, setSeats] = useState<number>(formOfferSeatsData?.seats || 3)
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
+  const [seats, setSeats] = useState<number>(formTripsData?.seats || 3)
 
   const increment = async () => {
     setSeats((val) => val + 1)
@@ -31,9 +31,9 @@ const Seats: React.FC = () => {
   }
 
   const onSubmit = async () => {
-    await setFormOfferSeatsData({
+    await setFormTripsData({
       seats,
-    } as Partial<FormOfferSeatsData>)
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/departure-price-recommendation')
   }
 
@@ -48,7 +48,13 @@ const Seats: React.FC = () => {
             <MinusCircleIcon className='h-8 w-8' />
           </IconButton>
           <p className='text-4xl font-bold text-blue-900'>{seats}</p>
-          <IconButton onClick={increment}>
+          <IconButton
+            onClick={increment}
+            disabled={
+              (formTripsData?.isComfort && seats >= 3) ||
+              (!formTripsData?.isComfort && seats >= 4)
+            }
+          >
             <PlusCircleIcon className='h-8 w-8' />
           </IconButton>
         </div>

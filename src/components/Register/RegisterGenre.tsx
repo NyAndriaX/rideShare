@@ -17,34 +17,32 @@ const RegisterGenre: React.FC = () => {
 
   return formAuthData?.dateOfBirth ? (
     <div className='flex flex-col gap-8 w-1/2'>
-      <p className='text-2xl font-bold text-midnightBlue text-center'>
-        What do you prefer to be called?
-      </p>
+      <h1 className='text-blue-900'>What do you prefer to be called?</h1>
       <div className='flex flex-col gap-4'>
         <div
-          className='flex flex-row justify-between rounded-md cursor-pointer items-center p-4 bg-white hover:bg-offWhite'
+          className='flex flex-row justify-between rounded-md cursor-pointer items-center p-4 bg-white hover:bg-gray-50'
           onClick={() => handleGenreSelection({ gender: 'Md' })}
         >
-          <p className='text-base text-deepSeaBlue font-semibold'>Madam</p>
-          <ChevronRightIcon className='h-6 w-6' />
+          <p className='text-base text-blue-900 font-semibold'>Madam</p>
+          <ChevronRightIcon className='h-6 w-6 text-gray-500' />
         </div>
-        <div className='border border-lightGrey mx-4' />
+        <div className='border border-gray-200 mx-4' />
         <div
           className='flex flex-row justify-between rounded-md cursor-pointer items-center p-4 bg-white hover:bg-offWhite'
           onClick={() => handleGenreSelection({ gender: 'Mr' })}
         >
-          <p className='text-base text-deepSeaBlue font-semibold'>Sir</p>
-          <ChevronRightIcon className='h-6 w-6' />
+          <p className='text-base text-blue-900 font-semibold'>Sir</p>
+          <ChevronRightIcon className='h-6 w-6 text-gray-500' />
         </div>
-        <div className='border border-lightGrey mx-4' />
+        <div className='border border-gray-200 mx-4' />
         <div
           className='flex flex-row justify-between rounded-md cursor-pointer items-center p-4 bg-white hover:bg-offWhite'
           onClick={() => handleGenreSelection({ gender: 'not-specified' })}
         >
-          <p className='text-base text-deepSeaBlue font-semibold'>
+          <p className='text-base text-blue-900 font-semibold'>
             I prefer not to say it
           </p>
-          <ChevronRightIcon className='h-6 w-6' />
+          <ChevronRightIcon className='h-6 w-6 text-gray-500' />
         </div>
       </div>
     </div>

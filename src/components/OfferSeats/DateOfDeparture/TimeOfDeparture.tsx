@@ -1,14 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { DepartureDate } from '@/types/interface'
-import { FormOfferSeatsData } from '@/types/interface'
+import {
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
+import { FormTripsData } from '@/types/interface'
 import Input from '@/components/common/Input/Input'
 import Button from '@/components/common/Button/Button'
-import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
 
 const getCurrentTime = () => {
   const now = new Date()
@@ -20,28 +19,29 @@ const getCurrentTime = () => {
 const TimeOfDeparture: React.FC = () => {
   const today = new Date()
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
   const defaultDate =
-    formOfferSeatsData?.departureDate?.date || today.toISOString().split('T')[0]
+    formTripsData?.departureDate || today.toISOString().split('T')[0]
   const defaultTime = getCurrentTime()
   const {
     register,
     handleSubmit,
     formState: { isDirty, errors, isValid },
-  } = useForm<Partial<DepartureDate>>({
+  } = useForm<Partial<FormTripsData>>({
     mode: 'onSubmit',
     defaultValues: {
-      date: defaultDate,
-      time: defaultTime,
+      departureDate: defaultDate,
+      departureTime: defaultTime,
     },
   })
 
-  const submit = async (data: Partial<DepartureDate>) => {
-    await setFormOfferSeatsData({
-      departureDate: data,
-    } as Partial<FormOfferSeatsData>)
-    navigate('/app/offer-seats/confort')
+  const submit = async (data: Partial<FormTripsData>) => {
+    await setFormTripsData({
+      departureDate: data.departureDate,
+      departureTime: data.departureTime,
+    } as Partial<FormTripsData>)
+    navigate('/app/offer-seats/comfort')
   }
 
   return (
@@ -54,10 +54,10 @@ const TimeOfDeparture: React.FC = () => {
         onSubmit={handleSubmit((data) => submit(data))}
       >
         <Input
-          {...register('time', {
+          {...register('departureTime', {
             required: 'Departure time is required',
           })}
-          error={errors.time?.message}
+          error={errors.departureTime?.message}
           ariaInvalid={isDirty}
           type='time'
           autofocus

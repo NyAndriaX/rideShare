@@ -3,20 +3,20 @@ import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import Input from '@/components/common/Input/Input'
 import Button from '@/components/common/Button/Button'
-import { FormOfferSeatsData, Stop } from '@/types/interface'
+import { FormTripsData, DepartureStops } from '@/types/interface'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
 
 const ChangeMeetingPoints: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const params = new URLSearchParams(location.search)
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
   const meetingPointsIndex = params.get('meetingPointsIndex')
   const {
     register,
@@ -26,19 +26,19 @@ const ChangeMeetingPoints: React.FC = () => {
     mode: 'onSubmit',
     defaultValues: {
       stopoversItem:
-        formOfferSeatsData?.stops && meetingPointsIndex !== null
-          ? formOfferSeatsData.stops[meetingPointsIndex as any].stopLocation ||
+        formTripsData?.departureStops && meetingPointsIndex !== null
+          ? formTripsData.departureStops[meetingPointsIndex as any].location ||
             ''
           : '',
     },
   })
 
   const submit = async (data: { stopoversItem: string }) => {
-    const stops: Stop[] = formOfferSeatsData?.stops || []
-    stops[meetingPointsIndex as any].stopLocation = data.stopoversItem
-    setFormOfferSeatsData({
-      stops: stops,
-    } as Partial<FormOfferSeatsData>)
+    const departureStops: DepartureStops[] = formTripsData?.departureStops || []
+    departureStops[meetingPointsIndex as any].location = data.stopoversItem
+    setFormTripsData({
+      departureStops: departureStops,
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/meeting-points')
   }
 

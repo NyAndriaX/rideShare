@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Seats from '@/components/OfferSeats/Seats'
-import Confort from '@/components/OfferSeats/Confort'
+import Comfort from '@/components/OfferSeats/Comfort'
 import ReturnDate from '@/components/OfferSeats/ReturnDate'
 import ReturnTrip from '@/components/OfferSeats/ReturnTrip'
 import GiftVoucher from '@/components/OfferSeats/GiftVoucher'
@@ -27,7 +27,7 @@ const OfferSeats: React.FC = () => {
           <Route path='/meeting-points/*' element={<MeetingPoints />} />
           <Route path='/declared-stopovers/*' element={<DeclaredStopovers />} />
           <Route path='/departure-date/*' element={<DateOfDeparture />} />
-          <Route path='/Confort' element={<Confort />} />
+          <Route path='/Comfort' element={<Comfort />} />
           <Route path='/seats' element={<Seats />} />
           <Route path='/return-trip/*' element={<ReturnTrip />} />
           <Route

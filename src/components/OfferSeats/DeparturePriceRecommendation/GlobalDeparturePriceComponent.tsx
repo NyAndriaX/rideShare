@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { styled } from 'styled-components'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import { useNavigate } from 'react-router-dom'
 import {
   ChevronRightIcon,
@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/24/outline'
 import Input from '@/components/common/Input/Input'
 import Button from '@/components/common/Button/Button'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import { formatPriceToDisplay } from '@/utils/formatPriceToDisplay'
 
 const IconButton = styled.button`
@@ -48,20 +48,22 @@ const TextOptions = styled.p`
 
 const GlobalDeparturePriceComponent: React.FC = () => {
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const theStops = formOfferSeatsData?.stops
+  const formTripsData = useFormTripsData()
+  const departureStops = formTripsData?.departureStops
   const recommendedPrice: number =
-    theStops && theStops.length !== 0 ? theStops.length * 1000 : 1000
+    departureStops && departureStops.length !== 0
+      ? departureStops.length * 1000
+      : 1000
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const { setFormOfferSeatsData, resetItem } = useFormOfferSeatsActions()
-  const [pricePerSeat, setPricePerSeat] = useState<number>(
-    formOfferSeatsData?.pricePerSeat || recommendedPrice,
+  const { setFormTripsData } = useFormTripsActions()
+  const [departurePrice, setDeparturePrice] = useState<number>(
+    formTripsData?.departurePrice || recommendedPrice,
   )
-  const [inputValue, setInputValue] = useState<number>(pricePerSeat)
+  const [inputValue, setInputValue] = useState<number>(departurePrice)
 
   useEffect(() => {
-    setInputValue(pricePerSeat)
-  }, [pricePerSeat])
+    setInputValue(departurePrice)
+  }, [departurePrice])
 
   const handleEdit = () => {
     setIsEdit(true)
@@ -69,16 +71,16 @@ const GlobalDeparturePriceComponent: React.FC = () => {
 
   const handleCancel = () => {
     setIsEdit(false)
-    setInputValue(pricePerSeat)
+    setInputValue(departurePrice)
   }
 
   const handleCheck = () => {
     setIsEdit(false)
-    setPricePerSeat(inputValue)
+    setDeparturePrice(inputValue)
   }
 
   const incrementPricePerSeat = async () => {
-    await setPricePerSeat((prev) => prev + 1000)
+    await setDeparturePrice((prev) => prev + 1000)
   }
 
   const handleInputValueChange = (price: number) => {
@@ -86,17 +88,16 @@ const GlobalDeparturePriceComponent: React.FC = () => {
   }
 
   const decrementPricePerSeat = async () => {
-    pricePerSeat - 1000 > 1000
-      ? setPricePerSeat((prev) => prev - 1000)
-      : setPricePerSeat(1000)
+    departurePrice - 1000 > 1000
+      ? setDeparturePrice((prev) => prev - 1000)
+      : setDeparturePrice(1000)
   }
 
   const handleSubmit = async () => {
-    await setFormOfferSeatsData({
-      pricePerSeat: pricePerSeat,
-      fixedPrice: true,
-    } as Partial<FormOfferSeatsData>)
-    await resetItem('stopPrices')
+    await setFormTripsData({
+      departurePrice: departurePrice,
+      fixedDeparturePrice: true,
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/return-trip')
   }
 
@@ -108,9 +109,9 @@ const GlobalDeparturePriceComponent: React.FC = () => {
           <div className='flex w-full flex-row justify-between items-center'>
             <IconButton
               className={
-                pricePerSeat <= 1000 ? `text-gray-200` : 'text-blue-500'
+                departurePrice <= 1000 ? `text-gray-200` : 'text-blue-500'
               }
-              disabled={pricePerSeat <= 1000}
+              disabled={departurePrice <= 1000}
               onClick={decrementPricePerSeat}
             >
               <MinusCircleIcon className={`h-8 w-8`} />
@@ -143,7 +144,7 @@ const GlobalDeparturePriceComponent: React.FC = () => {
                 <>
                   <ContainerPrice>
                     <p className='text-4xl font-bold text-blue-900'>
-                      {formatPriceToDisplay(pricePerSeat)}
+                      {formatPriceToDisplay(departurePrice)}
                     </p>
                     <IconButton onClick={handleEdit}>
                       <PencilSquareIcon className='h-5 w-5 text-gray-400' />
@@ -171,8 +172,8 @@ const GlobalDeparturePriceComponent: React.FC = () => {
                 Ideal price for this trip! You will get passengers in no time.
               </p>
             </div>
-            {formOfferSeatsData?.stops &&
-            formOfferSeatsData.stops.length !== 0 ? (
+            {formTripsData?.departureStops &&
+            formTripsData.departureStops.length !== 0 ? (
               <>
                 <div className='rounded-md w-full border h-1 bg-gray-100 ' />
                 <div className='flex flex-col w-full gap-1'>

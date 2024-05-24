@@ -1,9 +1,9 @@
 import { GenreEnum } from "./enum";
 
-export type GenreStateType = | GenreEnum.MASCULINE | GenreEnum.FEMININE | GenreEnum.NOT_SPECIFIE
+export type GenreStateType = | GenreEnum.MASCULINE | GenreEnum.FEMININE | GenreEnum.NOT_SPECIFIED
 
 export interface User{
-  id:string;
+  userId:number;
   created_at: Date;
   updated_at: Date;
   firstName: string;
@@ -108,6 +108,41 @@ export interface FormOfferSeatsData {
   phoneNumber:string;
   refundable:boolean;
   oneWay:boolean
+}
+// New interface FormTripsData
+
+export interface DepartureStops{
+  location:string;
+  checked:boolean;
+  price?:number;
+
+}
+
+export interface ReturnStops{
+  location:string;
+  checked:boolean;
+  price:number
+}
+
+export interface FormTripsData{
+  departureProvince:string;
+  departurePrecise: string;
+  departureDate:string;
+  departureTime:string;
+  destinationProvince: string;
+  destinationPrecise: string;
+  seats:number;
+  departureStops?:DepartureStops[];
+  fixedDeparturePrice:boolean;
+  departurePrice:number;
+  oneWay:boolean;
+  isComfort?:boolean;
+  returnDate?:string;
+  returnTime?:string;
+  returnStops?:ReturnStops[];
+  fixedReturnPrice?:boolean;
+  returnPrice:number;
+  phoneNumber:string;
 }
 
 export interface FormSearchData{

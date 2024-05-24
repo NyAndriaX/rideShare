@@ -1,9 +1,9 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
-import { useFormOfferSeatsActions } from '@/stores/use-form-offer-seats-store'
+import { useFormTripsActions } from '@/stores/use-form-trips-store'
 
 const ContainerOptions = styled.div`
   display: flex;
@@ -40,14 +40,14 @@ const comfortState: ComfortItem[] = [
   },
 ]
 
-const Confort: React.FC = () => {
+const Comfort: React.FC = () => {
   const navigate = useNavigate()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const { setFormTripsData } = useFormTripsActions()
 
   const handleChoice = async (data: ComfortItem) => {
-    await setFormOfferSeatsData({
+    await setFormTripsData({
       isComfort: data.value,
-    } as Partial<FormOfferSeatsData>)
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/seats')
   }
 
@@ -92,4 +92,4 @@ const Confort: React.FC = () => {
     </div>
   )
 }
-export default Confort
+export default Comfort

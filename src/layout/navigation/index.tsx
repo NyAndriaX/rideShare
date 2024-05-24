@@ -7,6 +7,7 @@ import Button from '@/components/common/Button/Button'
 import Logo from '@/components/common/Logo/Logo'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import Users from '@/components/Users'
+import { useUserInfo } from '@/stores/use-auth-store'
 
 const NavList = styled.li`
   list-style-type: none;
@@ -16,7 +17,7 @@ const NavList = styled.li`
 `
 
 const Navigation: React.FC = () => {
-  const isConnected = true
+  const user = useUserInfo()
   const navigate = useNavigate()
   const { scrollY } = useScroll()
   const { pathname } = useLocation()
@@ -47,7 +48,7 @@ const Navigation: React.FC = () => {
   })
 
   useEffect(() => {
-    console.log(pathname)
+    setHidden(false)
   }, [pathname])
 
   return (
@@ -77,7 +78,7 @@ const Navigation: React.FC = () => {
         ) && (
           <div className='flex flex-row items-center justify-center gap-4'>
             <SetCountry />
-            {isConnected ? (
+            {user ? (
               <>
                 <Button
                   type='button'
@@ -86,7 +87,7 @@ const Navigation: React.FC = () => {
                   icon={
                     <PlusCircleIcon className='h-5 w-5' aria-hidden='true' />
                   }
-                  className='border border-white hover:border-darkWhite text-primary'
+                  className='border border-white hover:border-blue-500 text-blue-500'
                 />
                 <Users
                   open={open}
@@ -100,13 +101,13 @@ const Navigation: React.FC = () => {
                   type='button'
                   text='Connexion'
                   onClick={() => navigate('/login')}
-                  className='border border-white hover:border-darkWhite text-primary'
+                  className='border border-white hover:border-blue-500 text-blue-500'
                 />
                 <Button
                   type='button'
                   text='Sign Up'
                   onClick={() => navigate('/register')}
-                  className='bg-primary text-white font-semibold hover:bg-darkPrimary'
+                  className='bg-blue-500 text-white font-semibold hover:bg-blue-600'
                 />
               </>
             )}

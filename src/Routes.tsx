@@ -7,7 +7,7 @@ import Register from './views/Auth/Register'
 import AuthProtectedRoute from './views/AuthProtectedRoute'
 import ProtectedRoute from './views/ProtectedRoute'
 import Tickets from './views/Tickets/Tickets'
-import Profile from './views/Profile/Profile'
+import Profil from './views/Profil/Profil'
 import Search from './views/Search/Search'
 import Travel from './views/Travel/Travel'
 import Payement from './views/Payement/Payement'
@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         path: 'app/account',
         element: (
           <ProtectedRoute>
-            <Profile />
+            <Profil />
           </ProtectedRoute>
         ),
       },

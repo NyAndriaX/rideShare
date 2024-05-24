@@ -1,38 +1,37 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
-import { DepartureDate, FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import { DayPicker } from 'react-day-picker'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 
 const DateOfDeparture: React.FC = () => {
   const today = new Date()
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
   const defaultDate =
-    formOfferSeatsData?.departureDate?.date || today.toISOString().split('T')[0]
+    formTripsData?.departureDate || today.toISOString().split('T')[0]
   const defaultTime =
-    formOfferSeatsData?.departureDate?.time ||
+    formTripsData?.departureTime ||
     `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
-  const [departureDate, setDepartureDate] = useState<DepartureDate | undefined>(
-    {
-      date: defaultDate,
-      time: defaultTime,
-    },
-  )
+  const [departureDate, setDepartureDate] = useState<Partial<FormTripsData>>({
+    departureDate: defaultDate,
+    departureTime: defaultTime,
+  })
 
   const disablePastDays = (day: Date) => {
     return day < today
   }
 
   const handleSubmit = async () => {
-    await setFormOfferSeatsData({
-      departureDate,
-    } as Partial<FormOfferSeatsData>)
+    await setFormTripsData({
+      departureDate: departureDate.departureDate,
+      departureTime: departureDate.departureTime,
+    } as Partial<FormTripsData>)
     navigate('time')
   }
 
@@ -45,7 +44,11 @@ const DateOfDeparture: React.FC = () => {
           captionLayout='dropdown-buttons'
           fromYear={2015}
           toYear={2025}
-          selected={departureDate ? new Date(departureDate.date) : undefined}
+          selected={
+            departureDate
+              ? new Date(departureDate.departureDate as string)
+              : undefined
+          }
           onSelect={(date) =>
             setDepartureDate((prevDepartureDate) => {
               if (prevDepartureDate && date) {
@@ -56,7 +59,7 @@ const DateOfDeparture: React.FC = () => {
                 })
                 return {
                   ...prevDepartureDate,
-                  date: selectedDateString,
+                  departureDate: selectedDateString,
                 }
               }
               return prevDepartureDate

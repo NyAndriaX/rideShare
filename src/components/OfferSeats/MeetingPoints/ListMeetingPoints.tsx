@@ -3,11 +3,11 @@ import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
 import { Reorder } from 'framer-motion'
-import { Stop, FormOfferSeatsData } from '@/types/interface'
+import { DepartureStops, FormTripsData } from '@/types/interface'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 const DoteOutlined = styled.div`
@@ -67,18 +67,18 @@ const ItemStopovers = styled.div`
 
 const ListMeetingPoints: React.FC = () => {
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const [stopovers, setStopovers] = useState<Stop[]>(
-    formOfferSeatsData && formOfferSeatsData.stops
-      ? formOfferSeatsData.stops
+  const formTripsData = useFormTripsData()
+  const [stopovers, setStopovers] = useState<DepartureStops[]>(
+    formTripsData && formTripsData.departureStops
+      ? formTripsData.departureStops
       : [],
   )
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const { setFormTripsData } = useFormTripsActions()
 
   const onSubmit = async () => {
-    setFormOfferSeatsData({
-      stops: stopovers,
-    } as Partial<FormOfferSeatsData>)
+    setFormTripsData({
+      departureStops: stopovers,
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/departure-date')
   }
 
@@ -91,7 +91,7 @@ const ListMeetingPoints: React.FC = () => {
         <div className='flex flex-row relative'>
           <DoteOutlined />
           <p className='text-xs absolute left-4 text-gray-500 font-bold w-52'>
-            {formOfferSeatsData?.departureProvince as string}
+            {formTripsData?.departureProvince as string}
           </p>
         </div>
         <ContainerStopovers>
@@ -110,7 +110,7 @@ const ListMeetingPoints: React.FC = () => {
                       <DoteOutlinedStopovers className='bg-white border-4 border-blue-900' />
                       <div className='flex flex-col'>
                         <p className='text-lg font-bold text-blue-900'>
-                          {stop.stopLocation}
+                          {stop.location}
                         </p>
                         <p className='text-xs font-semibold text-gray-400'>
                           ville
@@ -127,7 +127,7 @@ const ListMeetingPoints: React.FC = () => {
         <div className='flex flex-row relative'>
           <DoteOutlined />
           <p className='text-xs absolute left-4 text-gray-500 font-bold w-52'>
-            {formOfferSeatsData?.destinationProvince as string}
+            {formTripsData?.destinationProvince as string}
           </p>
         </div>
       </DoteContainer>

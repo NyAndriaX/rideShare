@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import { User } from '@/types/interface'
+import 'react-international-phone/style.css'
 import { useNavigate } from 'react-router-dom'
+import { useUserInfo } from '@/stores/use-auth-store'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import Button from '../common/Button/Button'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import { PhoneInput } from 'react-international-phone'
 import { PhoneNumberUtil } from 'google-libphonenumber'
-import 'react-international-phone/style.css'
+import { useTravelManageActions } from '@/stores/use-travel-manage-store'
+import AnimationCircleLoading from '../common/Animation/AnimationCircleLoading'
 
 const phoneUtil = PhoneNumberUtil.getInstance()
 
@@ -22,12 +27,15 @@ const isPhoneValid = (phone: string) => {
 
 const PhoneVerificationFill: React.FC = () => {
   const navigate = useNavigate()
+  const user: User | null = useUserInfo()
+  const formTripsData = useFormTripsData()
+  const { create } = useTravelManageActions()
   const [counter, setCounter] = useState<number>(0)
-  const formOfferSeatsData = useFormOfferSeatsData()
+  const { setFormTripsData } = useFormTripsActions()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [phoneNumber, setPhoneNumber] = useState<string>(
-    formOfferSeatsData?.phoneNumber ?? '',
+    formTripsData?.phoneNumber ?? '',
   )
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
   const [countValueChanged, setCountValueChanged] = useState<number>(0)
   const [inputValueChanged, setInputValueChanged] = useState<boolean>(false)
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
@@ -59,17 +67,37 @@ const PhoneVerificationFill: React.FC = () => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault()
-    setInputValueChanged(true)
-    if (inputValueChanged && isValid) {
-      if (counter > 0) {
-        await setFormOfferSeatsData({
-          phoneNumber: phoneNumber,
-        } as Partial<FormOfferSeatsData>)
-        navigate('/')
-      } else {
-        setCounter(10)
-        setShowConfirmation(true)
+    setIsLoading(true)
+    try {
+      setInputValueChanged(true)
+      if (inputValueChanged && isValid) {
+        if (counter > 0) {
+          await setFormTripsData({
+            phoneNumber: phoneNumber,
+          } as Partial<FormTripsData>)
+          if (user && user.userId) {
+            const { statusText } = await create(
+              user.userId,
+              formTripsData as Partial<FormTripsData>,
+            )
+            statusText === 'Created' && toast.success('Creation success')
+            setCounter(0)
+            setShowConfirmation(false)
+            navigate('/search')
+          } else {
+            setCounter(0)
+            setShowConfirmation(false)
+            toast.error('Please, log in again')
+          }
+        } else {
+          setCounter(10)
+          setShowConfirmation(true)
+        }
       }
+    } catch (e: any) {
+      toast.error(e.response?.data.message || e.message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -90,11 +118,15 @@ const PhoneVerificationFill: React.FC = () => {
             </span>
           )}
         </div>
-        <Button
-          type='submit'
-          text={`${showConfirmation ? `Are you sure ? ${counter}s` : 'Publish'}`}
-          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
-        />
+        {isLoading ? (
+          <AnimationCircleLoading height={100} width={100} />
+        ) : (
+          <Button
+            type='submit'
+            text={`${showConfirmation ? `Are you sure ? ${counter}s` : 'Publish'}`}
+            className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+          />
+        )}
       </form>
     </div>
   )

@@ -4,11 +4,12 @@ import { Popover, Transition } from '@headlessui/react'
 import {
   PencilSquareIcon,
   ArrowLeftOnRectangleIcon,
-  TicketIcon,
-  ListBulletIcon,
+  // TicketIcon,
+  // ListBulletIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { User } from '@/types/interface'
+import { useAuthActions } from '@/stores/use-auth-store'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 interface UsersProps {
   open: boolean
@@ -24,6 +25,8 @@ const Users: React.FC<UsersProps> = ({
   handleClickOpen,
   navigate,
 }) => {
+  const { logout } = useAuthActions()
+
   return (
     <Popover className='relative hidden leading-3 md:block text-midnightBlue'>
       {({ open }) => (
@@ -62,26 +65,6 @@ const Users: React.FC<UsersProps> = ({
                 <div className='relative grid  bg-white '>
                   <div className='flex items-center bg-white p-2'>
                     <Popover.Button
-                      onClick={() => navigate('/app/after-sales')}
-                      className='flex w-full items-center p-2 rounded-md hover:bg-gray-50'
-                    >
-                      <TicketIcon className='h-4 w-4' />
-                      <p className='ml-3 text-base font-medium'>Tickets</p>
-                    </Popover.Button>
-                  </div>
-                  <div className='flex items-center bg-white p-2'>
-                    <Popover.Button
-                      onClick={() => navigate('/app/history')}
-                      className='flex w-full items-center p-2 rounded-md hover:bg-gray-50'
-                    >
-                      <ListBulletIcon className='h-4 w-4' />
-                      <p className='ml-3 text-base font-medium'>
-                        Creation history
-                      </p>
-                    </Popover.Button>
-                  </div>
-                  <div className='flex items-center bg-white p-2'>
-                    <Popover.Button
                       onClick={() => navigate('/app/account')}
                       className='flex w-full items-center p-2 rounded-md hover:bg-gray-50'
                     >
@@ -92,7 +75,7 @@ const Users: React.FC<UsersProps> = ({
                   <div className='flex items-center bg-gray-50 p-4'>
                     <Popover.Button
                       className='flex items-center text-sm font-medium text-primary'
-                      // onClick={logout}
+                      onClick={logout}
                     >
                       <ArrowLeftOnRectangleIcon className='h-4 w-4' />
                       <p className='ml-3 text-base font-medium text-primary'>

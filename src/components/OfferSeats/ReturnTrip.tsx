@@ -1,9 +1,9 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
-import { useFormOfferSeatsActions } from '@/stores/use-form-offer-seats-store'
+import { useFormTripsActions } from '@/stores/use-form-trips-store'
 
 const ContainerOptions = styled.div`
   display: flex;
@@ -43,20 +43,18 @@ const returnTripState: ReturnTripItem[] = [
 
 const ReturnTrip: React.FC = () => {
   const navigate = useNavigate()
-  const { setFormOfferSeatsData, resetItem } = useFormOfferSeatsActions()
+  const { setFormTripsData } = useFormTripsActions()
 
   const handleChoice = async (data: ReturnTripItem) => {
-    await setFormOfferSeatsData({
+    await setFormTripsData({
       oneWay: data.value,
-    } as Partial<FormOfferSeatsData>)
+    } as Partial<FormTripsData>)
     if (data.value) {
-      await setFormOfferSeatsData({
+      await setFormTripsData({
         oneWay: data.value,
-      } as Partial<FormOfferSeatsData>)
+      } as Partial<FormTripsData>)
       navigate('/app/offer-seats/return-date')
     } else {
-      await resetItem('returnDate')
-      await resetItem('returnPrice')
       navigate('/app/offer-seats/phone-verification-fill')
     }
   }

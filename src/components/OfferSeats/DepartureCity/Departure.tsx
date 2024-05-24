@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import Input from '@/components/common/Input/Input'
 import {
-  useFormOfferSeatsActions,
-  useFormOfferSeatsData,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import { countriesData } from '@/data/countries-data'
 import Button from '@/components/common/Button/Button'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useCurrentCountryState } from '@/stores/use-contry-store'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
-import { styled } from 'styled-components'
 
 const ContainerOptionsProvince = styled.div`
   display: flex;
@@ -32,26 +32,26 @@ const TextOptionsProvince = styled.p`
 `
 
 const Departure: React.FC = () => {
-  const formOfferSeatsData = useFormOfferSeatsData()
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
   const {
     register,
     handleSubmit,
     formState: { isDirty, errors, isValid },
     setValue,
     trigger,
-  } = useForm<Partial<FormOfferSeatsData>>({
+  } = useForm<Partial<FormTripsData>>({
     mode: 'onSubmit',
     defaultValues: {
-      departureProvince: formOfferSeatsData?.departureProvince || '',
+      departureProvince: formTripsData?.departureProvince || '',
     },
   })
   const navigate = useNavigate()
   const [query, setQuery] = useState<string>(
-    formOfferSeatsData?.departureProvince || '',
+    formTripsData?.departureProvince || '',
   )
   const [open, setOpen] = useState<boolean>(false)
   const currentCountry = useCurrentCountryState()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
   const [currentProvince, setCurrentProvince] = useState<string[] | []>([])
 
   const filteredProvince =
@@ -89,8 +89,8 @@ const Departure: React.FC = () => {
     await trigger('departureProvince')
   }
 
-  const submit = async (data: Partial<FormOfferSeatsData>) => {
-    await setFormOfferSeatsData(data)
+  const submit = async (data: Partial<FormTripsData>) => {
+    await setFormTripsData(data as Partial<FormTripsData>)
     navigate('/app/offer-seats/departure/precise')
   }
 

@@ -1,43 +1,39 @@
 import React, { useState } from 'react'
 import {
-  useFormOfferSeatsActions,
-  useFormOfferSeatsData,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import { DayPicker } from 'react-day-picker'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
 import { getFutureDate } from '@/utils/formatDateTime'
-import { FormOfferSeatsData } from '@/types/interface'
-import { ReturnDate as ReturnDateInterface } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 
 const ReturnDate: React.FC = () => {
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
-  const { date, time } = formOfferSeatsData?.departureDate || {}
-  const [returnDate, setReturnDate] = useState<ReturnDateInterface | undefined>(
-    {
-      date: getFutureDate(date as string) ?? '',
-      time: time ?? '',
-    },
-  )
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
+  const departureDate = formTripsData?.departureDate
+  const [returnDate, setReturnDate] = useState<Partial<FormTripsData>>({
+    returnDate: getFutureDate(departureDate as string) ?? '',
+  })
 
-  if (date === undefined || time === undefined) {
+  if (departureDate) {
     navigate('/app/offer-seats/departure-date')
   }
 
   const disablePastDays = (day: Date) => {
-    if (typeof date === 'string') {
-      const parsedDate = new Date(date)
+    if (typeof departureDate === 'string') {
+      const parsedDate = new Date(departureDate)
       return day <= parsedDate
     }
     return true
   }
 
   const handleSubmit = async () => {
-    await setFormOfferSeatsData({
-      returnDate,
-    } as Partial<FormOfferSeatsData>)
+    await setFormTripsData({
+      returnDate: returnDate.returnDate,
+    } as Partial<FormTripsData>)
     navigate('time')
   }
 
@@ -51,8 +47,8 @@ const ReturnDate: React.FC = () => {
           fromYear={2015}
           toYear={2025}
           selected={
-            returnDate && returnDate.date
-              ? new Date(returnDate.date)
+            returnDate && returnDate.returnDate
+              ? new Date(returnDate.returnDate)
               : undefined
           }
           onSelect={(date) =>
@@ -65,7 +61,7 @@ const ReturnDate: React.FC = () => {
                 })
                 return {
                   ...prevReturnDate,
-                  date: selectedDateString,
+                  returnDate: selectedDateString,
                 }
               }
               return prevReturnDate

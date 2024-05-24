@@ -29,9 +29,7 @@ const RegisterDateOfBirth: React.FC = () => {
 
   return formData?.firstName || formData?.lastName ? (
     <div className='flex flex-col gap-8 w-1/2'>
-      <p className='text-2xl font-bold text-midnightBlue text-center'>
-        What's your birthday ?
-      </p>
+      <h1 className='text-blue-900'>What's your birthday ?</h1>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => submit(data))}
@@ -48,9 +46,9 @@ const RegisterDateOfBirth: React.FC = () => {
         />
         <Button
           type='submit'
-          text='Coninue'
+          text='Continue'
           disabled={isSubmitting}
-          className={`${isSubmitting && 'hidden'} rounded-md font-semibold text-midnightBlue bg-yellow`}
+          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
         />
       </form>
     </div>

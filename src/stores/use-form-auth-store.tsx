@@ -31,6 +31,7 @@ const useFormAuthStore = create<UseFormAuthStoreProps>()(
         setItem(StorageEnum.formAuthDataRegister, get().formAuthData)
       },
       resetAuthDataState: () => {
+        set({ formAuthData: {} })
         removeItem(StorageEnum.formAuthDataRegister)
       },
     },

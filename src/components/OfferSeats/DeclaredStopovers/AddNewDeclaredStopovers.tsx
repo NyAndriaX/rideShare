@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form'
 import Input from '@/components/common/Input/Input'
 import Button from '@/components/common/Button/Button'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
-import { Stop } from '@/types/interface'
+import { DepartureStops } from '@/types/interface'
 import { toast } from 'react-toastify'
 
 interface AddNewDeclaredStopoversProps {
-  listStopovers: Stop[] | []
-  setListStopovers: Dispatch<SetStateAction<Stop[] | []>>
+  listStopovers: DepartureStops[] | []
+  setListStopovers: Dispatch<SetStateAction<DepartureStops[] | []>>
 }
 
 const AddNewDeclaredStopovers: React.FC<AddNewDeclaredStopoversProps> = ({
@@ -20,24 +20,24 @@ const AddNewDeclaredStopovers: React.FC<AddNewDeclaredStopoversProps> = ({
     register,
     handleSubmit,
     formState: { isDirty, errors, isValid },
-  } = useForm<Partial<Stop>>({
+  } = useForm<Partial<DepartureStops>>({
     mode: 'onSubmit',
     defaultValues: {
-      stopLocation: '',
+      location: '',
     },
   })
   const navigate = useNavigate()
 
-  const addNewStopovers = (data: Partial<Stop>) => {
+  const addNewStopovers = (data: Partial<DepartureStops>) => {
     const isLocationExist = listStopovers.some(
-      (stop) => stop.stopLocation === data?.stopLocation,
+      (stop) => stop.location === data?.location,
     )
     if (isLocationExist) {
       toast.error('This stop already exists in the list')
       return
     }
-    const newStop: Stop = {
-      stopLocation: data?.stopLocation ?? '',
+    const newStop: DepartureStops = {
+      location: data?.location ?? '',
       checked: true,
     }
     setListStopovers((prevList) => [...prevList, newStop])
@@ -50,10 +50,10 @@ const AddNewDeclaredStopovers: React.FC<AddNewDeclaredStopoversProps> = ({
         onSubmit={handleSubmit((data) => addNewStopovers(data))}
       >
         <Input
-          {...register('stopLocation', {
+          {...register('location', {
             required: 'Stop location is required',
           })}
-          error={errors.stopLocation?.message}
+          error={errors.location?.message}
           ariaInvalid={isDirty}
           type='text'
           icon={<ChevronLeftIcon className='h-5 w-6 text-gray-400' />}

@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import { Stop } from '@/types/interface'
+import { DepartureStops } from '@/types/interface'
 import { Routes, Route } from 'react-router-dom'
-import { useFormOfferSeatsData } from '@/stores/use-form-offer-seats-store'
+import { useFormTripsData } from '@/stores/use-form-trips-store'
 import ListDeclaredStopovers from './DeclaredStopovers/ListDeclaredStopovers'
 import AddNewDeclaredStopovers from './DeclaredStopovers/AddNewDeclaredStopovers'
 
 const DeclaredStopovers: React.FC = () => {
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const [listStopovers, setListStopovers] = useState<Stop[] | []>(
-    formOfferSeatsData?.stops || [],
+  const formTripsData = useFormTripsData()
+  const [listStopovers, setListStopovers] = useState<DepartureStops[] | []>(
+    formTripsData?.departureStops || [],
   )
 
   return (

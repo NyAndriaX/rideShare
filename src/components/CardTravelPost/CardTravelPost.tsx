@@ -22,11 +22,13 @@ const CountourImage = styled.div`
 interface CardTravelPostProps {
   isCompleted?: boolean
   className?: string
+  isVisiblePrice?: boolean
 }
 
 const CardTravelPost: React.FC<CardTravelPostProps> = ({
   isCompleted,
   className,
+  isVisiblePrice,
 }) => {
   const navigate = useNavigate()
   const isContentsImage: boolean = true
@@ -37,7 +39,9 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
       className={`${className}  flex flex-row w-full p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
     >
       {/* User information */}
-      <div className='flex flex-col w-1/4 py-2 gap-4 justify-start items-start border-r border-gray-200'>
+      <div
+        className={`flex flex-col ${isVisiblePrice && isVisiblePrice === true ? 'w-1/4' : 'w-2/4'} py-2 gap-4 justify-start items-start border-r border-gray-200`}
+      >
         {/* Profil */}
         <div className='flex flex-row gap-6 items-center'>
           <img
@@ -61,7 +65,9 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
         </div>
       </div>
       {/* Trip information */}
-      <div className='flex w-3/4 flex-row justify-between pl-10 py-2'>
+      <div
+        className={`flex  flex-row  ${isVisiblePrice && isVisiblePrice === true ? 'w-3/4' : 'w-2/4'} justify-between pl-10 py-2`}
+      >
         {/* Information details trip */}
         <div className='flex flex-col gap-2 justify-start'>
           <div className='flex flex-col gap-1 justify-start'>
@@ -84,33 +90,41 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
           </div>
         </div>
         {/* Information price trip */}
-        {isCompleted ? (
-          <div className='text-sm text-red-500 font-semibold'>Completed</div>
-        ) : (
-          <div className='flex flex-col justify-between items-center'>
-            <div className='flex flex-row gap-1 items-center text-sm text-blue-500'>
-              <span className='text-lg font-semibold'>25.000</span>
-              <span>Ariary</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <div className='flex flex-row items-center gap-1 text-sm text-gray-500'>
-                <span className='text-lg font-semibold'>3</span>
-                <span>places restantes</span>
+        {isVisiblePrice && isVisiblePrice === true && (
+          <>
+            {isCompleted ? (
+              <div className='text-sm text-red-500 font-semibold'>
+                Completed
               </div>
-              <div className='flex flex-row gap-2 justify-end items-center'>
-                <CountourImage>
-                  {isContentsImage && (
-                    <img
-                      src={new URL('/image/person.svg', import.meta.url).href}
-                      alt='personal reserved'
-                      className='w-6 h-6'
-                    />
-                  )}
-                </CountourImage>
-                <CountourImage></CountourImage>
+            ) : (
+              <div className='flex flex-col justify-between items-center'>
+                <div className='flex flex-row gap-1 items-center text-sm text-blue-500'>
+                  <span className='text-lg font-semibold'>25.000</span>
+                  <span>Ariary</span>
+                </div>
+                <div className='flex flex-col gap-1'>
+                  <div className='flex flex-row items-center gap-1 text-sm text-gray-500'>
+                    <span className='text-lg font-semibold'>3</span>
+                    <span>places restantes</span>
+                  </div>
+                  <div className='flex flex-row gap-2 justify-end items-center'>
+                    <CountourImage>
+                      {isContentsImage && (
+                        <img
+                          src={
+                            new URL('/image/person.svg', import.meta.url).href
+                          }
+                          alt='personal reserved'
+                          className='w-6 h-6'
+                        />
+                      )}
+                    </CountourImage>
+                    <CountourImage></CountourImage>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            )}
+          </>
         )}
       </div>
     </div>

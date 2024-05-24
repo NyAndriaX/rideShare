@@ -1,35 +1,34 @@
 import React from 'react'
+import {
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import { useForm } from 'react-hook-form'
 import { ReturnDate } from '@/types/interface'
 import { useNavigate } from 'react-router-dom'
 import Input from '@/components/common/Input/Input'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import Button from '@/components/common/Button/Button'
-import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
 
 const ReturnTime: React.FC = () => {
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
   const {
     register,
     handleSubmit,
     formState: { isDirty, errors, isValid },
-  } = useForm<Partial<ReturnDate>>({
+  } = useForm<Partial<FormTripsData>>({
     mode: 'onSubmit',
     defaultValues: {
-      date: formOfferSeatsData?.returnDate?.date ?? '',
-      time: formOfferSeatsData?.returnDate?.time ?? '',
+      returnTime: formTripsData?.returnTime ?? '',
     },
   })
 
-  const submit = async (data: Partial<ReturnDate>) => {
-    await setFormOfferSeatsData({
-      returnDate: data,
-    } as Partial<FormOfferSeatsData>)
+  const submit = async (data: Partial<FormTripsData>) => {
+    await setFormTripsData({
+      returnTime: data.returnTime,
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/return-price-recommendation')
   }
 
@@ -43,10 +42,10 @@ const ReturnTime: React.FC = () => {
         onSubmit={handleSubmit((data) => submit(data))}
       >
         <Input
-          {...register('time', {
+          {...register('returnTime', {
             required: 'Return date time is required',
           })}
-          error={errors.time?.message}
+          error={errors.returnTime?.message}
           ariaInvalid={isDirty}
           type='time'
           autofocus

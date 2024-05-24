@@ -9,11 +9,11 @@ import {
 import Button from '@/components/common/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { countriesData } from '@/data/countries-data'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import { useCurrentCountryState } from '@/stores/use-contry-store'
 
 const ContainerOptionsProvince = styled.div`
@@ -34,26 +34,26 @@ const TextOptionsProvince = styled.p`
 `
 
 const Arrival: React.FC = () => {
-  const formOfferSeatsData = useFormOfferSeatsData()
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
   const {
     register,
     handleSubmit,
     formState: { isDirty, errors, isValid },
     setValue,
     trigger,
-  } = useForm<Partial<FormOfferSeatsData>>({
+  } = useForm<Partial<FormTripsData>>({
     mode: 'onSubmit',
     defaultValues: {
-      destinationProvince: formOfferSeatsData?.destinationProvince || '',
+      destinationProvince: formTripsData?.destinationProvince || '',
     },
   })
   const [query, setQuery] = useState<string>(
-    formOfferSeatsData?.destinationProvince || '',
+    formTripsData?.destinationProvince || '',
   )
   const navigate = useNavigate()
   const [open, setOpen] = useState<boolean>(false)
   const currentCountry = useCurrentCountryState()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
   const [currentProvince, setCurrentProvince] = useState<string[] | []>([])
 
   const filteredProvince =
@@ -91,8 +91,8 @@ const Arrival: React.FC = () => {
     await trigger('destinationProvince')
   }
 
-  const submit = async (data: Partial<FormOfferSeatsData>) => {
-    await setFormOfferSeatsData(data)
+  const submit = async (data: Partial<FormTripsData>) => {
+    await setFormTripsData(data as Partial<FormTripsData>)
     navigate('/app/offer-seats/arrival/precise')
   }
 

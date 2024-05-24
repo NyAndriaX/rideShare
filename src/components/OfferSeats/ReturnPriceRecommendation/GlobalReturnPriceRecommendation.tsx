@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { styled } from 'styled-components'
 import {
-  useFormOfferSeatsData,
-  useFormOfferSeatsActions,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 import { useNavigate } from 'react-router-dom'
 import {
   ChevronRightIcon,
@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/24/outline'
 import Input from '@/components/common/Input/Input'
 import Button from '@/components/common/Button/Button'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import { formatPriceToDisplay } from '@/utils/formatPriceToDisplay'
 
 const IconButton = styled.button`
@@ -48,20 +48,22 @@ const TextOptions = styled.p`
 
 const GlobalReturnPriceRecommendation: React.FC = () => {
   const navigate = useNavigate()
-  const formOfferSeatsData = useFormOfferSeatsData()
-  const theStops = formOfferSeatsData?.stops
+  const formTripsData = useFormTripsData()
+  const departureStops = formTripsData?.departureStops ?? []
   const recommendedPrice: number =
-    theStops && theStops.length !== 0 ? theStops.length * 1000 : 1000
+    departureStops && departureStops.length !== 0
+      ? departureStops.length * 1000
+      : 1000
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const { setFormOfferSeatsData, resetItem } = useFormOfferSeatsActions()
-  const [pricePerSeat, setPricePerSeat] = useState<number>(
-    formOfferSeatsData?.returnPrice?.pricePerSeat || recommendedPrice,
+  const { setFormTripsData } = useFormTripsActions()
+  const [returnPrice, setReturnPrice] = useState<number>(
+    formTripsData?.returnPrice || recommendedPrice,
   )
-  const [inputValue, setInputValue] = useState<number>(pricePerSeat)
+  const [inputValues, setInputValues] = useState<number>(returnPrice)
 
   useEffect(() => {
-    setInputValue(pricePerSeat)
-  }, [pricePerSeat])
+    setInputValues(returnPrice)
+  }, [returnPrice])
 
   const handleEdit = () => {
     setIsEdit(true)
@@ -69,36 +71,32 @@ const GlobalReturnPriceRecommendation: React.FC = () => {
 
   const handleCancel = () => {
     setIsEdit(false)
-    setInputValue(pricePerSeat)
+    setInputValues(returnPrice)
   }
 
   const handleCheck = () => {
     setIsEdit(false)
-    setPricePerSeat(inputValue)
+    setReturnPrice(inputValues)
   }
 
-  const incrementPricePerSeat = async () => {
-    await setPricePerSeat((prev) => prev + 1000)
+  const incrementReturnPrice = async () => {
+    await setReturnPrice((prev) => prev + 1000)
   }
 
   const handleInputValueChange = (price: number) => {
-    setInputValue(price)
+    setInputValues(price)
   }
 
-  const decrementPricePerSeat = async () => {
-    pricePerSeat - 1000 > 1000
-      ? setPricePerSeat((prev) => prev - 1000)
-      : setPricePerSeat(1000)
+  const decrementReturnPrice = async () => {
+    returnPrice - 1000 > 1000
+      ? setReturnPrice((prev) => prev - 1000)
+      : setReturnPrice(1000)
   }
 
   const handleSubmit = async () => {
-    await setFormOfferSeatsData({
-      returnPrice: {
-        pricePerSeat: pricePerSeat,
-        fixedPrice: true,
-      },
-    } as Partial<FormOfferSeatsData>)
-    await resetItem('stopPrices')
+    await setFormTripsData({
+      returnPrice: returnPrice,
+    } as Partial<FormTripsData>)
     navigate('/app/offer-seats/phone-verification-fill')
   }
   return (
@@ -109,10 +107,10 @@ const GlobalReturnPriceRecommendation: React.FC = () => {
           <div className='flex w-full flex-row justify-between items-center'>
             <IconButton
               className={
-                pricePerSeat <= 1000 ? `text-gray-200` : 'text-blue-500'
+                returnPrice <= 1000 ? `text-gray-200` : 'text-blue-500'
               }
-              disabled={pricePerSeat <= 1000}
-              onClick={decrementPricePerSeat}
+              disabled={returnPrice <= 1000}
+              onClick={decrementReturnPrice}
             >
               <MinusCircleIcon className={`h-8 w-8`} />
             </IconButton>
@@ -129,7 +127,7 @@ const GlobalReturnPriceRecommendation: React.FC = () => {
                   </div>
                   <Input
                     type='number'
-                    value={inputValue.toString()}
+                    value={inputValues.toString()}
                     onChange={(e) =>
                       handleInputValueChange(parseInt(e.target.value))
                     }
@@ -144,7 +142,7 @@ const GlobalReturnPriceRecommendation: React.FC = () => {
                 <>
                   <ContainerPrice>
                     <p className='text-4xl font-bold text-blue-900'>
-                      {formatPriceToDisplay(pricePerSeat)}
+                      {formatPriceToDisplay(returnPrice)}
                     </p>
                     <IconButton onClick={handleEdit}>
                       <PencilSquareIcon className='h-5 w-5 text-gray-400' />
@@ -154,7 +152,7 @@ const GlobalReturnPriceRecommendation: React.FC = () => {
               )}
             </div>
             <IconButton
-              onClick={incrementPricePerSeat}
+              onClick={incrementReturnPrice}
               className='text-blue-500'
             >
               <PlusCircleIcon className='h-8 w-8' />
@@ -172,8 +170,8 @@ const GlobalReturnPriceRecommendation: React.FC = () => {
                 Ideal price for this trip! You will get passengers in no time.
               </p>
             </div>
-            {formOfferSeatsData?.stops &&
-            formOfferSeatsData.stops.length !== 0 ? (
+            {formTripsData?.departureStops &&
+            formTripsData.departureStops.length !== 0 ? (
               <>
                 <div className='rounded-md w-full border h-1 bg-gray-100 ' />
                 <div className='flex flex-col w-full gap-1'>

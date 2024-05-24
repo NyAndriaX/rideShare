@@ -3,31 +3,31 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import Input from '@/components/common/Input/Input'
 import Button from '@/components/common/Button/Button'
-import { FormOfferSeatsData } from '@/types/interface'
+import { FormTripsData } from '@/types/interface'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
 import AddressExplanationModal from '../AddressExplanationModal'
 import {
-  useFormOfferSeatsActions,
-  useFormOfferSeatsData,
-} from '@/stores/use-form-offer-seats-store'
+  useFormTripsData,
+  useFormTripsActions,
+} from '@/stores/use-form-trips-store'
 
 const PreciseCityOfArrival: React.FC = () => {
-  const formOfferSeatsData = useFormOfferSeatsData()
+  const formTripsData = useFormTripsData()
+  const { setFormTripsData } = useFormTripsActions()
   const {
     register,
     handleSubmit,
     formState: { isDirty, errors, isValid },
-  } = useForm<Partial<FormOfferSeatsData>>({
+  } = useForm<Partial<FormTripsData>>({
     mode: 'onSubmit',
     defaultValues: {
-      destinationPrecise: formOfferSeatsData?.destinationPrecise || '',
+      destinationPrecise: formTripsData?.destinationPrecise || '',
     },
   })
   const navigate = useNavigate()
-  const { setFormOfferSeatsData } = useFormOfferSeatsActions()
 
-  const submit = async (data: Partial<FormOfferSeatsData>) => {
-    await setFormOfferSeatsData(data)
+  const submit = async (data: Partial<FormTripsData>) => {
+    await setFormTripsData(data as Partial<FormTripsData>)
     navigate('/app/offer-seats/declared-stopovers')
   }
   return (

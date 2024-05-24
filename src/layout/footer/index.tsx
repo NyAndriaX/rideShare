@@ -7,10 +7,6 @@ import { motion } from 'framer-motion'
 const Footer: React.FC = () => {
   const { pathname } = useLocation()
 
-  useEffect(() => {
-    console.log(pathname)
-  }, [])
-
   return (
     <React.Fragment>
       {!(
@@ -18,7 +14,7 @@ const Footer: React.FC = () => {
         pathname.startsWith('/register') ||
         pathname.startsWith('/search')
       ) && (
-        <motion.footer>
+        <motion.footer className='mt-5'>
           <Subscribe />
           <SiteLink />
         </motion.footer>

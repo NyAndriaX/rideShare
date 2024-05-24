@@ -3,11 +3,12 @@ export enum StorageEnum {
   Token = 'token',
   currentCountry = 'currentCountry',
   formAuthDataRegister = 'formAuthDataRegister',
-  formOfferSeats ='formOfferSeats' 
+  formOfferSeats ='formOfferSeats',
+  formTrips = "formTrips"
 }
 
 export enum GenreEnum {
   MASCULINE = 'Mr',
   FEMININE ='Md',
-  NOT_SPECIFIE = "not-specifie"
+  NOT_SPECIFIED = "not-specified"
 }

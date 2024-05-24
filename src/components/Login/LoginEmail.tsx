@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '../common/Input/Input'
 import { useForm } from 'react-hook-form'
 import { useAuthActions } from '@/stores/use-auth-store'
@@ -6,6 +6,7 @@ import { useAuthActions } from '@/stores/use-auth-store'
 import { toast } from 'react-toastify'
 import { EMAIL_REGEX } from '@/constants/app-constants'
 import Button from '../common/Button/Button'
+import AnimationCircleLoading from '../common/Animation/AnimationCircleLoading'
 
 const LoginEmail: React.FC = () => {
   const {
@@ -20,23 +21,25 @@ const LoginEmail: React.FC = () => {
       saveAccount: false,
     },
   })
-  const { login } = useAuthActions()
   // const navigate = useNavigate()
+  const { login } = useAuthActions()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const submit = async (data: { email: string; password: string }) => {
+  const submit = async (formValue: { email: string; password: string }) => {
+    setIsLoading(true)
     try {
-      // console
-      const res = await login(data)
-      console.log(res)
+      await login(formValue)
+      window.location.href = '/'
     } catch (e: any) {
-      toast.error(e.response?.data.message)
+      toast.error(e.response?.data.message || e.message)
     } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <div className='flex flex-col gap-8 w-1/2'>
-      <p className='text-2xl font-bold text-midnightBlue text-center'>Log in</p>
+      <h1 className='text-blue-900'>Log in</h1>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => submit(data))}
@@ -59,12 +62,12 @@ const LoginEmail: React.FC = () => {
           {...register('password', {
             required: 'Password is required',
             minLength: {
-              value: 6,
-              message: 'Password needs to be between 6 to 20 characters',
+              value: 8,
+              message: 'Password needs to be between 8 to 20 characters',
             },
             maxLength: {
               value: 20,
-              message: 'Password needs to be between 6 to 20 characters',
+              message: 'Password needs to be between 8 to 20 characters',
             },
           })}
           error={errors.password?.message}
@@ -74,18 +77,22 @@ const LoginEmail: React.FC = () => {
           autoComplete='on'
         />
         <div className='flex flex-row justify-between items-center'>
-          <p className='text-sm text-midnightBlue font-semibold'>Remember me</p>
+          <p className='text-sm text-blue-900 font-semibold'>Remember me</p>
           <input type='checkbox' {...register('saveAccount')} />
         </div>
-        <p className='text-sm text-primary font-semibold cursor-pointer'>
+        <p className='text-sm text-blue-500 font-semibold cursor-pointer'>
           Forgot my password ?
         </p>
-        <Button
-          type='submit'
-          text='Connexion'
-          disabled={isSubmitting}
-          className={`${isSubmitting && 'hidden'} rounded-md font-semibold text-midnightBlue bg-yellow`}
-        />
+        {isLoading ? (
+          <AnimationCircleLoading height={100} width={100} />
+        ) : (
+          <Button
+            type='submit'
+            text='Connexion'
+            disabled={isSubmitting}
+            className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+          />
+        )}
       </form>
     </div>
   )
