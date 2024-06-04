@@ -96,6 +96,7 @@ const PhoneVerificationFill: React.FC = () => {
         }
       }
     } catch (e: any) {
+      console.log(e)
       toast.error(e.response?.data.message || e.message)
     } finally {
       setIsLoading(false)
