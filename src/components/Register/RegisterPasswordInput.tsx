@@ -33,6 +33,7 @@ const RegisterPasswordInput: React.FC = () => {
       statusText === 'Created' && toast.success('Register success')
       navigate('/login')
     } catch (e: any) {
+      console.log(e)
       toast.error(e.response?.data?.message || e.message)
     } finally {
       setIsLoading(false)
