@@ -76,6 +76,7 @@ const PhoneVerificationFill: React.FC = () => {
             phoneNumber: phoneNumber,
           } as Partial<FormTripsData>)
           if (user && user.userId) {
+            console.log(formTripsData)
             const { statusText } = await create(
               user.userId,
               formTripsData as Partial<FormTripsData>,

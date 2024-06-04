@@ -1,6 +1,5 @@
 import React from 'react'
 import Line from '@/components/common/Line/Line'
-import CardTravelPost from '@/components/CardTravelPost/CardTravelPost'
 
 const TransBookCompare: React.FC = () => {
   return (
@@ -16,48 +15,9 @@ const TransBookCompare: React.FC = () => {
         <Line />
       </div>
       <div className='-mx-3 md:flex items-start'>
-        <div className='px-3 md:w-1/3'>
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-        </div>
-        <div className='px-3 md:w-1/3'>
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-        </div>
-        <div className='px-3 md:w-1/3'>
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-          <CardTravelPost
-            isCompleted={false}
-            className='border border-gray-200 rounded-md p-5 mb-5 mx-auto'
-          />
-        </div>
+        <div className='px-3 md:w-1/3'>{/* CardTravelPost */}</div>
+        <div className='px-3 md:w-1/3'>{/* CardTravelPost */}</div>
+        <div className='px-3 md:w-1/3'>{/* CardTravelPost */}</div>
       </div>
     </div>
   )

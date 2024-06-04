@@ -2,6 +2,7 @@ import React, { useState, ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { BusIson } from '../common/Icons/Icons'
 import { CarsIcon } from '../common/Icons/Icons'
+import { useTotalSearchItems } from '@/stores/use-form-search-store'
 
 const NavLink: React.FC<{
   index: number
@@ -38,6 +39,7 @@ const NavLink: React.FC<{
 )
 
 const RideOptionsFilter: React.FC = () => {
+  const totalItems = useTotalSearchItems()
   const [activeLink, setActiveLink] = useState<number>(0)
 
   const variants = {
@@ -64,7 +66,7 @@ const RideOptionsFilter: React.FC = () => {
           index={0}
           text='All'
           icons={<div className='h-9' />}
-          numbers={12}
+          numbers={totalItems}
           onClick={() => handleLinkClick(0)}
           activeLink={activeLink}
           variants={variants}
@@ -77,7 +79,7 @@ const RideOptionsFilter: React.FC = () => {
               className={`w-9 h-9 ${activeLink === 1 ? 'text-blue-500' : 'text-gray-400'}`}
             />
           }
-          numbers={12}
+          numbers={0}
           onClick={() => handleLinkClick(1)}
           activeLink={activeLink}
           variants={variants}

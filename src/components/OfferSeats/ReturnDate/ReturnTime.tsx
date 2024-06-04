@@ -4,7 +4,6 @@ import {
   useFormTripsActions,
 } from '@/stores/use-form-trips-store'
 import { useForm } from 'react-hook-form'
-import { ReturnDate } from '@/types/interface'
 import { useNavigate } from 'react-router-dom'
 import Input from '@/components/common/Input/Input'
 import { FormTripsData } from '@/types/interface'

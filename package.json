@@ -22,6 +22,7 @@
     "firebase": "^10.9.0",
     "framer-motion": "^11.0.14",
     "google-libphonenumber": "^3.2.34",
+    "hammerjs": "^2.0.8",
     "immer": "^10.0.4",
     "jwt-decode": "^4.0.0",
     "keen-slider": "^6.8.6",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@types/google-libphonenumber": "^7.4.30",
+    "@types/hammerjs": "^2.0.45",
     "@types/node": "^20.11.29",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",

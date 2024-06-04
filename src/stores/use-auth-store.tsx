@@ -4,6 +4,7 @@ import { User } from '@/types/interface'
 import { getItem, setItem, removeItem } from '@/utils/storage'
 import { StorageEnum } from '@/types/enum'
 import { _post } from '@/api/api-client'
+import { toast } from 'react-toastify'
 import { RegisterInput, LoginInput } from '@/types/interface'
 
 interface UseAuthStoreProps {
@@ -34,10 +35,15 @@ const useAuthStore = create<UseAuthStoreProps>()(
         return statusText
       },
       me: async (token: string): Promise<User | null | any> => {
-        const res = await _post<User | null | any>('/token/decode', { token })
-        const { user } = res.data
-        set({ user })
-        return user
+        try {
+          const res = await _post<User | null | any>('/token/decode', { token })
+          const { user } = res.data
+          set({ user })
+          return user
+        } catch (e: any) {
+          removeItem(StorageEnum.Token)
+          toast.warning('please, log in again')
+        }
       },
       logout: () => {
         set({ token: null, user: null })

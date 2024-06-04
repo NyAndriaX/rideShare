@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         element: <Payement />,
       },
       {
-        path: 'app/account',
+        path: 'app/account/*',
         element: (
           <ProtectedRoute>
             <Profil />

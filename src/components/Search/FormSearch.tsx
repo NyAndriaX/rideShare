@@ -1,26 +1,34 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import Button from '../common/Button/Button'
-import Passenger from './FormSearch/Passenger'
-import { useNavigate } from 'react-router-dom'
-import { FormSearchData } from '@/types/interface'
-import ReturnOfDate from './FormSearch/ReturnOfDate'
-import DateOfDeparture from './FormSearch/DateOfDeparture'
-import DeparturePrecise from './FormSearch/DeparturePrecise'
-import DestinationPrecise from './FormSearch/DestinationPrecise'
+import React, { SetStateAction, useState } from 'react'
+import { toast } from 'react-toastify'
 import {
   useFormSearchAction,
   useFormSearchData,
 } from '@/stores/use-form-search-store'
+import { useForm } from 'react-hook-form'
+import Button from '../common/Button/Button'
+import Passenger from './FormSearch/Passenger'
+import { FormSearchData } from '@/types/interface'
+import ReturnOfDate from './FormSearch/ReturnOfDate'
+import DateOfDeparture from './FormSearch/DateOfDeparture'
+import { useNavigate, useLocation } from 'react-router-dom'
+import DeparturePrecise from './FormSearch/DeparturePrecise'
+import DestinationPrecise from './FormSearch/DestinationPrecise'
+import AnimationCircleLoading from '../common/Animation/AnimationCircleLoading'
 
 interface FormSearchProps {
   displayTitle: boolean
+  setHasMore?: React.Dispatch<SetStateAction<boolean>>
 }
 
-const FormSearch: React.FC<FormSearchProps> = ({ displayTitle }) => {
+const FormSearch: React.FC<FormSearchProps> = ({
+  displayTitle,
+  setHasMore,
+}) => {
   const today = new Date()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const formSearchData = useFormSearchData()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const {
     register,
     handleSubmit,
@@ -39,12 +47,24 @@ const FormSearch: React.FC<FormSearchProps> = ({ displayTitle }) => {
     },
   })
 
-  const { setFormSearchData } = useFormSearchAction()
+  const { search } = useFormSearchAction()
 
   const onSubmit = async (data: Partial<FormSearchData>) => {
-    await setFormSearchData(data)
+    try {
+      setIsLoading(true)
+      if (pathname !== '/search') {
+        await search(data)
+        navigate('/search')
+      } else {
+        await search(data)
+        setHasMore?.(true)
+      }
+    } catch (e: any) {
+      toast.error(e?.message)
+    } finally {
+      setIsLoading(false)
+    }
   }
-
   return (
     <div className='flex flex-col gap-4 w-full bg-white p-6 rounded-md border border-gray-100'>
       {displayTitle && (
@@ -73,11 +93,15 @@ const FormSearch: React.FC<FormSearchProps> = ({ displayTitle }) => {
           </div>
           <Passenger watch={watch} setValue={setValue} />
         </div>
-        <Button
-          type='submit'
-          text='Search'
-          className='bg-yellow text-blue-900 font-semibold'
-        />
+        {isLoading ? (
+          <AnimationCircleLoading height={80} width={80} />
+        ) : (
+          <Button
+            type='submit'
+            text='Search'
+            className='bg-yellow text-blue-900 font-semibold'
+          />
+        )}
       </form>
     </div>
   )

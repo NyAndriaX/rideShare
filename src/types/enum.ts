@@ -4,7 +4,8 @@ export enum StorageEnum {
   currentCountry = 'currentCountry',
   formAuthDataRegister = 'formAuthDataRegister',
   formOfferSeats ='formOfferSeats',
-  formTrips = "formTrips"
+  formTrips = "formTrips",
+  formSearchData = 'formSearchData'
 }
 
 export enum GenreEnum {
