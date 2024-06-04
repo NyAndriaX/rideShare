@@ -84,7 +84,7 @@ const PhoneVerificationFill: React.FC = () => {
             statusText === 'Created' && toast.success('Creation success')
             setCounter(0)
             setShowConfirmation(false)
-            navigate('/search')
+            navigate('/')
           } else {
             setCounter(0)
             setShowConfirmation(false)
@@ -96,7 +96,6 @@ const PhoneVerificationFill: React.FC = () => {
         }
       }
     } catch (e: any) {
-      console.log(e)
       toast.error(e.response?.data.message || e.message)
     } finally {
       setIsLoading(false)
