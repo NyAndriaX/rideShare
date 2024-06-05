@@ -3,10 +3,10 @@ import Footer from './layout/footer'
 import { Outlet } from 'react-router-dom'
 import Navigation from './layout/navigation'
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import { ScrollToTop } from './components/ScrollToTop'
 import { useUserToken } from './stores/use-auth-store'
 import { useAuthActions } from './stores/use-auth-store'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App: React.FC = () => {
   const { me } = useAuthActions()
@@ -24,7 +24,7 @@ const App: React.FC = () => {
     const handleResize = () => {
       const width = window.innerWidth
       if (width <= 1280) {
-        setZoom(0.9)
+        setZoom(0.85)
       } else {
         setZoom(1)
       }

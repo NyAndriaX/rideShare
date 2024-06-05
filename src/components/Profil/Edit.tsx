@@ -1,19 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { styled } from 'styled-components'
+import React, { useState, ReactNode, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { User } from '@/types/interface'
+import { styled } from 'styled-components'
 import { formatDate } from '@/utils/formatDate'
-import {
-  PlusCircleIcon,
-  Bars3BottomLeftIcon,
-} from '@heroicons/react/24/outline'
-import { CloseIcon } from '../common/Icons/Icons'
+import { PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 interface EditProps {
   user: Partial<User> | null
 }
 
-const Button = styled.button`
+const StyledButton = styled.button`
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -26,127 +23,58 @@ const Button = styled.button`
   }
 `
 
-const variants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: '-100%' },
+interface DrawerBottomProps {
+  children: ReactNode
 }
 
-const overlayVariants = {
-  open: { opacity: 1, pointerEvents: 'auto' as const },
-  closed: { opacity: 0, pointerEvents: 'none' as const },
-}
-
-type DrawerProps = {
-  // sets the default width
-  children: any
-  width?: number
-}
-
-export const Drawer: React.FC<DrawerProps> = ({ width = 350, children }) => {
+const DrawerBottom: React.FC<DrawerBottomProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const toggleOpen = useCallback(() => setIsOpen((isOpen) => !isOpen), [])
-
-  const [hammerLoaded, setHammerLoaded] = useState<boolean>(false)
-
-  const drawerRef = useRef<null | HTMLDivElement>(null)
-
-  const pannerRef = useRef<null | HTMLDivElement>(null)
-
-  const hammertimeDrawer = useRef<any>()
-
-  const hammertimePanner = useRef<any>()
-
-  const hammerInstance = useRef<any>()
+  const toggleDrawer = () => setIsOpen((isOpen) => !isOpen)
 
   useEffect(() => {
-    const loadHammer = async () => {
-      hammerInstance.current = (await import('hammerjs')).default
-
-      setHammerLoaded(true)
+    if (isOpen) {
+      document.body.classList.add('no-scroll')
+    } else {
+      document.body.classList.remove('no-scroll')
     }
-    loadHammer()
-  }, [])
-
-  useEffect(() => {
-    if (hammerLoaded) {
-      const Hammer = hammerInstance.current
-      if (drawerRef?.current) {
-        if (!hammertimeDrawer?.current) {
-          if (Hammer) {
-            hammertimeDrawer.current = new Hammer(drawerRef.current, {
-              touchAction: 'pan-y',
-            })
-          }
-        }
-        hammertimeDrawer?.current?.on('swipeleft', toggleOpen)
-      }
-
-      if (pannerRef?.current) {
-        if (!hammertimePanner?.current) {
-          if (Hammer) {
-            hammertimePanner.current = new Hammer(pannerRef.current, {
-              touchAction: 'pan-y',
-            })
-          }
-        }
-        hammertimePanner?.current?.on('swiperight', toggleOpen)
-      }
-      return () => {
-        hammertimeDrawer?.current?.off('swipeleft', toggleOpen)
-        hammertimePanner?.current?.off('swiperight', toggleOpen)
-      }
-    }
-
-    return () => {}
-  }, [toggleOpen, hammerLoaded])
+  }, [isOpen])
 
   return (
     <React.Fragment>
-      <button
-        onClick={toggleOpen}
-        className='hamburger py-4 text-purple-600 transform transition-transform  hover:scale-125 active:scale-95 focus:outline-none '
-      >
-        <Bars3BottomLeftIcon className='h-6 w-6' />
-      </button>
-      <div ref={pannerRef} className='z-20 fixed inset-y-0 p-4' />
-      <motion.div
-        className='z-10 fixed inset-0 bg-black'
-        style={
-          {
-            '--tw-bg-oacity': 0.4,
-          } as any
-        }
-        initial='closed'
-        animate={isOpen ? 'open' : 'closed'}
-        variants={overlayVariants}
-        transition={{ type: 'tween' }}
-        onClick={toggleOpen}
-      />
-      <motion.div
-        ref={drawerRef}
-        className='fixed top-0 bottom-0 z-30'
-        initial='closed'
-        animate={isOpen ? 'open' : closed}
-        variants={variants}
-        transition={{ type: 'spring', stiffness: 350, damping: 40 }}
-      >
-        <div
-          style={{ width }}
-          className='bg-white border border-gray-300 p-4 h-full select-text'
-        >
-          <div className='flex items-center justify-end'>
-            <button
-              onClick={toggleOpen}
-              className='hamburger p-1 text-red-500 transform transition-transform hover:scale-125 active:scale-95 focus:outline-none'
-            >
-              <CloseIcon className='h-6 w-6' />
-            </button>
-          </div>
-          {/* Drawer Content */}
-          {children}
-        </div>
-      </motion.div>
+      <StyledButton onClick={toggleDrawer}>{children}</StyledButton>
+      {isOpen &&
+        createPortal(
+          <AnimatePresence>
+            <motion.div>
+              <motion.div
+                className='fixed inset-0 z-50 overflow-hidden bg-black bg-opacity-50'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={toggleDrawer}
+              />
+              <motion.div
+                className='fixed inset-x-0 h-screen bottom-0 z-50 bg-white'
+                initial={{ y: '100%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '100%' }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                <div className='flex flex-col items-center gap-4'>
+                  <div className='flex flex-col w-full items-start p-4'>
+                    <button onClick={toggleDrawer}>
+                      <XMarkIcon className='h-6 w-6 text-blue-500' />
+                    </button>
+                  </div>
+                  <div className='w-1/2'>{children}</div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>,
+          document.body,
+        )}
     </React.Fragment>
   )
 }
@@ -154,30 +82,29 @@ export const Drawer: React.FC<DrawerProps> = ({ width = 350, children }) => {
 const Edit: React.FC<EditProps> = ({ user }) => {
   return (
     <div className='flex flex-col gap-4 w-1/2'>
-      {/* <Drawer>Test</Drawer> */}
       <h1 className='text-blue-900'>Personal information</h1>
       <div className='flex flex-col gap-6 '>
         <div className='flex flex-col gap-4 items-start w-full'>
-          <Button>
+          <DrawerBottom>
             <p className='text-base text-gray-500'>Last Name</p>
             <p className='text-sm text-blue-500'>{user?.lastName}</p>
-          </Button>
-          <Button>
+          </DrawerBottom>
+          <DrawerBottom>
             <p className='text-base text-gray-500'>First Name</p>
             <p className='text-sm text-blue-500'>{user?.firstName}</p>
-          </Button>
-          <Button>
+          </DrawerBottom>
+          <DrawerBottom>
             <p className='text-base text-gray-500'>Date of birth</p>
             <p className='text-sm text-blue-500'>
               {user &&
                 user.dateOfBirth &&
                 formatDate(new Date(user?.dateOfBirth))}
             </p>
-          </Button>
-          <Button>
+          </DrawerBottom>
+          <DrawerBottom>
             <p className='text-base text-gray-500'>E-Mail</p>
             <p className='text-sm text-blue-500'>{user?.email}</p>
-          </Button>
+          </DrawerBottom>
         </div>
         <div className='bg-gray-50 h-1 rounded-md' />
         <div className='flex flex-row items-center gap-2 px-6 py-2 text-blue-500'>
