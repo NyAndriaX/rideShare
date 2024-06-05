@@ -17,20 +17,31 @@ const DoteOutlined = styled.div`
   border-radius: 100%;
 `
 
-const DetailsTravel: React.FC = () => {
+interface DetailsTravelProps {
+  trip: any
+}
+
+const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
   const oneWay: boolean = true
+
+  console.log(trip)
+
   return (
     <div className='flex flex-col items-start gap-4 w-2/3'>
       {/* Travel Indice */}
       <div className='flex flex-row text-base gap-8'>
         <div className='flex flex-row items-center gap-2 text-gray-400'>
-          <span>Reims</span>
+          <span>
+            {trip?.departureProvince} {trip?.departurePrecise}
+          </span>
           <ArrowLongRightIcon className='h-6 w-6 text-gray-400' />
-          <span>Troyes</span>
+          <span>
+            {trip?.destinationProvince} {trip?.destinationPrecise}
+          </span>
         </div>
         <div className='flex flex-row gap-2 text-blue-500'>
           <TicketIcon className='h-6 w-6' />
-          <Link to='/search'>Voir le trajet</Link>
+          <Link to='/search'>See the route</Link>
         </div>
       </div>
       {/* Travel information */}

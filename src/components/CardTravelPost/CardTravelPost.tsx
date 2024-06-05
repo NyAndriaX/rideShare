@@ -38,9 +38,17 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
   const navigate = useNavigate()
   const isContentsImage: boolean = true
 
+  const handleClick = () => {
+    const queryParams = new URLSearchParams({
+      tripId: trip?.tripId,
+    }).toString()
+
+    navigate(`/travel?${queryParams}`)
+  }
+
   return (
     <div
-      onClick={() => navigate('/travel')}
+      onClick={handleClick}
       className={`${className}  flex flex-row w-full gap-8 p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
     >
       {/* User information */}

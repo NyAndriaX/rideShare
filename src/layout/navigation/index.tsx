@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import SetCountry from './setCountry'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { styled } from 'styled-components'
 import Button from '@/components/common/Button/Button'
 import Logo from '@/components/common/Logo/Logo'
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Users from '@/components/Users'
 import { useUserInfo } from '@/stores/use-auth-store'
 
@@ -19,44 +19,16 @@ const NavList = styled.li`
 const Navigation: React.FC = () => {
   const user = useUserInfo()
   const navigate = useNavigate()
-  const { scrollY } = useScroll()
   const { pathname } = useLocation()
-  const [hidden, setHidden] = useState<boolean>(false)
   const [open, setOpen] = useState<boolean>(false)
-  const [prevScrollY, setPrevScrollY] = useState<number>(0)
-  const [currentScrollY, setCurrentScrollY] = useState<number>(0)
 
-  function update() {
-    if (currentScrollY < prevScrollY) {
-      setHidden(false)
-    } else {
-      setHidden(true)
-    }
-  }
-
-  const handleClickOpen = () => setOpen(true)
-
-  const variants = {
-    /** this is the "visible" key and it's correlating styles **/
-    visible: { opacity: 1, y: 0 },
-    /** this is the "hidden" key and it's correlating styles **/
-    hidden: { opacity: 0, y: -25 },
-  }
-
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    setCurrentScrollY(latest), update(), setPrevScrollY(currentScrollY)
-  })
-
-  useEffect(() => {
-    setHidden(false)
-  }, [pathname])
+  const handleClickOpen = useCallback(() => setOpen(true), [])
 
   return (
     <motion.header
-      variants={variants}
-      animate={!pathname.startsWith('/search') && hidden ? 'hidden' : 'visible'}
+      animate={'visible'}
       transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}
-      className={`fixed z-50 bg-white w-full ${currentScrollY <= 0 ? 'bg-opacity-100' : 'bg-opacity-70'}`}
+      className={`fixed z-50 bg-white w-full bg-opacity-100`}
     >
       <div className='flex flex-row justify-between items-center p-4'>
         <div className='flex flex-row justify-between items-center gap-10'>
