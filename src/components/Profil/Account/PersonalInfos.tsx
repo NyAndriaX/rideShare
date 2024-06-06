@@ -33,7 +33,7 @@ const PersonalInfos: React.FC<PersonalInfosProps> = ({ user }) => {
         </div>
       </Link>
       <Link
-        to='user/edit'
+        to='picture'
         className='flex flex-row gap-2 text-base text-blue-500 mx-4'
       >
         <PlusCircleIcon className='h-6 w-6' />

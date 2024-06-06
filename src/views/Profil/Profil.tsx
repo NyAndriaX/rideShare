@@ -1,10 +1,11 @@
 import React from 'react'
 import Edit from '@/components/Profil/Edit'
 import { Routes, Route } from 'react-router-dom'
+import Picture from '@/components/Profil/Picture'
 import Account from '@/components/Profil/Account'
-import { useLocation, useNavigate } from 'react-router-dom'
 import UserShow from '@/components/Profil/UserShow'
 import { useUserInfo } from '@/stores/use-auth-store'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ArrowLongLeftIcon } from '@heroicons/react/24/outline'
 
 const Profile: React.FC = () => {
@@ -30,6 +31,7 @@ const Profile: React.FC = () => {
           </div>
         )}
         <Routes>
+          <Route path='/picture' element={<Picture />} />
           <Route path='/user/show' element={<UserShow user={user} />} />
           <Route path='/user/edit' element={<Edit user={user} />} />
         </Routes>
