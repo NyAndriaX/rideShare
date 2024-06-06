@@ -77,6 +77,7 @@ const TransBookCompare: React.FC = () => {
           ))}
         </div>
       )}
+      {hasError && <>Fetch have a probleme</>}
     </div>
   )
 }
