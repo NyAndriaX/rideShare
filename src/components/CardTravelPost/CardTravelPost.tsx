@@ -49,7 +49,7 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
   return (
     <div
       onClick={handleClick}
-      className={`${className}  flex flex-row w-full min-w-fit rounded-md p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
+      className={`${className}  flex flex-row w-full rounded-md p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
     >
       {/* User information */}
       <div
@@ -84,10 +84,10 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
       <div className='bg-gray-100' style={{ width: '2px' }} />
       {/* Trip information */}
       <div
-        className={`flex  flex-row  ${isVisiblePrice && isVisiblePrice === true ? 'w-3/4' : 'w-2/4'} min-w-[300px] justify-between pl-10 py-2`}
+        className={`flex  flex-row  ${isVisiblePrice && isVisiblePrice === true ? 'w-3/4' : 'w-2/4'} min-w-[200px] justify-between px-4 py-2`}
       >
         {/* Information details trip */}
-        <div className='flex flex-col gap-2 justify-start'>
+        <div className='flex flex-col gap-2 justify-between'>
           <div className='flex flex-col gap-1 justify-start'>
             <div className='text-blue-500 text-base'>
               {formatDateTime(
@@ -101,13 +101,13 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
               <span>{trip?.destinationProvince as string}</span>
             </div>
           </div>
-          <div className='text-gray-500 text-sm'>
-            <div className='flex flex-row gap-1 items-center'>
+          <div className='flex flex-col gap-2 items-start text-gray-500 text-sm'>
+            <div className='flex flex-row gap-2 items-center'>
               <DoteOutlined className='border-4 border-green-400' />
               {trip?.departureProvince as string},
               {trip?.departurePrecise as string}
             </div>
-            <div className='flex flex-row gap-1 items-center'>
+            <div className='flex flex-row gap-2 items-center'>
               <DoteOutlined className='border-4 border-red-400' />
               {trip?.destinationProvince as string},{' '}
               {trip?.destinationPrecise as string}
