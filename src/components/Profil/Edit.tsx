@@ -1,10 +1,16 @@
 import React, { useState, ReactNode, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
 import { User } from '@/types/interface'
+import Input from '../common/Input/Input'
 import { styled } from 'styled-components'
-import { formatDate } from '@/utils/formatDate'
+import Button from '../common/Button/Button'
+import { motion, AnimatePresence } from 'framer-motion'
 import { PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
+
+const CapitalizeFirstLetter = ({ str }: { str: string }) => {
+  return <span>{str.charAt(0).toUpperCase() + str.slice(1)}</span>
+}
 
 interface EditProps {
   user: Partial<User> | null
@@ -24,10 +30,22 @@ const StyledButton = styled.button`
 `
 
 interface DrawerBottomProps {
-  children: ReactNode
+  label: string
+  name: string
+  value: string
 }
 
-const DrawerBottom: React.FC<DrawerBottomProps> = ({ children }) => {
+const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
+  const formDefaultValues: Record<string, string> = {}
+  formDefaultValues[name] = value
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty, errors, isValid },
+  } = useForm<Record<string, string>>({
+    defaultValues: formDefaultValues,
+  })
+  const [zoom, setZoom] = useState(1)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const toggleDrawer = () => setIsOpen((isOpen) => !isOpen)
@@ -40,9 +58,33 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ children }) => {
     }
   }, [isOpen])
 
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width <= 1280) {
+        setZoom(0.85)
+      } else {
+        setZoom(1)
+      }
+    }
+
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.addEventListener('resize', handleResize)
+  }, [])
+
+  const handleRegister = async (data: Record<string, string>) => {
+    console.log(data)
+  }
+
   return (
     <React.Fragment>
-      <StyledButton onClick={toggleDrawer}>{children}</StyledButton>
+      <StyledButton onClick={toggleDrawer}>
+        <p className='text-base text-gray-500'>{label}</p>
+        <p className='text-sm text-blue-500'>{value}</p>
+      </StyledButton>
       {isOpen &&
         createPortal(
           <AnimatePresence>
@@ -68,7 +110,35 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ children }) => {
                       <XMarkIcon className='h-6 w-6 text-blue-500' />
                     </button>
                   </div>
-                  <div className='w-1/2'>{children}</div>
+                  <div
+                    className='flex flex-col gap-8 w-1/2 pt-10 pb-28'
+                    style={{ zoom: zoom }}
+                  >
+                    <h1 className='text-blue-900'>
+                      What is your <CapitalizeFirstLetter str={label} /> ?
+                    </h1>
+                    <form
+                      className='flex flex-col gap-6'
+                      onSubmit={handleSubmit((data) => handleRegister(data))}
+                    >
+                      <Input
+                        type='text'
+                        {...register(name, {
+                          required: `${label} is required`,
+                        })}
+                        error={errors[name]?.message}
+                        ariaInvalid={isDirty}
+                        autofocus
+                        autoComplete='off'
+                      />
+                      <Button
+                        type='submit'
+                        text='Register'
+                        disabled={!isValid}
+                        className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+                      />
+                    </form>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
@@ -85,26 +155,22 @@ const Edit: React.FC<EditProps> = ({ user }) => {
       <h1 className='text-blue-900'>Personal information</h1>
       <div className='flex flex-col gap-6 '>
         <div className='flex flex-col gap-4 items-start w-full'>
-          <DrawerBottom>
-            <p className='text-base text-gray-500'>Last Name</p>
-            <p className='text-sm text-blue-500'>{user?.lastName}</p>
-          </DrawerBottom>
-          <DrawerBottom>
-            <p className='text-base text-gray-500'>First Name</p>
-            <p className='text-sm text-blue-500'>{user?.firstName}</p>
-          </DrawerBottom>
-          <DrawerBottom>
-            <p className='text-base text-gray-500'>Date of birth</p>
-            <p className='text-sm text-blue-500'>
-              {user &&
-                user.dateOfBirth &&
-                formatDate(new Date(user?.dateOfBirth))}
-            </p>
-          </DrawerBottom>
-          <DrawerBottom>
-            <p className='text-base text-gray-500'>E-Mail</p>
-            <p className='text-sm text-blue-500'>{user?.email}</p>
-          </DrawerBottom>
+          <DrawerBottom
+            name='lastname'
+            label='last name'
+            value={user?.lastName ?? ''}
+          />
+          <DrawerBottom
+            name='firstname'
+            label='first name'
+            value={user?.firstName ?? ''}
+          />
+          <DrawerBottom
+            name='dateofbirth'
+            label='date of birth'
+            value={user?.dateOfBirth?.toString() ?? ''}
+          />
+          <DrawerBottom name='email' label='email' value={user?.email ?? ''} />
         </div>
         <div className='bg-gray-50 h-1 rounded-md' />
         <div className='flex flex-row items-center gap-2 px-6 py-2 text-blue-500'>

@@ -24,7 +24,7 @@ const useTravelManageStore = create<useTravelManageProps>()(
         return await _get<any>(`/trips/${tripId}/details`)
       },
       getRecentTrips: async () => {
-        return await _get('/trips/recents')
+        return await _get(`/trips/recents?limit=${9}`)
       },
     },
   })),
