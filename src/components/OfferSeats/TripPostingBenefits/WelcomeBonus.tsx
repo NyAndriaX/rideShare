@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUserInfo } from '@/stores/use-auth-store'
 import { WalletIcon } from '@heroicons/react/24/outline'
 import Button from '@/components/common/Button/Button'
 
 const WelcomeBonus: React.FC = () => {
+  const user = useUserInfo()
   const navigate = useNavigate()
+
+  const handleClick = useCallback(() => {
+    user && !user?.hasTripCreated
+      ? navigate('/app/offer-seats/gift-voucher')
+      : navigate('/app/offer-seats/departure')
+  }, [])
+
   return (
     <div className='flex flex-col w-full items-center justify-center py-5'>
       <div className='w-full bg-yellow py-4 text-center'>
@@ -38,7 +47,7 @@ const WelcomeBonus: React.FC = () => {
           <Button
             type='button'
             text='publish a route'
-            onClick={() => navigate('/app/offer-seats/gift-voucher')}
+            onClick={handleClick}
             className='rounded-md font-semibold text-midnightBlue bg-yellow'
           />
         </div>

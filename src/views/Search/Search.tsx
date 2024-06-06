@@ -27,13 +27,28 @@ const Search: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchMoreTrips = async () => {
+    setIsLoading(true)
     await nextPage()
-    setHasMore(totalPages === page ? false : true)
+    setIsLoading(false)
+    setHasMore(page < totalPages)
   }
 
   useEffect(() => {
-    setIsLoading(false)
+    if (trips.length === 0 && !isLoading) {
+      setIsLoading(true)
+      fetchMoreTrips().then(() => setIsLoading(false))
+    }
   }, [])
+
+  useEffect(() => {
+    setHasMore(() => {
+      if (totalItems <= 6) {
+        return false
+      } else {
+        return totalPages !== page
+      }
+    })
+  }, [page, totalPages])
 
   return (
     <div className='flex pt-20 px-4'>

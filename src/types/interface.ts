@@ -17,6 +17,7 @@ export interface User{
   phone:string;
   email: string;
   password: string;
+  hasTripCreated:boolean
 }
 
 export interface RegisterInput{

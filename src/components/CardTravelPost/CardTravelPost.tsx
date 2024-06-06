@@ -49,11 +49,11 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
   return (
     <div
       onClick={handleClick}
-      className={`${className}  flex flex-row w-full gap-8 p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
+      className={`${className}  flex flex-row w-full min-w-fit rounded-md p-4 ${isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer opacity-100'} `}
     >
       {/* User information */}
       <div
-        className={`flex flex-col ${isVisiblePrice && isVisiblePrice === true ? 'w-1/4' : 'w-2/4'} py-2 gap-4 justify-start items-start`}
+        className={`flex flex-col ${isVisiblePrice && isVisiblePrice === true ? 'w-1/4' : 'w-2/4'} min-w-[200px] py-2 gap-4 justify-start items-start`}
       >
         {/* Profil */}
         <div className='flex flex-row gap-6 items-center'>
@@ -84,7 +84,7 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
       <div className='bg-gray-100' style={{ width: '2px' }} />
       {/* Trip information */}
       <div
-        className={`flex  flex-row  ${isVisiblePrice && isVisiblePrice === true ? 'w-3/4' : 'w-2/4'} justify-between pl-10 py-2`}
+        className={`flex  flex-row  ${isVisiblePrice && isVisiblePrice === true ? 'w-3/4' : 'w-2/4'} min-w-[300px] justify-between pl-10 py-2`}
       >
         {/* Information details trip */}
         <div className='flex flex-col gap-2 justify-start'>
