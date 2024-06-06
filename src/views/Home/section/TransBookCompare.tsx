@@ -17,15 +17,15 @@ const chunkArray = <T,>(array: T[], chunkSize: number): T[][] => {
 const TransBookCompare: React.FC = () => {
   const [chunkedTrips, setChunkedTrips] = useState<any[][]>([])
   const [hasError, setHasError] = useState<boolean>(false)
-  const { getSixRecentTrips } = useTravelManageActions()
+  const { getRecentTrips } = useTravelManageActions()
   const [isFetching, setIsFetching] = useState<boolean>(true)
   const chunkedTravelPostSkeletons = chunkArray(dataTravelPostSkeleton, 3)
 
   useEffect(() => {
-    const fetchSixRecentTrips = async () => {
+    const fetchRecentTrips = async () => {
       setIsFetching(true)
       try {
-        const { data } = await getSixRecentTrips()
+        const { data } = await getRecentTrips()
         setChunkedTrips(chunkArray(data, 3))
       } catch (e: any) {
         setHasError(true)
@@ -33,8 +33,8 @@ const TransBookCompare: React.FC = () => {
         setIsFetching(false)
       }
     }
-    fetchSixRecentTrips()
-  }, [getSixRecentTrips])
+    fetchRecentTrips()
+  }, [getRecentTrips])
 
   return (
     <div className='w-full px-4 mx-auto'>

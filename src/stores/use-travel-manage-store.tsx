@@ -7,7 +7,7 @@ interface useTravelManageProps {
   actions: {
     create: (userId: number, data: Partial<FormTripsData>) => Promise<any>
     getTripWithId: (tripId: number) => Promise<any>
-    getSixRecentTrips: () => Promise<any>
+    getRecentTrips: () => Promise<any>
   }
 }
 
@@ -23,7 +23,7 @@ const useTravelManageStore = create<useTravelManageProps>()(
       getTripWithId: async (tripId: number) => {
         return await _get<any>(`/trips/${tripId}/details`)
       },
-      getSixRecentTrips: async () => {
+      getRecentTrips: async () => {
         return await _get('/trips/recents')
       },
     },
