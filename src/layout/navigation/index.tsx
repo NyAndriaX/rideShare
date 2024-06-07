@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Users from '@/components/Users'
 import { User } from '@/types/interface'
 import { useUserInfo } from '@/stores/use-auth-store'
+import { useAuthActions } from '@/stores/use-auth-store'
 
 const NavList = styled.li`
   list-style-type: none;
@@ -36,6 +37,8 @@ const DrawerNavigation: React.FC<DrawerNavigationProps> = ({
   toggleDrawer,
   toggleNavigation,
 }) => {
+  const { logout } = useAuthActions()
+
   useEffect(() => {
     if (showDrawer) {
       document.body.classList.add('no-scroll')
@@ -76,14 +79,20 @@ const DrawerNavigation: React.FC<DrawerNavigationProps> = ({
               <div className='flex flex-col items-center gap-2 py-2 px-4'>
                 {user ? (
                   <>
-                    <button className='flex flex-row w-full justify-between items-center text-lg py-2 text-blue-500'>
+                    <button
+                      onClick={() => toggleNavigation('/app/account')}
+                      className='flex flex-row w-full justify-between items-center text-lg py-2 text-blue-500'
+                    >
                       <div className='flex flex-row gap-2 items-center'>
                         <PencilSquareIcon className='h-6 w-6' />
                         <span>Profile</span>
                       </div>
                       <ChevronRightIcon className='h-6 w-6 text-gray-400' />
                     </button>
-                    <button className='flex flex-row w-full justify-between items-center text-lg py-2 text-blue-500'>
+                    <button
+                      onClick={logout}
+                      className='flex flex-row w-full justify-between items-center text-lg py-2 text-blue-500'
+                    >
                       <div className='flex flex-row gap-2 items-center'>
                         <ArrowLeftOnRectangleIcon className='h-6 w-6' />
                         <span>Sign out</span>
@@ -196,7 +205,7 @@ const Navigation: React.FC = () => {
                   <Button
                     type='button'
                     text='Publish'
-                    onClick={() => toggleNavigation('/app/offer-seats')}
+                    onClick={() => navigate('/app/offer-seats')}
                     icon={
                       <PlusCircleIcon className='h-5 w-5' aria-hidden='true' />
                     }
@@ -213,13 +222,13 @@ const Navigation: React.FC = () => {
                   <Button
                     type='button'
                     text='Connexion'
-                    onClick={() => toggleNavigation('/login')}
+                    onClick={() => navigate('/login')}
                     className='border border-white hover:border-blue-500 text-blue-500'
                   />
                   <Button
                     type='button'
                     text='Sign Up'
-                    onClick={() => toggleNavigation('/register')}
+                    onClick={() => navigate('/register')}
                     className='bg-blue-500 text-white font-semibold hover:bg-blue-600'
                   />
                 </>
@@ -227,7 +236,7 @@ const Navigation: React.FC = () => {
             </div>
             {user && (
               <div className='md:hidden flex flex-row items-center justify-center gap-4 w-full'>
-                <button onClick={() => toggleNavigation('/app/offer-seats')}>
+                <button onClick={() => navigate('/app/offer-seats')}>
                   <PlusCircleIcon className='h-8 w-8 text-blue-500' />
                 </button>
                 <img

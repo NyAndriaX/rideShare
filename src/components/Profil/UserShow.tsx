@@ -12,7 +12,7 @@ interface UserShowProps {
 
 const UserShow: React.FC<UserShowProps> = ({ user }) => {
   return (
-    <div className='flex flex-col gap-6 py-6 w-1/2'>
+    <div className='flex flex-col gap-6 py-6 w-full md:w-1/2'>
       <div className='flex flex-col gap-4 items-start'>
         <div className='flex flex-row justify-between rounded-md items-center px-6 py-2 w-full'>
           <div className='flex flex-col gap-1'>

@@ -111,7 +111,7 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
                     </button>
                   </div>
                   <div
-                    className='flex flex-col gap-8 w-1/2 pt-10 pb-28'
+                    className='flex flex-col gap-8 w-full md:w-1/2 pt-10 pb-28'
                     style={{ zoom: zoom }}
                   >
                     <h1 className='text-blue-900'>
@@ -151,7 +151,7 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
 
 const Edit: React.FC<EditProps> = ({ user }) => {
   return (
-    <div className='flex flex-col gap-4 w-1/2'>
+    <div className='flex flex-col gap-4 w-full md:w-1/2'>
       <h1 className='text-blue-900'>Personal information</h1>
       <div className='flex flex-col gap-6 '>
         <div className='flex flex-col gap-4 items-start w-full'>

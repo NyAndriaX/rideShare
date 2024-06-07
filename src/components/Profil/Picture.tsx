@@ -113,10 +113,10 @@ const Picture: React.FC = () => {
   return (
     <React.Fragment>
       <div className='flex flex-col items-center '>
-        <div className='flex flex-row justify-between items-start gap-40 py-6 w-2/3'>
+        <div className='flex flex-col gap-10 md:flex-row justify-between items-center md:items-start md:gap-40 px-4 md:px-0 py-6 w-full md:w-2/3'>
           <div className='w-fit h-fit'>
             <img
-              className='h-36 w-36 rounded-full'
+              className='h-28 w-28 md:h-36 md:w-36 rounded-full'
               src={new URL('/image/person.svg', import.meta.url).href}
               alt={'Anonymous'}
             />
