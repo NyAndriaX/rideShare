@@ -41,7 +41,7 @@ const StepProgressBar: React.FC<StepProgressBarProps> = ({ pathname }) => {
           className={`step ${isActive('/register')} ${isComplete(keywords.options)}`}
           data-step='1'
         >
-          Registration options
+          Options
         </li>
         <li
           onClick={() => navigate('/register/email')}
@@ -55,7 +55,7 @@ const StepProgressBar: React.FC<StepProgressBarProps> = ({ pathname }) => {
           className={`step ${isActive('/register/name')} ${isComplete(keywords.name)}`}
           data-step='3'
         >
-          First and last name
+          Name
         </li>
         <li
           onClick={() => navigate('/register/date-of-birth')}
@@ -67,14 +67,14 @@ const StepProgressBar: React.FC<StepProgressBarProps> = ({ pathname }) => {
         <li
           onClick={() => navigate('/register/gender')}
           className={`step  ${isActive('/register/gender')}  ${isComplete(keywords.gender)}`}
-          data-step='4'
+          data-step='5'
         >
           Gender
         </li>
         <li
           onClick={() => navigate('/register/password')}
           className={`step  ${isActive('/register/password')}`}
-          data-step='4'
+          data-step='6'
         >
           Password
         </li>

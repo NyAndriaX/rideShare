@@ -8,6 +8,8 @@ const WelcomeBonus: React.FC = () => {
   const user = useUserInfo()
   const navigate = useNavigate()
 
+  console.log(user)
+
   const handleClick = useCallback(() => {
     user && !user?.hasTripCreated
       ? navigate('/app/offer-seats/gift-voucher')

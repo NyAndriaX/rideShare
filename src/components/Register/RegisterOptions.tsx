@@ -7,7 +7,7 @@ const RegisterOptions: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <div className='flex flex-col gap-8 w-1/2'>
+    <div className='flex flex-col gap-8 w-full md:w-1/2'>
       <h1 className='text-blue-900'>How do you want to register ?</h1>
       <div className='flex flex-col gap-4'>
         <div

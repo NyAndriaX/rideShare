@@ -16,7 +16,7 @@ const RegisterGenre: React.FC = () => {
   }
 
   return formAuthData?.dateOfBirth ? (
-    <div className='flex flex-col gap-8 w-1/2'>
+    <div className='flex flex-col gap-8 w-full md:w-1/2'>
       <h1 className='text-blue-900'>What do you prefer to be called?</h1>
       <div className='flex flex-col gap-4'>
         <div

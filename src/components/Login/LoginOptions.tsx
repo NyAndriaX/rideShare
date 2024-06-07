@@ -6,7 +6,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 const LoginOptions: React.FC = () => {
   const navigate = useNavigate()
   return (
-    <div className='flex flex-col gap-8 w-1/2'>
+    <div className='flex flex-col gap-8 md:w-1/2 w-full'>
       <h1 className='text-blue-900'>I connect :</h1>
       <div className='flex flex-col gap-4'>
         <div

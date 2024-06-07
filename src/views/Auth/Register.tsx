@@ -13,7 +13,7 @@ const Register: React.FC = () => {
   const { pathname } = useLocation()
 
   return (
-    <div className='flex flex-col justify-center items-center pt-28 px-4 gap-16'>
+    <div className='flex flex-col justify-center items-center pt-28 px-4'>
       <StepProgressBar pathname={pathname as string} />
       <div className='flex w-full justify-center items-center'>
         <Routes>

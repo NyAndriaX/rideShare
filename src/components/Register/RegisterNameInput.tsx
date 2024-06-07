@@ -29,7 +29,7 @@ const RegisterNameInput: React.FC = () => {
   }
 
   return formData?.email ? (
-    <div className='flex flex-col gap-8 w-1/2'>
+    <div className='flex flex-col gap-8 w-full md:w-1/2'>
       <h1 className='text-blue-900'>What is your name ?</h1>
       <form
         className='flex flex-col gap-6'

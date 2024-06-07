@@ -69,7 +69,9 @@ const Users: React.FC<UsersProps> = ({
                       className='flex w-full items-center p-2 rounded-md hover:bg-gray-50'
                     >
                       <PencilSquareIcon className='h-4 w-4' />
-                      <p className='ml-3 text-base font-medium'>Profile</p>
+                      <p className='ml-3 text-base text-blue-900 font-medium'>
+                        Profile
+                      </p>
                     </Popover.Button>
                   </div>
                   <div className='flex items-center bg-gray-50 p-4'>

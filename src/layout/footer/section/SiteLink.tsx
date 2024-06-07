@@ -52,11 +52,13 @@ const SocialListItemLink = styled(Link)`
 
 const SiteLink: React.FC = () => {
   return (
-    <div className='bg-midnightBlue relative z-0 text-white pt-16 pb-8 px-4'>
+    <div className='bg-blue-900 relative z-0 text-white pt-16 pb-8 px-4'>
       <div className='mx-auto px-4 container overflow-hidden flex flex-col lg:flex-row justify-between'>
-        <Logo />
-        <div className='w-2/3 block sm:flex text-sm mt-6 lg:mt-0'>
-          <List>
+        <div className='flex justify-center md:justify-start'>
+          <Logo />
+        </div>
+        <div className='w-full md:w-2/3 block sm:flex text-sm mt-6 lg:mt-0'>
+          <List className='items-center md:items-start'>
             <ListItem>Rideshare</ListItem>
             <ListItem>
               <ListItemLink to='/#'>About</ListItemLink>
@@ -74,7 +76,7 @@ const SiteLink: React.FC = () => {
               <ListItemLink to='/#'>Privacy Policy</ListItemLink>
             </ListItem>
           </List>
-          <List>
+          <List className='items-center md:items-start'>
             <ListItem>to travel</ListItem>
             <ListItem>
               <ListItemLink to='/#'>Destinations</ListItemLink>
@@ -83,7 +85,7 @@ const SiteLink: React.FC = () => {
               <ListItemLink to='/#'>Terms of service</ListItemLink>
             </ListItem>
           </List>
-          <List>
+          <List className='items-center md:items-start'>
             <ListItem>Follow us</ListItem>
             <SocialList>
               <SocialListItemLink to='/#'>

@@ -28,7 +28,7 @@ const RegisterDateOfBirth: React.FC = () => {
   }
 
   return formData?.firstName || formData?.lastName ? (
-    <div className='flex flex-col gap-8 w-1/2'>
+    <div className='flex flex-col gap-8 w-full md:w-1/2'>
       <h1 className='text-blue-900'>What's your birthday ?</h1>
       <form
         className='flex flex-col gap-6'
