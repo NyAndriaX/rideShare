@@ -13,7 +13,7 @@ const Advantages: React.FC = () => {
         <h1 className='text-blue-900'>Only good reasons to carpool with us</h1>
         <Line />
       </div>
-      <div className='grid grid-cols-3 gap-4'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
         <div className='flex flex-col gap-4 shadow-lg py-8 px-6 rounded-md'>
           <EnergyIcon className='h-10 w-10' />
           <div className='flex flex-col gap-2'>

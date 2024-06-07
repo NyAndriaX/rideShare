@@ -22,7 +22,7 @@ const WelcomeBonus: React.FC = () => {
         <h1 className='text-blue-900 font-bold'>Get 5.000 Ar Welcome</h1>
       </div>
       <div className='flex flex-col gap-12 py-8 items-center justify-center font-light bg-blue-900 w-full'>
-        <div className='flex flex-col gap-8 w-1/2 text-white'>
+        <div className='flex flex-col gap-8 w-full px-4 md:px-0 md:w-1/2 text-white'>
           <p>
             From May 1, 2024, benefit from a 5.000 Ar welcome for you encourage
             carpooling!
@@ -45,7 +45,7 @@ const WelcomeBonus: React.FC = () => {
             *See general conditions
           </a>
         </div>
-        <div className='flex w-1/5'>
+        <div className='flex w-3/5 md:w-1/5'>
           <Button
             type='button'
             text='publish a route'
