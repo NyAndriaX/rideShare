@@ -225,7 +225,7 @@ const Navigation: React.FC = () => {
                 </>
               )}
             </div>
-            {!user && (
+            {user && (
               <div className='md:hidden flex flex-row items-center justify-center gap-4 w-full'>
                 <button onClick={() => toggleNavigation('/app/offer-seats')}>
                   <PlusCircleIcon className='h-8 w-8 text-blue-500' />
@@ -233,8 +233,7 @@ const Navigation: React.FC = () => {
                 <img
                   className='h-8 w-8 rounded-full'
                   src={
-                    (user && user.profilUrl) === 'default' ||
-                    !(user && user.profilUrl)
+                    user.profilUrl === 'default' || !user.profilUrl
                       ? new URL('/image/person.svg', import.meta.url).href
                       : user.profilUrl
                   }
