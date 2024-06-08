@@ -213,6 +213,7 @@ const Navigation: React.FC = () => {
                   />
                   <Users
                     open={open}
+                    user={user}
                     navigate={navigate}
                     handleClickOpen={handleClickOpen}
                   />
@@ -240,13 +241,13 @@ const Navigation: React.FC = () => {
                   <PlusCircleIcon className='h-8 w-8 text-blue-500' />
                 </button>
                 <img
-                  className='h-8 w-8 rounded-full'
+                  className='w-8 h-8 object-contain rounded-full border-4 border-gray-50'
                   src={
-                    user.profilUrl === 'default' || !user.profilUrl
-                      ? new URL('/image/person.svg', import.meta.url).href
-                      : user.profilUrl
+                    user
+                      ? user!.profilUrl
+                      : new URL('/image/person.svg', import.meta.url).href
                   }
-                  alt={user ? user.firstName : 'Anonymous'}
+                  alt={'Anonymous'}
                 />
               </div>
             )}

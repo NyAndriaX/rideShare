@@ -25,11 +25,15 @@ const PersonalInfos: React.FC<PersonalInfosProps> = ({ user }) => {
         </div>
         <div className='flex flex-row gap-2 items-center'>
           <img
-            className='h-12 w-12 rounded-full border border-gray-200'
-            src={new URL('/image/person.svg', import.meta.url).href}
+            className='w-14 h-14 object-contain rounded-full border-4 border-gray-50'
+            src={
+              user && user?.profilUrl
+                ? user.profilUrl
+                : new URL('/image/person.svg', import.meta.url).href
+            }
             alt={'Anonymous'}
           />
-          <ChevronRightIcon className='h-4 w-4 text-gray-300' />
+          <ChevronRightIcon className='h-6 w-6 text-gray-300' />
         </div>
       </Link>
       <Link

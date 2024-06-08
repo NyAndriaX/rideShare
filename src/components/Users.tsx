@@ -13,14 +13,14 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 interface UsersProps {
   open: boolean
-  userData?: User
+  user?: User
   mobile?: boolean
   navigate: NavigateFunction
   handleClickOpen: () => void
 }
 
 const Users: React.FC<UsersProps> = ({
-  userData,
+  user,
   // mobile,
   handleClickOpen,
   navigate,
@@ -36,14 +36,13 @@ const Users: React.FC<UsersProps> = ({
             onClick={handleClickOpen}
           >
             <img
-              className='h-8 w-7 rounded-full'
+              className='w-8 h-8 object-contain rounded-full border-4 border-gray-50'
               src={
-                (userData && userData.profilUrl) === 'default' ||
-                !(userData && userData.profilUrl)
-                  ? new URL('/image/person.svg', import.meta.url).href
-                  : userData.profilUrl
+                user
+                  ? user!.profilUrl
+                  : new URL('/image/person.svg', import.meta.url).href
               }
-              alt={userData ? userData.firstName : 'Anonymous'}
+              alt={'Anonymous'}
             />
             <ChevronDownIcon
               className='-mr-1 h-5 w-5 text-slateBlue'
@@ -68,10 +67,8 @@ const Users: React.FC<UsersProps> = ({
                       onClick={() => navigate('/app/account')}
                       className='flex w-full items-center p-2 rounded-md hover:bg-gray-50'
                     >
-                      <PencilSquareIcon className='h-4 w-4' />
-                      <p className='ml-3 text-base text-blue-900 font-medium'>
-                        Profile
-                      </p>
+                      <PencilSquareIcon className='h-6 w-6 text-semibold' />
+                      <p className='ml-3 text-lg text-blue-900'>Profile</p>
                     </Popover.Button>
                   </div>
                   <div className='flex items-center bg-gray-50 p-4'>
@@ -79,8 +76,8 @@ const Users: React.FC<UsersProps> = ({
                       className='flex items-center text-sm font-medium text-primary'
                       onClick={logout}
                     >
-                      <ArrowLeftOnRectangleIcon className='h-4 w-4' />
-                      <p className='ml-3 text-base font-medium text-primary'>
+                      <ArrowLeftOnRectangleIcon className='h-6 w-6' />
+                      <p className='ml-3 text-lg font-medium text-primary'>
                         Sign out
                       </p>
                     </Popover.Button>

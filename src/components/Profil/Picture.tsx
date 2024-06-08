@@ -93,7 +93,7 @@ const Picture: React.FC<PictureProps> = ({ user }) => {
   const { updatedProfile } = useUserAction()
   const [file, setFile] = useState<any | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showPicture, setShowPicture] = useState<boolean>(false)
   const [selectedPicture, setSelectedPicture] = useState<string | null>(null)
 
@@ -148,7 +148,7 @@ const Picture: React.FC<PictureProps> = ({ user }) => {
         <div className='flex flex-col gap-10 md:flex-row justify-between items-center md:items-start md:gap-40 px-4 md:px-0 py-6 w-full md:w-2/3'>
           <div className='w-fit h-fit'>
             <img
-              className='h-28 w-28 md:h-36 md:w-36 rounded-full'
+              className='w-20 h-20 md:h-20 md:w-32 object-contain rounded-full border-4 border-gray-50'
               src={
                 user && user?.profilUrl
                   ? user.profilUrl

@@ -104,6 +104,7 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({
       setItem(StorageEnum.Token, token)
       toast.success('Profile updated successfully')
     } catch (e: any) {
+      console.log(e)
       toast.warning(
         'A problem occurred during the update, please try again later',
       )
@@ -113,7 +114,7 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({
     }
   }
 
-  const inputType = name === 'dateofbirth' ? 'date' : 'text'
+  const inputType = name === 'dateOfBirth' ? 'date' : 'text'
   const validationRules =
     name === 'email'
       ? {
@@ -207,19 +208,19 @@ const Edit: React.FC<EditProps> = ({ user }) => {
       <div className='flex flex-col gap-6 '>
         <div className='flex flex-col gap-4 items-start w-full'>
           <DrawerBottom
-            name='lastname'
+            name='lastName'
             label='last name'
             userId={user?.userId ?? 0}
             value={user?.lastName ?? ''}
           />
           <DrawerBottom
-            name='firstname'
+            name='firstName'
             label='first name'
             userId={user?.userId ?? 0}
             value={user?.firstName ?? ''}
           />
           <DrawerBottom
-            name='dateofbirth'
+            name='dateOfBirth'
             label='date of birth'
             userId={user?.userId ?? 0}
             value={user?.dateOfBirth?.toString() ?? ''}
