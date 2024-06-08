@@ -58,7 +58,11 @@ const CardTravelPost: React.FC<CardTravelPostProps> = ({
         {/* Profil */}
         <div className='flex flex-row gap-6 items-center'>
           <img
-            src={new URL('/image/person.svg', import.meta.url).href}
+            src={
+              trip && trip.author!.profilUrl
+                ? trip.author.profilUrl
+                : new URL('/image/person.svg', import.meta.url).href
+            }
             className='h-14 w-14 rounded-full border border-gray-200'
             alt='Profil user who shared'
           />

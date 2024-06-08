@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
         </svg>
       </div>
       <div className='flex flex-col-reverse md:flex-row relative top-32 justify-center z-10 gap-4'>
-        <div className='w-full md:w-1/2 p-6'>
+        <div className='w-full md:w-1/2 p-4'>
           <FormSearch displayTitle={false} />
         </div>
         <div className='flex flex-col gap-4 w-full px-4 md:px-0 md:w-1/2 md:mt-4'>

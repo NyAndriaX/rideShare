@@ -1,10 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
+import { toast } from 'react-toastify'
 import { createPortal } from 'react-dom'
+import { User } from '@/types/interface'
+import { setItem } from '@/utils/storage'
+import { StorageEnum } from '@/types/enum'
 import { storage } from '@/config/firebase'
 import Button from '../common/Button/Button'
+import { useUserAction } from '@/stores/use-user-store'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useAuthActions } from '@/stores/use-auth-store'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import AnimationCircleLoading from '../common/Animation/AnimationCircleLoading'
 
@@ -42,18 +48,20 @@ const ShowPicture: React.FC<ShowPictureProps> = ({
               onClick={(e) => e.stopPropagation()}
             >
               {isLoading && (
-                <div className='absolute flex opacity-20 z-20 items-center justify-center top-0 bg-black rounded-md h-[72vh] w-full'>
+                <div className='absolute flex opacity-60 z-20 items-center justify-center top-0 bg-white rounded-md h-[320px] md:h-[520px] w-full'>
                   <AnimationCircleLoading height={100} width={100} />
                 </div>
               )}
               <div className='relative w-full h-full z-10 bg-transparent'>
-                <button
-                  onClick={toggleClose}
-                  className='fixed rounded-full bg-red-500 w-fit h-fit z-20 p-1 -mt-3 ml-[270px] md:ml-[430px]'
-                >
-                  <XMarkIcon className='h-6 w-6 text-white' />
-                </button>
-                <div className='relative flex flex-col gap-6 p-2 rounded-md w-[300px] md:w-[450px] h-fit'>
+                {!isLoading && (
+                  <button
+                    onClick={toggleClose}
+                    className='fixed rounded-full bg-red-500 w-fit h-fit z-60 p-1 -mt-3 ml-[270px] md:ml-[430px]'
+                  >
+                    <XMarkIcon className='h-6 w-6 text-white' />
+                  </button>
+                )}
+                <div className='relative flex flex-col gap-2 p-2 rounded-md w-[300px] md:w-[450px] h-fit'>
                   <img
                     className='h-[300px] md:h-[450px] rounded-md w-full object-contain'
                     src={imageUrl}
@@ -76,10 +84,16 @@ const ShowPicture: React.FC<ShowPictureProps> = ({
   )
 }
 
-const Picture: React.FC = () => {
+interface PictureProps {
+  user: User | null
+}
+
+const Picture: React.FC<PictureProps> = ({ user }) => {
+  const { me } = useAuthActions()
+  const { updatedProfile } = useUserAction()
   const [file, setFile] = useState<any | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [showPicture, setShowPicture] = useState<boolean>(false)
   const [selectedPicture, setSelectedPicture] = useState<string | null>(null)
 
@@ -105,17 +119,26 @@ const Picture: React.FC = () => {
 
   const uploadImage = async () => {
     if (file === null) return
+    setIsLoading(true)
     try {
-      setIsLoading(true)
       const imageRef = await ref(storage, `images/${file.name + v4()}`)
       await uploadBytes(imageRef, file)
       const imageUrl = await getDownloadURL(imageRef)
-      setIsLoading(false)
-      console.log(imageUrl)
+      const { data } = await updatedProfile(user!.userId, {
+        profilUrl: imageUrl,
+      } as Partial<User>)
+      const { token } = data
+      await me(token)
+      setItem(StorageEnum.Token, token)
+      toast.success('Profile updated successfully')
     } catch (e: any) {
-      console.log(e)
+      toast.error(
+        'A problem occurred during the update, please try again later',
+      )
     } finally {
+      setIsLoading(false)
       setShowPicture(false)
+      toggleClose()
     }
   }
 
@@ -126,7 +149,11 @@ const Picture: React.FC = () => {
           <div className='w-fit h-fit'>
             <img
               className='h-28 w-28 md:h-36 md:w-36 rounded-full'
-              src={new URL('/image/person.svg', import.meta.url).href}
+              src={
+                user && user?.profilUrl
+                  ? user.profilUrl
+                  : new URL('/image/person.svg', import.meta.url).href
+              }
               alt={'Anonymous'}
             />
           </div>

@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { createPortal } from 'react-dom'
 import { User } from '@/types/interface'
+import { setItem } from '@/utils/storage'
 import Input from '../common/Input/Input'
 import { styled } from 'styled-components'
+import { StorageEnum } from '@/types/enum'
 import Button from '../common/Button/Button'
 import { useUserAction } from '@/stores/use-user-store'
+import { useAuthActions } from '@/stores/use-auth-store'
 import { EMAIL_REGEX } from '@/constants/app-constants'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import AnimationCircleLoading from '../common/Animation/AnimationCircleLoading'
+import { toast } from 'react-toastify'
 
 const CapitalizeFirstLetter = ({ str }: { str: string }) => {
   return <span>{str.charAt(0).toUpperCase() + str.slice(1)}</span>
@@ -54,9 +59,11 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({
   } = useForm<Record<string, string>>({
     defaultValues: formDefaultValues,
   })
+  const { me } = useAuthActions()
   const [zoom, setZoom] = useState(1)
   const { updatedProfile } = useUserAction()
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const toggleDrawer = () => setIsOpen((isOpen) => !isOpen)
 
@@ -85,11 +92,24 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({
     return () => window.addEventListener('resize', handleResize)
   }, [])
 
-  const handleRegister = async (data: Record<string, string>) => {
+  const handleRegister = async (newInfoUser: Record<string, string>) => {
+    setIsLoading(true)
     try {
-      await updatedProfile(userId, data as Partial<User>)
+      const { data } = await updatedProfile(
+        userId,
+        newInfoUser as Partial<User>,
+      )
+      const { token } = data
+      await me(token)
+      setItem(StorageEnum.Token, token)
+      toast.success('Profile updated successfully')
     } catch (e: any) {
-      console.log(e)
+      toast.warning(
+        'A problem occurred during the update, please try again later',
+      )
+    } finally {
+      setIsLoading(false)
+      toggleDrawer()
     }
   }
 
@@ -132,7 +152,7 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({
                 exit={{ y: '100%' }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
               >
-                <div className='flex flex-col items-center pt-4 md:pt-0 gap-4'>
+                <div className='flex flex-col items-center md:pt-0 gap-4'>
                   <div className='flex flex-col w-full items-start p-4'>
                     <button onClick={toggleDrawer}>
                       <XMarkIcon className='h-6 w-6 text-blue-500' />
@@ -157,11 +177,17 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({
                         autofocus
                         autoComplete='off'
                       />
-                      <Button
-                        type='submit'
-                        text='Register'
-                        className={`rounded-md font-semibold text-blue-900 bg-yellow`}
-                      />
+                      {isLoading ? (
+                        <div className='flex flex-row justify-center items-center w-full'>
+                          <AnimationCircleLoading height={80} width={80} />
+                        </div>
+                      ) : (
+                        <Button
+                          type='submit'
+                          text='Register'
+                          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+                        />
+                      )}
                     </form>
                   </div>
                 </div>
@@ -175,8 +201,6 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({
 }
 
 const Edit: React.FC<EditProps> = ({ user }) => {
-  console.log(user)
-
   return (
     <div className='flex flex-col gap-4 w-full md:w-1/2'>
       <h1 className='text-blue-900'>Personal information</h1>

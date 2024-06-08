@@ -31,7 +31,7 @@ const Profile: React.FC = () => {
           </div>
         )}
         <Routes>
-          <Route path='/picture' element={<Picture />} />
+          <Route path='/picture' element={<Picture user={user} />} />
           <Route path='/user/show' element={<UserShow user={user} />} />
           <Route path='/user/edit' element={<Edit user={user} />} />
         </Routes>
