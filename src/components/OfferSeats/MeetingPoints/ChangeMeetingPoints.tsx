@@ -43,7 +43,7 @@ const ChangeMeetingPoints: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
+    <div className='flex flex-col gap-8 px-4 md:px-0 w-full md:w-1/2 pt-10 pb-28'>
       <h1 className='text-blue-900'>
         Where do you want to drop off your passengers?
       </h1>

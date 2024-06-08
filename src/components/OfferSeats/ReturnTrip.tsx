@@ -61,7 +61,7 @@ const ReturnTrip: React.FC = () => {
 
   return (
     <div className='flex flex-row gap-4 justify-between items-start'>
-      <div className='flex'>
+      <div className='hidden md:flex'>
         <img
           className='w-full'
           src={

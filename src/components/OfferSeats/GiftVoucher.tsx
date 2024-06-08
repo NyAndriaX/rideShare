@@ -17,7 +17,7 @@ const GiftVoucher: React.FC = () => {
         </h1>
       </div>
       <div className='flex flex-col gap-12 py-8 items-center justify-center w-full'>
-        <div className='flex flex-col gap-8 w-1/2 text-white'>
+        <div className='flex flex-col gap-8 w-full px-4 md:px-0 md:w-1/2 text-white'>
           <p className='text-blue-900'>
             From May 1, 2024, benefit from a 5.000 Ar welcome for you encourage
             carpooling!
@@ -40,7 +40,7 @@ const GiftVoucher: React.FC = () => {
             *See general conditions
           </a>
         </div>
-        <div className='flex w-1/5'>
+        <div className='flex w-3/5 md:w-1/5'>
           <Button
             type='button'
             text='publish a route'

@@ -83,7 +83,7 @@ const ListMeetingPoints: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
+    <div className='flex flex-col gap-8 px-4 md:px-0 w-full md:w-1/2 pt-10 pb-28'>
       <h1 className='text-blue-900'>
         Here are the best places to stop in these towns. Does it suit you ?
       </h1>
@@ -94,36 +94,43 @@ const ListMeetingPoints: React.FC = () => {
             {formTripsData?.departureProvince as string}
           </p>
         </div>
-        <ContainerStopovers>
-          <Line className='border-l-2 border-gray-200' />
-          <ContainerItemStopovers>
-            <Reorder.Group axis='y' values={stopovers} onReorder={setStopovers}>
-              {stopovers?.map((stop, index) => (
-                <Reorder.Item key={index} value={stop}>
-                  <ItemStopovers
-                    className='hover:bg-gray-50'
-                    onClick={() =>
-                      navigate(`change?meetingPointsIndex=${index}`)
-                    }
-                  >
-                    <div className='flex flex-row gap-4 '>
-                      <DoteOutlinedStopovers className='bg-white border-4 border-blue-900' />
-                      <div className='flex flex-col'>
-                        <p className='text-lg font-bold text-blue-900'>
-                          {stop.location}
-                        </p>
-                        <p className='text-xs font-semibold text-gray-400'>
-                          ville
-                        </p>
+        <div>
+          <ContainerStopovers>
+            <Line className='border-l-2 border-gray-200' />
+            <ContainerItemStopovers>
+              <Reorder.Group
+                axis='y'
+                values={stopovers}
+                onReorder={setStopovers}
+              >
+                {stopovers?.map((stop, index) => (
+                  <Reorder.Item key={index} value={stop}>
+                    <ItemStopovers
+                      className='hover:bg-gray-50 w-[115vw] md:w-[60vw]'
+                      onClick={() =>
+                        navigate(`change?meetingPointsIndex=${index}`)
+                      }
+                    >
+                      <div className='flex flex-row gap-4'>
+                        <DoteOutlinedStopovers className='bg-white border-4 border-blue-900' />
+                        <div className='flex flex-col'>
+                          <p className='text-lg font-bold text-blue-900'>
+                            {stop.location}
+                          </p>
+                          <p className='text-xs font-semibold text-gray-400'>
+                            ville
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <ChevronRightIcon className='h-6 w-6 text-gray-400' />
-                  </ItemStopovers>
-                </Reorder.Item>
-              ))}
-            </Reorder.Group>
-          </ContainerItemStopovers>
-        </ContainerStopovers>
+                      <ChevronRightIcon className='h-6 w-6 text-gray-400' />
+                    </ItemStopovers>
+                  </Reorder.Item>
+                ))}
+              </Reorder.Group>
+            </ContainerItemStopovers>
+          </ContainerStopovers>
+        </div>
+
         <div className='flex flex-row relative'>
           <DoteOutlined />
           <p className='text-xs absolute left-4 text-gray-500 font-bold w-52'>

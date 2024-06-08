@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/Button/Button'
 import { FormTripsData } from '@/types/interface'
@@ -22,10 +22,22 @@ const DateOfDeparture: React.FC = () => {
     departureDate: defaultDate,
     departureTime: defaultTime,
   })
+  const [numberOfMonths, setNumberOfMonths] = useState(2)
 
   const disablePastDays = (day: Date) => {
     return day < today
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setNumberOfMonths(window.innerWidth < 765 ? 1 : 2)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleSubmit = async () => {
     await setFormTripsData({
@@ -36,7 +48,7 @@ const DateOfDeparture: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
+    <div className='flex flex-col gap-8 px-4 md:px-0 w-full md:w-1/2 pt-10 pb-28'>
       <h1 className='text-blue-900'>When are you leaving ?</h1>
       <div className='flex flex-col gap-6'>
         <DayPicker
@@ -66,14 +78,14 @@ const DateOfDeparture: React.FC = () => {
             })
           }
           disabled={disablePastDays}
-          numberOfMonths={2}
+          numberOfMonths={numberOfMonths}
           pagedNavigation
         />
         <Button
           type='submit'
           text='Continue'
           onClick={handleSubmit}
-          className={`rounded-md font-semibold text-midnightBlue bg-yellow`}
+          className={`rounded-md font-semibold text-blue-900 bg-yellow`}
         />
       </div>
     </div>

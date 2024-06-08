@@ -35,12 +35,12 @@ const Hero: React.FC = () => {
   return (
     <main
       className='w-full mb-10'
-      style={{ height: isMobile ? '100vh' : '600px' }}
+      style={{ height: isMobile ? '82vh' : '600px' }}
     >
       <div className='w-full absolute left-0 z-0'>
         <div
           className='w-full bg-primary'
-          style={{ height: isMobile ? '80vh' : '300px', width: '100%' }}
+          style={{ height: isMobile ? '60vh' : '300px', width: '100%' }}
         />
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
           <h3 className='text-xl mb-5 font-light text-center text-white'>
             All information on free carpooling
           </h3>
-          <div className='flex flex-col md:flex-row gap-6 items-center justify-between md:justify-around py-4 w-full'>
+          <div className='hidden md:flex flex-col md:flex-row gap-6 items-center justify-between md:justify-around py-4 w-full'>
             <div className='flex flex-row justify-between md:justify-center items-center gap-4'>
               <div className='flex flex-col gap-1'>
                 <div className='flex flex-row gap-1'>

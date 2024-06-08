@@ -44,7 +44,7 @@ const AddNewDeclaredStopovers: React.FC<AddNewDeclaredStopoversProps> = ({
     navigate('/app/offer-seats/declared-stopovers')
   }
   return (
-    <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
+    <div className='flex flex-col gap-8 px-4 md:px-0 w-full md:w-1/2 pt-10 pb-28'>
       <form
         className='flex flex-col gap-6'
         onSubmit={handleSubmit((data) => addNewStopovers(data))}

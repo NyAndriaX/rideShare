@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   useFormTripsData,
   useFormTripsActions,
@@ -17,6 +17,7 @@ const ReturnDate: React.FC = () => {
   const [returnDate, setReturnDate] = useState<Partial<FormTripsData>>({
     returnDate: getFutureDate(departureDate as string) ?? '',
   })
+  const [numberOfMonths, setNumberOfMonths] = useState(2)
 
   if (departureDate) {
     navigate('/app/offer-seats/departure-date')
@@ -30,6 +31,17 @@ const ReturnDate: React.FC = () => {
     return true
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setNumberOfMonths(window.innerWidth < 765 ? 1 : 2)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const handleSubmit = async () => {
     await setFormTripsData({
       returnDate: returnDate.returnDate,
@@ -38,7 +50,7 @@ const ReturnDate: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
+    <div className='flex flex-col gap-8 px-4 md:px-0 w-full md:w-1/2 pt-10 pb-28'>
       <h1 className='text-blue-900'>When are you leaving again ?</h1>
       <div className='flex flex-col gap-6'>
         <DayPicker
@@ -68,7 +80,7 @@ const ReturnDate: React.FC = () => {
             })
           }
           disabled={disablePastDays}
-          numberOfMonths={2}
+          numberOfMonths={numberOfMonths}
           pagedNavigation
         />
         <Button

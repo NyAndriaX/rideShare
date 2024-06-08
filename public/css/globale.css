@@ -23,14 +23,22 @@
 }
 
 .rdp-months {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   font-size: 0.8rem;
   font-weight: bold;
   color: #004dffd4;
 }
+.rdp-table,
+.rdp-month {
+  width: 100% !important;
+  max-width: 100% !important;
+}
 
 .rdp-day_selected {
   color: white !important;
-  background-color: #98d5dc !important;
+  background-color: #004dffd4 !important;
 }
 
 h1 {

@@ -5,6 +5,8 @@ import { User } from '@/types/interface'
 import Input from '../common/Input/Input'
 import { styled } from 'styled-components'
 import Button from '../common/Button/Button'
+import { useUserAction } from '@/stores/use-user-store'
+import { EMAIL_REGEX } from '@/constants/app-constants'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -30,22 +32,30 @@ const StyledButton = styled.button`
 `
 
 interface DrawerBottomProps {
+  userId: number
   label: string
   name: string
   value: string
 }
 
-const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
-  const formDefaultValues: Record<string, string> = {}
-  formDefaultValues[name] = value
+const DrawerBottom: React.FC<DrawerBottomProps> = ({
+  userId,
+  label,
+  name,
+  value,
+}) => {
+  const transformedValue =
+    name === 'dateofbirth' ? new Date(value).toISOString().split('T')[0] : value
+  const formDefaultValues = { [name]: transformedValue }
   const {
     register,
     handleSubmit,
-    formState: { isDirty, errors, isValid },
+    formState: { isDirty, errors },
   } = useForm<Record<string, string>>({
     defaultValues: formDefaultValues,
   })
   const [zoom, setZoom] = useState(1)
+  const { updatedProfile } = useUserAction()
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const toggleDrawer = () => setIsOpen((isOpen) => !isOpen)
@@ -76,14 +86,32 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
   }, [])
 
   const handleRegister = async (data: Record<string, string>) => {
-    console.log(data)
+    try {
+      await updatedProfile(userId, data as Partial<User>)
+    } catch (e: any) {
+      console.log(e)
+    }
   }
+
+  const inputType = name === 'dateofbirth' ? 'date' : 'text'
+  const validationRules =
+    name === 'email'
+      ? {
+          required: `${label.charAt(0).toUpperCase() + label.slice(1)} is required`,
+          pattern: {
+            value: EMAIL_REGEX,
+            message: 'Invalid address. Try Again.',
+          },
+        }
+      : {
+          required: `${label.charAt(0).toUpperCase() + label.slice(1)} is required`,
+        }
 
   return (
     <React.Fragment>
       <StyledButton onClick={toggleDrawer}>
         <p className='text-base text-gray-500'>{label}</p>
-        <p className='text-sm text-blue-500'>{value}</p>
+        <p className='text-sm text-blue-500'>{transformedValue}</p>
       </StyledButton>
       {isOpen &&
         createPortal(
@@ -104,14 +132,14 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
                 exit={{ y: '100%' }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
               >
-                <div className='flex flex-col items-center gap-4'>
+                <div className='flex flex-col items-center pt-4 md:pt-0 gap-4'>
                   <div className='flex flex-col w-full items-start p-4'>
                     <button onClick={toggleDrawer}>
                       <XMarkIcon className='h-6 w-6 text-blue-500' />
                     </button>
                   </div>
                   <div
-                    className='flex flex-col gap-8 w-full md:w-1/2 pt-10 pb-28'
+                    className='flex flex-col gap-8 w-full md:w-1/2 px-4 pt-10 pb-28'
                     style={{ zoom: zoom }}
                   >
                     <h1 className='text-blue-900'>
@@ -122,10 +150,8 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
                       onSubmit={handleSubmit((data) => handleRegister(data))}
                     >
                       <Input
-                        type='text'
-                        {...register(name, {
-                          required: `${label} is required`,
-                        })}
+                        type={inputType}
+                        {...register(name, validationRules)}
                         error={errors[name]?.message}
                         ariaInvalid={isDirty}
                         autofocus
@@ -134,7 +160,6 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
                       <Button
                         type='submit'
                         text='Register'
-                        disabled={!isValid}
                         className={`rounded-md font-semibold text-blue-900 bg-yellow`}
                       />
                     </form>
@@ -150,6 +175,8 @@ const DrawerBottom: React.FC<DrawerBottomProps> = ({ label, name, value }) => {
 }
 
 const Edit: React.FC<EditProps> = ({ user }) => {
+  console.log(user)
+
   return (
     <div className='flex flex-col gap-4 w-full md:w-1/2'>
       <h1 className='text-blue-900'>Personal information</h1>
@@ -158,19 +185,27 @@ const Edit: React.FC<EditProps> = ({ user }) => {
           <DrawerBottom
             name='lastname'
             label='last name'
+            userId={user?.userId ?? 0}
             value={user?.lastName ?? ''}
           />
           <DrawerBottom
             name='firstname'
             label='first name'
+            userId={user?.userId ?? 0}
             value={user?.firstName ?? ''}
           />
           <DrawerBottom
             name='dateofbirth'
             label='date of birth'
+            userId={user?.userId ?? 0}
             value={user?.dateOfBirth?.toString() ?? ''}
           />
-          <DrawerBottom name='email' label='email' value={user?.email ?? ''} />
+          <DrawerBottom
+            name='email'
+            label='email'
+            userId={user?.userId ?? 0}
+            value={user?.email ?? ''}
+          />
         </div>
         <div className='bg-gray-50 h-1 rounded-md' />
         <div className='flex flex-row items-center gap-2 px-6 py-2 text-blue-500'>

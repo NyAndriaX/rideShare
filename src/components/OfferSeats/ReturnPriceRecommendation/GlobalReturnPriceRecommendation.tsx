@@ -100,7 +100,7 @@ const GlobalReturnPriceRecommendation: React.FC = () => {
     navigate('/app/offer-seats/phone-verification-fill')
   }
   return (
-    <div className='flex flex-col gap-8 w-1/2 pt-10 pb-28'>
+    <div className='flex flex-col gap-8 px-4 md:px-0 w-full md:w-1/2 pt-10 pb-28'>
       <h1 className='text-blue-900'>Set your price per place</h1>
       <div className='flex flex-col items-center justify-center gap-14'>
         <div className='flex flex-col w-full items-center gap-8'>

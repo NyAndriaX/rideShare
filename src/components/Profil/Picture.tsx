@@ -3,6 +3,7 @@ import { v4 } from 'uuid'
 import { createPortal } from 'react-dom'
 import { storage } from '@/config/firebase'
 import Button from '../common/Button/Button'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import AnimationCircleLoading from '../common/Animation/AnimationCircleLoading'
@@ -37,7 +38,7 @@ const ShowPicture: React.FC<ShowPictureProps> = ({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3 }}
-              className='relative bg-white rounded-md w-1/3 h-2/3 z-50'
+              className='relative bg-white rounded-md w-fit h-fit z-50'
               onClick={(e) => e.stopPropagation()}
             >
               {isLoading && (
@@ -45,18 +46,26 @@ const ShowPicture: React.FC<ShowPictureProps> = ({
                   <AnimationCircleLoading height={100} width={100} />
                 </div>
               )}
-              <div className='relative flex flex-col gap-6 w-full h-full rounded-md z-10'>
-                <img
-                  className='h-full rounded-md w-full border border-gray-200'
-                  src={imageUrl}
-                  alt={'Anonymous'}
-                />
-                <Button
-                  type='button'
-                  text='Update profile'
-                  onClick={uploadImage}
-                  className={`rounded-md font-semibold text-blue-900 bg-yellow`}
-                />
+              <div className='relative w-full h-full z-10 bg-transparent'>
+                <button
+                  onClick={toggleClose}
+                  className='fixed rounded-full bg-red-500 w-fit h-fit z-20 p-1 -mt-3 ml-[270px] md:ml-[430px]'
+                >
+                  <XMarkIcon className='h-6 w-6 text-white' />
+                </button>
+                <div className='relative flex flex-col gap-6 p-2 rounded-md w-[300px] md:w-[450px] h-fit'>
+                  <img
+                    className='h-[300px] md:h-[450px] rounded-md w-full object-contain'
+                    src={imageUrl}
+                    alt={'Anonymous'}
+                  />
+                  <Button
+                    type='button'
+                    text='Update profile'
+                    onClick={uploadImage}
+                    className={`rounded-md font-semibold text-blue-900 bg-yellow`}
+                  />
+                </div>
               </div>
             </motion.div>
           </motion.div>

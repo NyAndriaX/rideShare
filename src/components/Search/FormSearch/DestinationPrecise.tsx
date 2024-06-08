@@ -24,7 +24,6 @@ const DestinationPrecise: React.FC<DestinationPreciseProps> = ({
         placeholder='Destination'
         ariaInvalid={isDirty}
         icon={<MapPinIcon className='h-6 w-6 text-blue-500' />}
-        autofocus
         autoComplete='off'
       />
     </div>
