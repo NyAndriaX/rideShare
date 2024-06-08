@@ -11,7 +11,7 @@ interface UseUserAuthStoreProps {
 }
 
 const useUserStore = create<UseUserAuthStoreProps>()(
-  devtools((set) => ({
+  devtools(() => ({
     action: {
       updatedProfile: async (
         userId: number,
