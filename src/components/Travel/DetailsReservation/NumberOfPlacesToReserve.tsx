@@ -13,7 +13,13 @@ import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 
 const people = [{ name: '1 place' }, { name: '2 place' }, { name: '3 place' }]
 
-const NumberOfPlacesToReserve: React.FC = () => {
+interface NumberOfPlacesToReserveProps {
+  trip?: any
+}
+
+const NumberOfPlacesToReserve: React.FC<NumberOfPlacesToReserveProps> = ({
+  trip,
+}) => {
   const navigate = useNavigate()
   const [selected, setSelected] = useState(people[0])
 
@@ -24,8 +30,8 @@ const NumberOfPlacesToReserve: React.FC = () => {
           <BoltIcon className='h-5 w-5 text-yellow' />
         </div>
         <span>
-          Votre réservation sera{' '}
-          <span className='font-semibold'>automatiquement</span> confirmée
+          Your reservation will be{' '}
+          <span className='font-semibold'>automatically</span> confirmed
         </span>
       </div>
       <Listbox value={selected} onChange={setSelected}>
@@ -93,7 +99,7 @@ const NumberOfPlacesToReserve: React.FC = () => {
       </div>
       <Button
         type='button'
-        onClick={() => navigate('/app/payement')}
+        onClick={() => navigate(`/app/payement?tripId=${trip?.tripId}`)}
         text='Reserve'
         className='bg-yellow text-blue-900 font-semibold'
       />

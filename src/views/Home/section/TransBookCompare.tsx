@@ -26,6 +26,7 @@ const TransBookCompare: React.FC = () => {
       setIsFetching(true)
       try {
         const { data } = await getRecentTrips()
+        console.log(data)
         setChunkedTrips(chunkArray(data, 3))
       } catch (e: any) {
         setHasError(true)

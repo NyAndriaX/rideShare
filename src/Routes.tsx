@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/app/payement',
+        path: '/app/payement/*',
         element: <Payement />,
       },
       {

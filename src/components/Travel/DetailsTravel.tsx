@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { formatDate } from '@/utils/formatDate'
 import { styled } from 'styled-components'
 import Button from '@/components/common/Button/Button'
 import {
@@ -24,16 +25,12 @@ interface DetailsTravelProps {
 const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
   const oneWay: boolean = true
 
-  console.log(trip)
-
   return (
     <div className='flex flex-col items-start gap-4 w-2/3'>
       {/* Travel Indice */}
       <div className='flex flex-row text-base gap-8'>
         <div className='flex flex-row items-center gap-2 text-gray-400'>
-          <span>
-            {trip?.departureProvince} {trip?.departurePrecise}
-          </span>
+          <span>{trip?.departureProvince}</span>
           <ArrowLongRightIcon className='h-6 w-6 text-gray-400' />
           <span>
             {trip?.destinationProvince} {trip?.destinationPrecise}
@@ -52,7 +49,9 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
             <div className='w-1/4 text-gray-400'>Departure</div>
             <div className='flex flex-row gap-4 items-center w-3/4 text-blue-500'>
               <DoteOutlined className='border-4 border-green-400' />
-              <span>Reims, France</span>
+              <span>
+                {trip?.departurePrecise}, {trip?.departureProvince}
+              </span>
             </div>
           </div>
           {/* Destination */}
@@ -60,7 +59,9 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
             <div className='w-1/4 text-gray-400'>Destination</div>
             <div className='flex flex-row gap-4 items-center w-3/4 text-blue-500'>
               <DoteOutlined className='border-4 border-red-400' />
-              <span>City</span>
+              <span>
+                {trip?.destinationPrecise}, {trip?.destinationProvince}
+              </span>
             </div>
           </div>
           {/* Date de départure */}
@@ -68,7 +69,14 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
             <div className='w-1/4 text-gray-400'>Date of departure</div>
             <div className='flex flex-row gap-4 items-center w-3/4 text-blue-900'>
               <CalendarDaysIcon className='h-5 w-5 text-blue-900' />
-              <span>Demain à 16:45</span>
+              <span>
+                {formatDate(
+                  new Date(
+                    (trip && trip.departureDate && trip.departureDate) ?? '',
+                  ),
+                )}{' '}
+                à{trip?.departureTime}
+              </span>
             </div>
           </div>
           {/* return of date */}
@@ -77,7 +85,14 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
               <div className='w-1/4 text-gray-400'>Return of date</div>
               <div className='flex flex-row gap-4 items-center w-3/4 text-blue-900'>
                 <CalendarDaysIcon className='h-5 w-5 text-blue-900' />
-                <span>Demain à 16:45</span>
+                <span>
+                  {formatDate(
+                    new Date(
+                      (trip && trip.returnDate && trip.returnDate) ?? '',
+                    ),
+                  )}{' '}
+                  à{trip?.returnTime}
+                </span>
               </div>
             </div>
           )}
@@ -87,11 +102,11 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
             <div className='flex flex-col gap-4 items-start w-3/4 text-gray-400'>
               <div className='flex flex-row gap-4 items-center'>
                 <ClockIcon className='h-5 w-5 text-gray-400' />
-                <span>Départ pile à heure</span>
+                <span>Departure right on time</span>
               </div>
               <div className='flex flex-row gap-4 items-center'>
                 <ArrowTrendingUpIcon className='h-5 w-5 text-gray-400' />
-                <span>De 15 minutes max</span>
+                <span>15 minutes max</span>
               </div>
             </div>
           </div>
@@ -104,7 +119,7 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
                 alt='personal reserved'
                 className='w-6 h-6 border border-gray-200 rounded-full'
               />
-              <span>2 max. à l'arrière</span>
+              <span>2 max. in back</span>
             </div>
           </div>
         </div>
@@ -116,9 +131,12 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
           />
           <div className='flex flex-col gap-4'>
             <div className='flex flex-col items-start'>
-              <span className='text-blue-900 font-semibold'>Benjamin Q</span>
+              <span className='text-blue-900 font-semibold'>
+                {trip?.author?.lastName} {trip?.author?.firstName}
+              </span>
               <span className='text-gray-400'>
-                N'hésitez à me contacter pour les lieux de départ de d'arrivée
+                Do not hesitate to contact me for departure and arrival
+                locations
               </span>
             </div>
             <Button
@@ -126,7 +144,7 @@ const DetailsTravel: React.FC<DetailsTravelProps> = ({ trip }) => {
               icon={
                 <ChatBubbleLeftEllipsisIcon className='h-6 w-6 text-white' />
               }
-              text='Contactez le conducteur'
+              text='Contact the driver'
               className='bg-blue-500 text-white font-semibold w-fit'
             />
           </div>

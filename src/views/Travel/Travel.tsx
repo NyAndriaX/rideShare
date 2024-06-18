@@ -38,7 +38,7 @@ const Travel: React.FC = () => {
   return (
     <React.Fragment>
       {isfetching ? (
-        <div className='w-full'>
+        <div className='flex flex-col items-center justify-center w-full h-screen'>
           <AnimationCircleLoading height={100} width={100} />
         </div>
       ) : hasError ? (
@@ -47,13 +47,13 @@ const Travel: React.FC = () => {
         <div className='flex justify-between items-start gap-4 pt-28 pb-28 px-4'>
           <DetailsTravel trip={trip} />
           <div className='flex flex-col gap-4 w-1/3'>
-            <DetailsReservation />
+            <DetailsReservation trip={trip} />
             <div className='flex flex-col gap-4 rounded-md p-4 border border-gray-200'>
               {/* headers for reservation */}
               <div className='flex flex-row justify-between items-end border-b border-gray-200 p-4'>
                 <span className='text-base text-gray-400'>Driver</span>
               </div>
-              <DriverInformation />
+              <DriverInformation trip={trip} />
             </div>
           </div>
         </div>
