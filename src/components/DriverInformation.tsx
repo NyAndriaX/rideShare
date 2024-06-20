@@ -15,7 +15,7 @@ const DriverInformation: React.FC<DriverInformationProps> = ({ trip }) => {
         <div className='flex flex-row gap-4 items-start'>
           <img
             src={
-              trip && trip.author!.profilUrl
+              trip && trip.author && trip.author.profilUrl
                 ? trip.author.profilUrl
                 : new URL('/image/person.svg', import.meta.url).href
             }
